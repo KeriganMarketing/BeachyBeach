@@ -1,0 +1,10 @@
+.DS_Store
+.dns
+.idea/
+error_log
+wp-config.php
+tags
+/wp-content/uploads
+.htaccess
+.user.ini
+php.ini

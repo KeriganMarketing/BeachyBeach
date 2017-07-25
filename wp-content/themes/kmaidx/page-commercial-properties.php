@@ -1,0 +1,88 @@
+<?php
+/**
+ * The template for displaying all pages
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site may use a
+ * different template.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package KMA_DEMO
+ */
+
+global $paged;
+global $wpdb;
+
+$paged  = (get_query_var('paged')) ? abs((int)get_query_var('paged')) : 1;
+$mls    = new MLS();
+
+$query = $mls->buildQuery(array(
+    'property_type' => array(
+        'E',
+        'F'
+    )
+));
+
+$sortBy          = isset($_GET['sortBy']) ? ' ORDER BY ' . $_GET['sortBy'] : '';
+$orderBy         = isset($_GET['orderBy']) ? ' ' . $_GET['orderBy'] : '';
+$total_query     = $mls->getTotalQuery($query);
+$total           = $wpdb->get_var($total_query);
+$listingsPerPage = 36;
+$page            = $mls->determinePagination();
+$offset          = $mls->determineOffset($page, $listingsPerPage);
+$finalQuery      = $query . $sortBy . $orderBy . " LIMIT " . $offset . ", " . $listingsPerPage;
+$results         = $wpdb->get_results($finalQuery);
+
+get_header(); ?>
+<div id="content">
+
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main" >
+
+            <?php while ( have_posts() ) : the_post();
+
+                get_template_part( 'template-parts/content', 'page' );
+
+            endwhile; ?>
+
+        </main><!-- #main -->
+    </div><!-- #primary -->
+    <div class="container wide" >
+        <div class="row">
+            <div class="col">
+				<?php get_template_part( 'template-parts/mls', 'sortbar' ); ?>
+            </div>
+        </div>
+        <div class="row">
+
+			<?php foreach ($results as $result) { ?>
+            <div class="listing-tile commercial col-sm-6 col-lg-3 text-center">
+			    <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
+            </div>
+            <?php } ?>
+
+        </div>
+        <nav aria-label="Search results navigation" class="text-center mx-auto">
+            <ul class="pagination">
+                <?php
+                echo paginate_links(array(
+                    'base'      => add_query_arg('pg', '%#%'),
+                    'format'    => '',
+                    'prev_text' => __('&laquo;'),
+                    'next_text' => __('&raquo;'),
+                    'total'     => ceil($total / $listingsPerPage),
+                    'current'   => $page,
+                ));
+                ?>
+            </ul>
+        </nav>
+    </div>
+</div>
+<?php get_template_part( 'template-parts/mls', 'mortgage-calulator' ); ?>
+<?php
+wp_enqueue_script( 'search-ajax' );
+wp_enqueue_script( 'chart-js' );
+wp_enqueue_script( 'mortgage-calc' );
+get_footer();
