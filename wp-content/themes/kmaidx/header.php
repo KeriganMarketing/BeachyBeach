@@ -70,10 +70,10 @@ $bb = new BeachyBucket();
                                 array(
                                     'theme_location'  => 'menu-1',
                                     'container_class' => 'navbar-static',
-                                    'container_id'    => 'navbarNavDropdown-1',
+                                    'container_id'    => 'navbarNavDropdown',
                                     'menu_class'      => 'navbar-nav justify-content-center',
                                     'fallback_cb'     => '',
-                                    'menu_id'         => 'menu-1-desktop',
+                                    'menu_id'         => 'menu-1',
                                     'walker'          => new WP_Bootstrap_Navwalker(),
                                 )
                             ); ?>
@@ -93,10 +93,10 @@ $bb = new BeachyBucket();
                 array(
                     'theme_location'  => 'menu-3',
                     'container_class' => 'navbar-static',
-                    'container_id'    => 'navbarNavDropdown-3',
+                    'container_id'    => 'navbarNavDropdown',
                     'menu_class'      => 'navbar-nav justify-content-end',
                     'fallback_cb'     => '',
-                    'menu_id'         => 'menu-3-mobile',
+                    'menu_id'         => 'menu-3',
                     'walker'          => new WP_Bootstrap_Navwalker(),
                 )
             ); ?>

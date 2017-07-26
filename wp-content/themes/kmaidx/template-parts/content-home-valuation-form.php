@@ -1,6 +1,7 @@
 <?php
 
 $mlsLead = new kmaLeads();
+$mls = new MLS();
 $ADMIN_EMAIL = 'bryan@kerigan.com';
 $DOMAIN_NAME = 'beachybeach.com';
 
@@ -67,8 +68,11 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 
 		$agent = new mlsTeam();
 		$agentInfo = $agent->getSingleAgent($selectedAgent);
-		echo '<pre>',print_r($_POST),'</pre>';
-		echo '<pre>',print_r($agentInfo),'</pre>';
+		//echo '<pre>',print_r($_POST),'</pre>';
+		//echo '<pre>',print_r($agentInfo),'</pre>';
+		$agentMLSInfo = $mls->getAgentByName($agentInfo['name']);
+		$ADMIN_EMAIL    = ($agentMLSInfo != false ? $agentMLSInfo->email : '');
+		if($agentInfo['email'] != '' ){ $ADMIN_EMAIL = $agentInfo['email']; }
 		$leadFor = $selectedAgent;
 
 	}elseif($who == 'pcb'){
@@ -82,7 +86,6 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 		$leadFor = 'Beachy Beach 30A';
 
 	}
-	$ADMIN_EMAIL = 'bryan@kerigan.com';
 
 	//BEGIN CHECKS
 	$passCheck = TRUE;
