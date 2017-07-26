@@ -100,31 +100,31 @@ function kmaidx_scripts() {
     wp_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js', false, false, true);
 
     //styles
-    wp_register_style('fullcalendar-style', '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css', null, '0.0.1');
-    wp_register_style('lightbox-styles', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css', false, '0.0.2');
-    wp_register_style('select2-styles', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css', false, '0.0.2');
+    wp_register_style('fullcalendar-style', '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css', null);
+    wp_register_style('lightbox-styles', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css', false);
+    wp_register_style('select2-styles', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css', false);
 
     //scripts
-    wp_register_script('tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', array('jquery'), '0.0.1', true);
-    wp_register_script('bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', array('jquery'), '0.0.1', true);
-    wp_register_script('images-loaded', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.min.js', array('jquery'), '0.0.1', true);
-    wp_register_script('custom-scripts', get_template_directory_uri() . '/js/scripts.js', array(), '0.0.2', true);
-    wp_register_script('lightbox', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.min.js', array('jquery'), '0.0.1', true);
-    wp_register_script('lazy-js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js', array('jquery'), '0.0.1', true);
-    wp_register_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js', array('jquery'), '0.0.1', true);
-    wp_register_script('jquery-ui-slider', get_template_directory_uri() . '/js/jquery-ui.min.js', array('jquery'), '0.0.1', true);
-    //wp_register_script('chart-js', get_template_directory_uri() . '/js/chartjs/Chart.js', array('jquery'), '0.0.1', true);
-    wp_register_script('chart-js', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js', array('jquery'), '0.0.1', true);
-    wp_register_script('mortgage-calc', get_template_directory_uri() . '/js/mortgagecalc.js', array('jquery'), '0.0.1', true);
-    wp_register_script('listing-js', get_template_directory_uri() . '/js/listing.js', array('jquery'), '0.0.1', true);
-    wp_register_script('team-js', get_template_directory_uri() . '/js/team.js', array('jquery'), '0.0.1', true);
+    wp_register_script('tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', array('jquery'), null, true);
+    wp_register_script('bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', array('jquery'), null, true);
+    wp_register_script('images-loaded', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.min.js', array('jquery'), null, true);
+    wp_register_script('custom-scripts', get_template_directory_uri() . '/js/scripts.js', array(), null, true);
+    wp_register_script('lightbox', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.min.js', array('jquery'), null, true);
+    wp_register_script('lazy-js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js', array('jquery'), null, true);
+    wp_register_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js', array('jquery'), null, true);
+    wp_register_script('jquery-ui-slider', get_template_directory_uri() . '/js/jquery-ui.min.js', array('jquery'), null, true);
+    //wp_register_script('chart-js', get_template_directory_uri() . '/js/chartjs/Chart.js', array('jquery'), null, true);
+    wp_register_script('chart-js', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js', array('jquery'), null, true);
+    wp_register_script('mortgage-calc', get_template_directory_uri() . '/js/mortgagecalc.js', array('jquery'), null, true);
+    wp_register_script('listing-js', get_template_directory_uri() . '/js/listing.js', array('jquery'), null, true);
+    wp_register_script('team-js', get_template_directory_uri() . '/js/team.js', array('jquery'), null, true);
 
     //wp ajax scripts
-    wp_register_script('communities-ajax', get_template_directory_uri() . '/js/communities.ajax.js', array('jquery'), '0.0.2', true);
+    wp_register_script('communities-ajax', get_template_directory_uri() . '/js/communities.ajax.js', array('jquery'), null, true);
     wp_localize_script('communities-ajax', 'wpAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
-    wp_register_script('search-ajax', get_template_directory_uri() . '/js/search.ajax.js', array('jquery'), '0.0.2', true);
+    wp_register_script('search-ajax', get_template_directory_uri() . '/js/search.ajax.js', array('jquery'), null, true);
     wp_localize_script('search-ajax', 'wpAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
-    wp_register_script('office-ajax', get_template_directory_uri() . '/js/office.ajax.js', array('jquery'), '0.0.2', true);
+    wp_register_script('office-ajax', get_template_directory_uri() . '/js/office.ajax.js', array('jquery'), null, true);
     wp_localize_script('office-ajax', 'wpAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
 
     //enqeue
@@ -142,7 +142,7 @@ function kmaidx_scripts() {
 add_action('wp_enqueue_scripts', 'kmaidx_scripts');
 
 function prefix_add_footer_styles() {
-    wp_enqueue_style('kmaidx-footer-styles', get_template_directory_uri() . '/style.css', false, '0.0.2');
+    wp_enqueue_style('kmaidx-footer-styles', get_template_directory_uri() . '/style.css');
 }
 
 ;
@@ -219,16 +219,16 @@ if (!function_exists('kmaidx_inline')) :
             <?php echo file_get_contents('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css' ) ?>
         </style>
         <style type="text/css">
-            <?php echo file_get_contents(get_template_directory_uri() . '/modules/modulestyles.php?ver=0.0.1') ?>
+            <?php echo file_get_contents(get_template_directory_uri() . '/modules/modulestyles.php') ?>
         </style>
         <style type="text/css">
             <?php echo file_get_contents(get_template_directory_uri() . '/css/jquery-ui.min.css') ?>
         </style>
         <style type="text/css">
-            <?php echo file_get_contents(get_template_directory_uri() . '/css/inline.css?ver=0.0.4' ) ?>
+            <?php echo file_get_contents(get_template_directory_uri() . '/css/inline.css' ) ?>
         </style>
         <style type="text/css">
-            <?php echo file_get_contents(get_template_directory_uri() . '/css/ie.css?ver=0.0.1' ) ?>
+            <?php echo file_get_contents(get_template_directory_uri() . '/css/ie.css' ) ?>
         </style>
         <?php
     }

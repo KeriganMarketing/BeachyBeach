@@ -32,7 +32,7 @@
 //                    );
 
                     ?>
-					<select id="home-prop-type" class="prop-type-input form-control form-control-lg" name="class" placeholder="Property Type"  ></select>
+					<select id="home-prop-type" class="prop-type-input form-control form-control-lg" name="class" ></select>
 				</div>
 			</div>
 			<div class="col-md-8 hidden-sm-down">
@@ -61,8 +61,8 @@
                     </select>
                 </div>
             </div>
-            <input hidden="hidden" id="ihf-minprice-homes" name="min_price" placeholder="" class="form-control ihf-search-form-input" type="hidden" value=""/>
-            <input hidden="hidden" id="ihf-maxprice-homes" name="max_price" placeholder="" class="form-control ihf-search-form-input" type="hidden" value=""/>
+            <input hidden="hidden" id="ihf-minprice-homes" name="min_price" class="form-control ihf-search-form-input" type="hidden" value=""/>
+            <input hidden="hidden" id="ihf-maxprice-homes" name="max_price" class="form-control ihf-search-form-input" type="hidden" value=""/>
             <input type="hidden" name="sortBy" value="date_modified">
             <input type="hidden" name="orderBy" value="ASC">
 		</form>
