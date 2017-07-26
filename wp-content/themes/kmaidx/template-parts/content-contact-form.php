@@ -74,6 +74,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         $agentInfo = $agent->getSingleAgent($selectedAgent);
 	    //echo '<pre>',print_r($_POST),'</pre>';
         //echo '<pre>',print_r($agentInfo),'</pre>';
+        $ADMIN_EMAIL = $agentInfo->email;
         $leadFor = $selectedAgent;
 
     }elseif($who == 'pcb'){
