@@ -1672,7 +1672,7 @@ form h3 {
     color: #27C1E7;
     margin: 0;
     padding: 0 1rem .75rem;
-    line-height: 1.3rem;
+    line-height: 1.8rem;
 }
 
 .community-button-container:hover {
@@ -1696,7 +1696,7 @@ form h3 {
 
     .community-button a {
         top: 1rem;
-        width: 181px;
+        width: 178px;
         height: 200px;
     }
 
