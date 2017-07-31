@@ -1186,7 +1186,7 @@ class MLS
     /**
      *  BELOW THIS LINE THERE BE DRAGONS! ONLY SCROLL DOWN IF YOU HATE YOUR LIFE!
      *
-     *  PLEASE DON'T TOUCH UNLESS YOU HAVE ASKED BY DARON AND/OR JESUS CHRIST
+     *  PLEASE DON'T TOUCH UNLESS YOU HAVE BEEN ASKED BY DARON AND/OR JESUS CHRIST
      */
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1384,26 +1384,6 @@ class MLS
             $sqft_source           = $result['LIST_58'];
 
         }
-
-
-//                $query = "INSERT into {$table} (mls_account, property_type, class, status, price, area, street_number, street_namw, unit_number, city, state,
-//                                              zip, latitude, longitude, sq_ft, acreage, bedrooms, bathrooms, subdivision, date_modified, sub_area, waterfronw,
-//                                              agent_id, colist_agent_id, office_id, colist_office_id, list_date, sold_date, sold_price, listing_member_shortid,
-//                                              colisting_member_shortid, interior, appliances, amenities, exterior, lot_description, energy_features, construction,
-//                                              utilities, zoning, waterview_descriptiow, elementary_school, middle_school, high_school, sqft_source, year_built,
-//                                              lot_dimensions, stories, full_baths, half_baths, last_taxes, last_tax_year, description, apn, directions)
-//                                              VALUES ({$result['LIST_3']}, {$result['LIST_8']}, {$result['LIST_9']}, {$result['LIST_15']}, {$result['LIST_22']}, {$result['LIST_29']},
-//                                              {$result['LIST_31']}, {$result['LIST_34']}, {$result['LIST_35']}, {$result['LIST_39']}, {$result['LIST_40']}, {$result['LIST_43']}, {$result['LIST_46']},
-//                                              {$result['LIST_47']}, {$result['LIST_48']}, {$result['LIST_57']}, {$result['LIST_66']}, {$result['LIST_67']}, {$result['LIST_77']},
-//                                                    {$result['LIST_87']}, {$result['LIST_94']}, {$waterfront}, {$result['LIST_5']}, {$result['LIST_6']}, {$result['LIST_106']},
-//                                                    {$result['LIST_165']}, {$result['LIST_10']}, {$result['LIST_12']}, {$result['LIST_23']}, {$result['listing_member_shortid']},
-//                                                    {$result['colisting_member_shortid']}, {$interior}, {$appliances}, null, {$exterior}, null, {$energy_features}, {$construction}, {$utilities},
-//                                                    {$zoning}, {$waterview_description}, {$result['LIST_88']}, {$result['LIST_89']}, {$result['LIST_90']}, {$sqft_source}, {$result['LIST_53']},
-//                                                    {$result['LIST_56']}, {$result['LIST_64']}, {$result['LIST_68']}, {$result['LIST_69']}, {$result['LIST_75']}, {$result['LIST_76']}, {$result['LIST_78']},
-//                                                    {$result['LIST_80']}, {$result['LIST_82']})";
-//
-//                $wpdb->query($query);
-
 
         $wpdb->insert($table,
             array(
