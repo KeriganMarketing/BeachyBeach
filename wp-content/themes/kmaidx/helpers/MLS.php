@@ -211,8 +211,6 @@ class MLS
 
         $results = $rets->Search('Property', $class, '*', $this->ecarOptions[$class]);
 
-//        echo '<p>' . $results->getTotalResultsCount() . '</p>';
-//        echo '<p>' . $results->isMaxRowsReached() . '</p>';
         $count = 0;
         foreach ($results as $result) {
             echo '<pre>', print_r($result['LIST_3']), '</pre>';
@@ -1139,31 +1137,6 @@ class MLS
 
     }
 
-
-    /**
-     * @param $loginUrl
-     * @param $username
-     * @param $password
-     * @param $mls_number
-     * @param $class
-     * @return array
-     */
-    private function listingFromCloud($loginUrl, $username, $password, $mls_number, $class)
-    {
-
-        $rets = $this->connectToMLS($loginUrl, $username, $password);
-        $rets->Login();
-
-        $result     = $rets->Search('Property', $class, '(LIST_3=' . $mls_number . ')');
-        $waterfront = isset($result[0]['LIST_192']) ? $result[0]['LIST_192'] : $result[0]['GF20131203222329624962000000'];
-        $listing    = array();
-
-        $completeListing = $this->createListingObject($mls_number, $result, $listing, $waterfront, $rets);
-
-        return $completeListing;
-
-    }
-
     /**
      * @param string $file
      * @return string
@@ -1418,7 +1391,6 @@ class MLS
                 'sold_price'               => $result['LIST_23'],
                 'listing_member_shortid'   => $result['listing_member_shortid'],
                 'colisting_member_shortid' => $result['colisting_member_shortid'],
-//add these columns to database//
                 'interior'                 => $interior,
                 'appliances'               => $appliances,
                 'amenities'                => null,
