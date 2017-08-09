@@ -8,48 +8,33 @@
  */
 
 get_header(); ?>
-<div id="content">
-    <div class="container">
+    <div id="content">
+
+
         <div id="primary" class="content-area">
-            <main id="main" class="site-main" role="main">
+            <main id="main" class="site-main" >
+                <article>
 
-                <section class="error-404 not-found">
-                    <header class="page-header">
-                        <h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'kmaidx' ); ?></h1>
-                    </header><!-- .page-header -->
+                    <header class="entry-header">
+                        <div class="container wide">
+                            <h1 class="entry-title">404</h1>
+                    </div>
+                    </header><!-- .entry-header -->
 
-                    <div class="page-content">
-                        <p><?php esc_html_e( 'It looks like nothing was found at this location. Try one of the links below.', 'kmaidx' ); ?></p>
-
-                        <?php
-
-                            the_widget( 'WP_Widget_Recent_Posts' );
-
-                            // Only show the widget if site has multiple categories.
-                            if ( kmaidx_categorized_blog() ) : ?>
-
-                            <div class="widget widget_categories">
-                                <h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'kmaidx' ); ?></h2>
-                                <ul>
-                                <?php
-                                    wp_list_categories( array(
-                                        'orderby'    => 'count',
-                                        'order'      => 'DESC',
-                                        'show_count' => 1,
-                                        'title_li'   => '',
-                                        'number'     => 10,
-                                    ) );
-                                ?>
-                                </ul>
-                            </div><!-- .widget -->
-
-                        <?php endif; ?>
-
-                    </div><!-- .page-content -->
-                </section><!-- .error-404 -->
+                    <div class="entry-content">
+                        <div class="container wide">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-11">
+                                    <p>The page you requested does not exist. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- .entry-content -->
+                </article>
 
             </main><!-- #main -->
         </div><!-- #primary -->
+
+
     </div>
-</div>
 <?php get_footer();
