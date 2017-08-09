@@ -209,10 +209,8 @@ class MLS
     private function get_ECAR_data($class, $rets)
     {
 
-        $results = $rets->Search('Property', $class, '*', $this->ecarOptions[ $class ]);
+        $results = $rets->Search('Property', $class, '*', $this->ecarOptions[$class]);
 
-//        echo '<p>' . $results->getTotalResultsCount() . '</p>';
-//        echo '<p>' . $results->isMaxRowsReached() . '</p>';
         $count = 0;
         foreach ($results as $result) {
             echo '<pre>', print_r($result['LIST_3']), '</pre>';
@@ -391,16 +389,16 @@ class MLS
 
         $query = "SELECT b.mls_account, b.id, b.latitude, b.longitude, b.lot_dimensions, b.property_type, b.status, b.state, b.preferred_image, b.price, b.area, b.sub_area, b.subdivision, b.city, b.street_number, b.street_name, b.unit_number, b.zip, b.bedrooms, b.bathrooms, b.sq_ft, b.acreage, b.class, b.waterfront, b.date_modified FROM wp_bcar b WHERE 1=1 AND";
 
-        for($i = 0; $i < count($status); $i++){
+        for ($i = 0; $i < count($status); $i++) {
             $query .= ' b.status LIKE "' . $status[$i] . '"';
-            if($i != count($status) - 1) {
+            if ($i != count($status) - 1) {
                 $query .= ' OR';
             }
         }
         if ($cityArrayCount > 0) {
             $query .= ' AND(';
             for ($i = 0; $i < $cityArrayCount; $i++) {
-                $query .= ' b.city LIKE "' . stripslashes($cityArray[ $i ]) . '" OR b.zip LIKE "' . stripslashes($cityArray[ $i ]) . '" OR b.subdivision LIKE "' . stripslashes($cityArray[ $i ]) . '" OR b.area LIKE "' . stripslashes($cityArray[ $i ]) . '"';
+                $query .= ' b.city LIKE "' . stripslashes($cityArray[$i]) . '" OR b.zip LIKE "' . stripslashes($cityArray[$i]) . '" OR b.subdivision LIKE "' . stripslashes($cityArray[$i]) . '" OR b.area LIKE "' . stripslashes($cityArray[$i]) . '"';
 
                 if ($i != $cityArrayCount - 1) {
                     $query .= ' OR';
@@ -432,7 +430,7 @@ class MLS
         if ($classArray[0] != '' && $classArrayCount > 0) {
             $query .= " AND(";
             for ($i = 0; $i < $classArrayCount; $i++) {
-                $query .= ' b.class LIKE "' . $classArray[ $i ] . '"';
+                $query .= ' b.class LIKE "' . $classArray[$i] . '"';
 
                 if ($i != $classArrayCount - 1) {
                     $query .= " OR";
@@ -443,7 +441,7 @@ class MLS
         if ($propertyTypeArrayCount > 0) {
             $query .= " AND(";
             for ($i = 0; $i < $propertyTypeArrayCount; $i++) {
-                $query .= ' b.property_type LIKE "' . $propertyTypeArray[ $i ] . '"';
+                $query .= ' b.property_type LIKE "' . $propertyTypeArray[$i] . '"';
 
                 if ($i != $propertyTypeArrayCount - 1) {
                     $query .= " OR";
@@ -456,16 +454,16 @@ class MLS
 
         $query .= "SELECT e.mls_account, e.id, e.latitude, e.longitude, e.lot_dimensions, e.property_type, e.status, e.state, e.preferred_image, e.price, e.area, e.sub_area, e.subdivision, e.city, e.street_number, e.street_name, e.unit_number, e.zip, e.bedrooms, e.bathrooms, e.sq_ft, e.acreage, e.class, e.waterfront, e.date_modified FROM wp_ecar e WHERE 1=1 AND";
 
-        for($i = 0; $i < count($status); $i++){
+        for ($i = 0; $i < count($status); $i++) {
             $query .= ' e.status LIKE "' . $status[$i] . '"';
-            if($i != count($status) - 1) {
+            if ($i != count($status) - 1) {
                 $query .= ' OR';
             }
         }
         if ($cityArrayCount > 0) {
             $query .= ' AND(';
             for ($i = 0; $i < $cityArrayCount; $i++) {
-                $query .= ' e.city LIKE "' . stripslashes($cityArray[ $i ]) . '" OR e.zip LIKE "' . stripslashes($cityArray[ $i ]) . '" OR e.subdivision LIKE "' . stripslashes($cityArray[ $i ]) . '" OR e.area LIKE "' . stripslashes($cityArray[ $i ]) . '"';
+                $query .= ' e.city LIKE "' . stripslashes($cityArray[$i]) . '" OR e.zip LIKE "' . stripslashes($cityArray[$i]) . '" OR e.subdivision LIKE "' . stripslashes($cityArray[$i]) . '" OR e.area LIKE "' . stripslashes($cityArray[$i]) . '"';
 
                 if ($i != $cityArrayCount - 1) {
                     $query .= ' OR';
@@ -497,7 +495,7 @@ class MLS
         if ($classArrayCount > 0 && $classArray[0] != '') {
             $query .= " AND(";
             for ($i = 0; $i < $classArrayCount; $i++) {
-                $query .= ' e.class LIKE "' . $classArray[ $i ] . '"';
+                $query .= ' e.class LIKE "' . $classArray[$i] . '"';
 
                 if ($i != $classArrayCount - 1) {
                     $query .= " OR";
@@ -508,7 +506,7 @@ class MLS
         if ($propertyTypeArrayCount > 0) {
             $query .= " AND(";
             for ($i = 0; $i < $propertyTypeArrayCount; $i++) {
-                $query .= ' e.property_type LIKE "' . $propertyTypeArray[ $i ] . '"';
+                $query .= ' e.property_type LIKE "' . $propertyTypeArray[$i] . '"';
 
                 if ($i != $propertyTypeArrayCount - 1) {
                     $query .= " OR";
@@ -546,7 +544,7 @@ class MLS
         if ($cityArrayCount > 0) {
             $query .= ' AND(';
             for ($i = 0; $i < $cityArrayCount; $i++) {
-                $query .= ' b.city LIKE "' . $cityArray[ $i ] . '" OR b.zip LIKE "' . $cityArray[ $i ] . '" OR b.subdivision LIKE "' . $cityArray[ $i ] . '" OR b.area LIKE "' . $cityArray[ $i ] . '"';
+                $query .= ' b.city LIKE "' . $cityArray[$i] . '" OR b.zip LIKE "' . $cityArray[$i] . '" OR b.subdivision LIKE "' . $cityArray[$i] . '" OR b.area LIKE "' . $cityArray[$i] . '"';
 
                 if ($i != $cityArrayCount - 1) {
                     $query .= ' OR';
@@ -572,7 +570,7 @@ class MLS
         if ($classArrayCount > 0) {
             $query .= " AND(";
             for ($i = 0; $i < $classArrayCount; $i++) {
-                $query .= ' b.class LIKE "' . $classArray[ $i ] . '"';
+                $query .= ' b.class LIKE "' . $classArray[$i] . '"';
 
                 if ($i != $classArrayCount - 1) {
                     $query .= " OR";
@@ -583,7 +581,7 @@ class MLS
         if ($propertyTypeArrayCount > 0) {
             $query .= " AND(";
             for ($i = 0; $i < $propertyTypeArrayCount; $i++) {
-                $query .= ' b.property_type LIKE "' . $propertyTypeArray[ $i ] . '"';
+                $query .= ' b.property_type LIKE "' . $propertyTypeArray[$i] . '"';
 
                 if ($i != $propertyTypeArrayCount - 1) {
                     $query .= " OR";
@@ -599,7 +597,7 @@ class MLS
         if ($cityArrayCount > 0) {
             $query .= ' AND(';
             for ($i = 0; $i < $cityArrayCount; $i++) {
-                $query .= ' e.city LIKE "' . $cityArray[ $i ] . '" OR e.zip LIKE "' . $cityArray[ $i ] . '" OR e.subdivision LIKE "' . $cityArray[ $i ] . '" OR e.area LIKE "' . $cityArray[ $i ] . '"';
+                $query .= ' e.city LIKE "' . $cityArray[$i] . '" OR e.zip LIKE "' . $cityArray[$i] . '" OR e.subdivision LIKE "' . $cityArray[$i] . '" OR e.area LIKE "' . $cityArray[$i] . '"';
 
                 if ($i != $cityArrayCount - 1) {
                     $query .= ' OR';
@@ -625,7 +623,7 @@ class MLS
         if ($classArrayCount > 0) {
             $query .= " AND(";
             for ($i = 0; $i < $classArrayCount; $i++) {
-                $query .= ' e.class LIKE "' . $classArray[ $i ] . '"';
+                $query .= ' e.class LIKE "' . $classArray[$i] . '"';
 
                 if ($i != $classArrayCount - 1) {
                     $query .= " OR";
@@ -636,7 +634,7 @@ class MLS
         if ($propertyTypeArrayCount > 0) {
             $query .= " AND(";
             for ($i = 0; $i < $propertyTypeArrayCount; $i++) {
-                $query .= ' e.property_type LIKE "' . $propertyTypeArray[ $i ] . '"';
+                $query .= ' e.property_type LIKE "' . $propertyTypeArray[$i] . '"';
 
                 if ($i != $propertyTypeArrayCount - 1) {
                     $query .= " OR";
@@ -724,7 +722,7 @@ class MLS
         $chunkedArray = array_chunk($listingsArray, 250);
 
         foreach ($chunkedArray as $chunk => $mls) {
-            $newArray[ $chunk ] = implode(",", $mls);
+            $newArray[$chunk] = implode(",", $mls);
         }
 
         $this->truncateTable($wpdb, 'wp_bcar_photos');
@@ -762,7 +760,7 @@ class MLS
         $chunkedArray = array_chunk($listingsArray, 250);
 
         foreach ($chunkedArray as $chunk => $mls) {
-            $newArray[ $chunk ] = implode(",", $mls);
+            $newArray[$chunk] = implode(",", $mls);
         }
 
         $this->truncateTable($wpdb, 'wp_ecar_photos');
@@ -1038,11 +1036,11 @@ class MLS
             $agent = array();
             foreach ($agentObjects as $key => $value) {
 
-                $agent[ $key ] = $value;
+                $agent[$key] = $value;
 
             }
             for ($i = 0; $i < count($agentObjects); $i++) {
-                $agent[0]->short_ids[ $i ] = $agentObjects[ $i ]->short_id;
+                $agent[0]->short_ids[$i] = $agentObjects[$i]->short_id;
             }
 
             unset($agent[0]->short_id);
@@ -1096,10 +1094,10 @@ class MLS
         $totalResults = array();
 
         foreach ($results as $result) {
-            if (!isset($totalResults[ $result->class ])) {
-                $totalResults[ $result->class ] = $result->mycount;
+            if (!isset($totalResults[$result->class])) {
+                $totalResults[$result->class] = $result->mycount;
             } else {
-                $totalResults[ $result->class ] += $result->mycount;
+                $totalResults[$result->class] += $result->mycount;
             }
         }
 
@@ -1139,31 +1137,6 @@ class MLS
 
     }
 
-
-    /**
-     * @param $loginUrl
-     * @param $username
-     * @param $password
-     * @param $mls_number
-     * @param $class
-     * @return array
-     */
-    private function listingFromCloud($loginUrl, $username, $password, $mls_number, $class)
-    {
-
-        $rets = $this->connectToMLS($loginUrl, $username, $password);
-        $rets->Login();
-
-        $result     = $rets->Search('Property', $class, '(LIST_3=' . $mls_number . ')');
-        $waterfront = isset($result[0]['LIST_192']) ? $result[0]['LIST_192'] : $result[0]['GF20131203222329624962000000'];
-        $listing    = array();
-
-        $completeListing = $this->createListingObject($mls_number, $result, $listing, $waterfront, $rets);
-
-        return $completeListing;
-
-    }
-
     /**
      * @param string $file
      * @return string
@@ -1186,7 +1159,7 @@ class MLS
     /**
      *  BELOW THIS LINE THERE BE DRAGONS! ONLY SCROLL DOWN IF YOU HATE YOUR LIFE!
      *
-     *  PLEASE DON'T TOUCH UNLESS YOU HAVE ASKED BY DARON AND/OR JESUS CHRIST
+     *  PLEASE DON'T TOUCH UNLESS YOU HAVE BEEN ASKED BY DARON AND/OR JESUS CHRIST
      */
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1385,26 +1358,6 @@ class MLS
 
         }
 
-
-//                $query = "INSERT into {$table} (mls_account, property_type, class, status, price, area, street_number, street_namw, unit_number, city, state,
-//                                              zip, latitude, longitude, sq_ft, acreage, bedrooms, bathrooms, subdivision, date_modified, sub_area, waterfronw,
-//                                              agent_id, colist_agent_id, office_id, colist_office_id, list_date, sold_date, sold_price, listing_member_shortid,
-//                                              colisting_member_shortid, interior, appliances, amenities, exterior, lot_description, energy_features, construction,
-//                                              utilities, zoning, waterview_descriptiow, elementary_school, middle_school, high_school, sqft_source, year_built,
-//                                              lot_dimensions, stories, full_baths, half_baths, last_taxes, last_tax_year, description, apn, directions)
-//                                              VALUES ({$result['LIST_3']}, {$result['LIST_8']}, {$result['LIST_9']}, {$result['LIST_15']}, {$result['LIST_22']}, {$result['LIST_29']},
-//                                              {$result['LIST_31']}, {$result['LIST_34']}, {$result['LIST_35']}, {$result['LIST_39']}, {$result['LIST_40']}, {$result['LIST_43']}, {$result['LIST_46']},
-//                                              {$result['LIST_47']}, {$result['LIST_48']}, {$result['LIST_57']}, {$result['LIST_66']}, {$result['LIST_67']}, {$result['LIST_77']},
-//                                                    {$result['LIST_87']}, {$result['LIST_94']}, {$waterfront}, {$result['LIST_5']}, {$result['LIST_6']}, {$result['LIST_106']},
-//                                                    {$result['LIST_165']}, {$result['LIST_10']}, {$result['LIST_12']}, {$result['LIST_23']}, {$result['listing_member_shortid']},
-//                                                    {$result['colisting_member_shortid']}, {$interior}, {$appliances}, null, {$exterior}, null, {$energy_features}, {$construction}, {$utilities},
-//                                                    {$zoning}, {$waterview_description}, {$result['LIST_88']}, {$result['LIST_89']}, {$result['LIST_90']}, {$sqft_source}, {$result['LIST_53']},
-//                                                    {$result['LIST_56']}, {$result['LIST_64']}, {$result['LIST_68']}, {$result['LIST_69']}, {$result['LIST_75']}, {$result['LIST_76']}, {$result['LIST_78']},
-//                                                    {$result['LIST_80']}, {$result['LIST_82']})";
-//
-//                $wpdb->query($query);
-
-
         $wpdb->insert($table,
             array(
                 'mls_account'              => $result['LIST_3'],
@@ -1438,7 +1391,6 @@ class MLS
                 'sold_price'               => $result['LIST_23'],
                 'listing_member_shortid'   => $result['listing_member_shortid'],
                 'colisting_member_shortid' => $result['colisting_member_shortid'],
-//add these columns to database//
                 'interior'                 => $interior,
                 'appliances'               => $appliances,
                 'amenities'                => null,
@@ -1678,7 +1630,7 @@ class MLS
         ];
 
         if ($class != null) {
-            return $typeArray[ $class ];
+            return $typeArray[$class];
         }
 
         return $typeArray;
