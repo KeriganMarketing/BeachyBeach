@@ -591,7 +591,7 @@ function listing_page_titles($metaTitle)
 	{
 		global $metaTitle;
 		if (isset($metaTitle))
-			$newTitle = $metaTitle." | ".get_bloginfo('name');
+			$newTitle = $metaTitle;
 	}
 	return $newTitle;
 }
