@@ -580,3 +580,18 @@ add_filter( 'get_the_archive_title', function ($title) {
 	return $title;
 
 });
+
+
+add_filter('wpseo_title','listing_page_titles',100);
+function listing_page_titles($title)
+{
+	global $pagename;
+	$new_title = $title;
+	if ($pagename=='listing')
+	{
+		global $title;
+		if (isset($title))
+			$new_title = $title." | ".get_bloginfo('name');
+	}
+	return $new_title;
+}

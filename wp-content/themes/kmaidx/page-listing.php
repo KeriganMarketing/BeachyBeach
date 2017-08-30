@@ -32,12 +32,6 @@ if ($listingInfo->unit_number != '') {
     $title = $title . ' ' . $listingInfo->unit_number;
 }
 
-add_filter('wp_title', 'filter_listing_title', 100);
-function filter_listing_title($title) {
-	$title = $title . '|' . get_bloginfo();
-	return $title;
-}
-
 get_header(); ?>
     <div id="content">
         <article id="post-<?php echo $listingInfo->mls_account; ?>" class="listing">
