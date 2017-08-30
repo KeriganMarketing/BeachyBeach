@@ -623,3 +623,18 @@ function listing_og_image($ogPhoto)
 	}
 	return $newImage;
 }
+
+add_filter('wpseo_canonical','listing_og_url',100,1);
+add_filter('wpseo_opengraph_url','listing_og_url',100,1);
+function listing_og_url($ogUrl)
+{
+	global $pagename;
+	$newUrl = $ogUrl;
+	if ($pagename == 'listing')
+	{
+		global $ogUrl;
+		if (isset($ogUrl))
+			$newUrl = $ogUrl;
+	}
+	return $newUrl;
+}
