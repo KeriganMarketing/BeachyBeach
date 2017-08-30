@@ -32,7 +32,7 @@ if ($listingInfo->unit_number != '') {
     $title = $title . ' ' . $listingInfo->unit_number;
 }
 
-add_filter('wpseo_title', 'filter_listing_title');
+add_filter('wp_title', 'filter_listing_title', 100);
 function filter_listing_title($title) {
 	$title = $title . '|' . get_bloginfo();
 	return $title;
