@@ -583,15 +583,43 @@ add_filter( 'get_the_archive_title', function ($title) {
 
 
 add_filter('wpseo_title','listing_page_titles',100);
-function listing_page_titles($title)
+function listing_page_titles($metaTitle)
 {
 	global $pagename;
-	$new_title = $title;
+	$newTitle = $metaTitle;
 	if ($pagename=='listing')
 	{
-		global $title;
-		if (isset($title))
-			$new_title = $title." | ".get_bloginfo('name');
+		global $metaTitle;
+		if (isset($metaTitle))
+			$newTitle = $metaTitle." | ".get_bloginfo('name');
 	}
-	return $new_title;
+	return $newTitle;
+}
+
+add_filter('wpseo_metadesc','listing_page_description',100,1);
+function listing_page_description($metaDescription)
+{
+	global $pagename;
+	$newDescription = $metaDescription;
+	if ($pagename == 'listing')
+	{
+		global $metaDescription;
+		if (isset($metaDescription))
+			$newDescription = $metaDescription;
+	}
+	return $newDescription;
+}
+
+add_filter('wpseo_opengraph_image','listing_og_image', 100,1);
+function listing_og_image($ogPhoto)
+{
+	global $pagename;
+	$newImage = $ogPhoto;
+	if ($pagename == 'listing')
+	{
+		global $ogPhoto;
+		if (isset($ogPhoto))
+			$newImage = $ogPhoto;
+	}
+	return $newImage;
 }
