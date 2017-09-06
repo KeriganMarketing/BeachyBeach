@@ -1500,7 +1500,10 @@ span.subhead.small {
     border-radius:0;
     max-width: 100%;
 }
-
+.card-image {
+    height: 268px;
+    overflow: hidden;
+}
 .agent-card.active {
     display: inline-flex;
 }

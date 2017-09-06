@@ -17,7 +17,7 @@ foreach($locationlist as $location){ ?>
 				<p><strong><?php echo $location['address']; ?></strong><br>
 					<em>office:</em>&nbsp;&nbsp; <?php echo $location['phone']; ?><br>
 					<em>fax:</em>&nbsp;&nbsp; <?php echo $location['fax']; ?><br>
-					<em>email:</em>&nbsp;&nbsp; <a href="mailto:info@beachybeach.com"><?php echo $location['title']; ?></a></p>
+					<em>email:</em>&nbsp;&nbsp; <a href="mailto:<?php echo $location['email']; ?>"><?php echo $location['title']; ?></a></p>
 			</div>
 		</div>
 	</div>

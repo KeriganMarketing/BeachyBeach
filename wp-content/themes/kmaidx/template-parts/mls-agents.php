@@ -47,7 +47,9 @@ foreach($team as $agent){
     ?>
     <div class="agent-card col-sm-6 col-lg-4 col-xl-3<?php echo $agentCategories; ?> all-filter" >
         <div class="card" >
-            <img class="card-img-top" src="<?php echo ($agent['thumbnail'] != '' ? $agent['thumbnail'] : get_template_directory_uri().'/img/beachybeach-placeholder.jpg' ); ?>" alt="<?php echo $agent['name']; ?>" style="width:500px;">
+            <div class="card-image">
+                <img class="card-img-top" src="<?php echo ($agent['thumbnail'] != '' ? $agent['thumbnail'] : get_template_directory_uri().'/img/beachybeach-placeholder.jpg' ); ?>" alt="<?php echo $agent['name']; ?>" style="width:500px;">
+            </div>
             <div class="card-block">
                 <h4 class="card-title"><?php echo $agent['name']; ?></h4>
                 <h5 class="card-subtitle"><?php echo ($agent['title'] != '' ? $agent['title'] : 'Realtor' ); ?></h5>

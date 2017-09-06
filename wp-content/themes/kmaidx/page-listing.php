@@ -32,6 +32,11 @@ if ($listingInfo->unit_number != '') {
     $title = $title . ' ' . $listingInfo->unit_number;
 }
 
+$metaTitle = $title . ' | $' . number_format($listingInfo->price) . ' | ' . get_bloginfo('name');
+$metaDescription = $listingInfo->description;
+$ogPhoto = ($listingInfo->preferred_image != '' ? $listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg' );
+$ogUrl = get_the_permalink() . '?mls=' . $listingInfo->mls_account;
+
 get_header(); ?>
     <div id="content">
         <article id="post-<?php echo $listingInfo->mls_account; ?>" class="listing">
