@@ -2,7 +2,7 @@
 
 $mlsLead = new kmaLeads();
 $mls = new MLS();
-$ADMIN_EMAIL = 'bryan@kerigan.com';
+$ADMIN_EMAIL = 'info@beachybeach.com';
 $DOMAIN_NAME = 'beachybeach.com';
 
 //CURRENT USER INFO
@@ -76,7 +76,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 	    //echo '<pre>',print_r($_POST),'</pre>';
         //echo '<pre>',print_r($agentInfo),'</pre>';
 	    $agentMLSInfo = $mls->getAgentByName($agentInfo['name']);
-	    $ADMIN_EMAIL    = ($agentMLSInfo != false ? $agentMLSInfo->email : '');
+	    $ADMIN_EMAIL    = ($agentMLSInfo != false ? $agentMLSInfo->email : 'info@beachybeach.com');
 	    if($agentInfo['email'] != '' ){ $ADMIN_EMAIL = $agentInfo['email']; }
         $leadFor = $selectedAgent;
 
@@ -116,6 +116,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 		'from'		=> get_bloginfo().' <noreply@'.$DOMAIN_NAME.'>',
 		'subject'	=> 'Property info request from website',
 		'bcc'		=> 'support@kerigan.com',
+		'cc'        => 'lacey@beachybeach.com',
 		'replyto'   => $youremail
 	);
 
