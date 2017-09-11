@@ -585,42 +585,57 @@ add_filter( 'get_the_archive_title', function ($title) {
 add_filter('wpseo_title','listing_page_titles',100);
 function listing_page_titles($metaTitle)
 {
-	global $pagename;
-	$newTitle = $metaTitle;
-	if ($pagename=='listing')
-	{
-		global $metaTitle;
-		if (isset($metaTitle))
-			$newTitle = $metaTitle;
-	}
-	return $newTitle;
+    global $post;
+    $newTitle = $metaTitle;
+    if ($post->post_name == 'listing') {
+        global $metaTitle;
+        if (isset($metaTitle)) {
+            $newTitle = $metaTitle;
+        }
+    } elseif ($post->post_type == 'agent') {
+        global $metaTitle;
+        if (isset($metaTitle)) {
+            $newTitle = $metaTitle;
+        }
+    }
+    return $newTitle;
 }
 
 add_filter('wpseo_metadesc','listing_page_description',100,1);
 function listing_page_description($metaDescription)
 {
-	global $pagename;
-	$newDescription = $metaDescription;
-	if ($pagename == 'listing')
-	{
-		global $metaDescription;
-		if (isset($metaDescription))
-			$newDescription = $metaDescription;
-	}
-	return $newDescription;
+    global $post;
+    $newDescription = $metaDescription;
+    if ($post->post_name == 'listing') {
+        global $metaDescription;
+        if (isset($metaDescription)) {
+            $newDescription = $metaDescription;
+        }
+    } elseif ($post->post_type == 'agent') {
+        global $metaDescription;
+        if (isset($metaDescription)) {
+            $newDescription = $metaDescription;
+        }
+    }
+    return $newDescription;
 }
 
 add_filter('wpseo_opengraph_image','listing_og_image', 100,1);
 function listing_og_image($ogPhoto)
 {
-	global $pagename;
+	global $post;
 	$newImage = $ogPhoto;
-	if ($pagename == 'listing')
-	{
-		global $ogPhoto;
-		if (isset($ogPhoto))
-			$newImage = $ogPhoto;
-	}
+    if ($post->post_name == 'listing') {
+        global $ogPhoto;
+        if (isset($ogPhoto)) {
+            $newImage = $ogPhoto;
+        }
+    } elseif ($post->post_type == 'agent') {
+        global $ogPhoto;
+        if (isset($ogPhoto)) {
+            $newImage = $ogPhoto;
+        }
+    }
 	return $newImage;
 }
 
@@ -628,13 +643,18 @@ add_filter('wpseo_canonical','listing_og_url',100,1);
 add_filter('wpseo_opengraph_url','listing_og_url',100,1);
 function listing_og_url($ogUrl)
 {
-	global $pagename;
-	$newUrl = $ogUrl;
-	if ($pagename == 'listing')
-	{
-		global $ogUrl;
-		if (isset($ogUrl))
-			$newUrl = $ogUrl;
-	}
-	return $newUrl;
+    global $post;
+    $newUrl = $ogUrl;
+    if ($post->post_name == 'listing') {
+        global $ogUrl;
+        if (isset($ogUrl)) {
+            $newUrl = $ogUrl;
+        }
+    } elseif ($post->post_type == 'agent') {
+        global $ogUrl;
+        if (isset($ogUrl)) {
+            $newUrl = $ogUrl;
+        }
+    }
+    return $newUrl;
 }

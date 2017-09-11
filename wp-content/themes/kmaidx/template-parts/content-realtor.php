@@ -64,6 +64,11 @@ if($agent['phone'] != '' ){ $agentCellPhone = $agent['phone']; }
 $agentWebsite  = ($agentMLSInfo != false ? $agentMLSInfo->url : '');
 if($agent['website'] != '' ){ $agentWebsite = $agent['website']; }
 
+$metaTitle = $agent['name'] . ' | ' . $agent['title'] . ' | ' . get_bloginfo('name');
+$metaDescription = $post->post_content;
+$ogPhoto = ($agent['thumbnail'] != '' ? $agent['thumbnail'] : get_template_directory_uri().'/img/beachybeach-placeholder.jpg' );
+$ogUrl = get_the_permalink();
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
