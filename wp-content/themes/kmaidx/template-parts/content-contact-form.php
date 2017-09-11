@@ -216,7 +216,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
                         'lead_info_phone_number' => $phone,
                         'lead_info_email_address' => $youremail,
                         'lead_info_message' => $message,
-                        'lead_info_mls' => $mlsnumber,
+                        'lead_info_mls_number' => $mlsnumber,
                         'lead_info_selected_agent' => $selectedAgent,
                         'lead_info_notification_preview' => $emailMessage,
                     )
