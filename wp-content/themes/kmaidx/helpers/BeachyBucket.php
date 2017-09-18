@@ -40,14 +40,14 @@ class BeachyBucket
         ];
 
         return json_encode($response);
-
     }
 
     private function addListingToBucket($user_id, $mls_account)
     {
         global $wpdb;
 
-        $wpdb->insert('wp_beachy_buckets',
+        $wpdb->insert(
+            'wp_beachy_buckets',
             array(
                 'user_id'     => $user_id,
                 'mls_account' => $mls_account
@@ -64,7 +64,7 @@ class BeachyBucket
         global $wpdb;
 
         $wpdb->query(
-            "DELETE FROM wp_beachy_buckets 
+            "DELETE FROM wp_beachy_buckets
              WHERE user_id={$user_id} AND mls_account LIKE '{$mls_account}'"
         );
     }
@@ -74,7 +74,7 @@ class BeachyBucket
         global $wpdb;
 
         $query = "SELECT * FROM wp_beachy_buckets
-                  WHERE user_id={$user_id} 
+                  WHERE user_id={$user_id}
                   AND mls_account LIKE '{$mls_account}'";
 
         $results = $wpdb->get_results($query);
@@ -105,16 +105,16 @@ class BeachyBucket
         }
 
         return $mlsNumbers;
-
     }
 
     public function clientBeachyBuckets($agentName)
     {
         global $wpdb;
-        $mls = new MLS();
-
+        $mls        = new MLS();
         $userIDs    = [];
         $mlsNumbers = [];
+        $query      = '';
+
         $results    = $wpdb->get_results("SELECT user_id from wp_usermeta WHERE meta_value LIKE '{$agentName}'");
         if (!empty($results)) {
             foreach ($results as $result) {
@@ -133,12 +133,13 @@ class BeachyBucket
         }
         $results = $wpdb->get_results($query);
 
-        foreach($results as $result){
-            array_push($mlsNumbers, $result->mls_account);
+        if (count($results) > 0) {
+            foreach ($results as $result) {
+                array_push($mlsNumbers, $result->mls_account);
+            }
         }
 
         return $mlsNumbers;
-
     }
 
     public function beachyBucketResults($mlsNumberArray)
@@ -163,9 +164,7 @@ class BeachyBucket
         $query =
             "SELECT * FROM wp_bcar WHERE 1 AND ";
 
-
         for ($i = 0; $i < count($mlsNumberArray); $i++) {
-
             $query .= "mls_account LIKE '{$mlsNumberArray[$i]}'";
 
             if ($i < count($mlsNumberArray) - 1) {
@@ -180,7 +179,6 @@ class BeachyBucket
 
 
         for ($i = 0; $i < count($mlsNumberArray); $i++) {
-
             $query .= "mls_account LIKE '{$mlsNumberArray[$i]}'";
 
             if ($i < count($mlsNumberArray) - 1) {
@@ -190,6 +188,4 @@ class BeachyBucket
 
         return $query;
     }
-
-
 }
