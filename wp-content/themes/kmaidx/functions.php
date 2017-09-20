@@ -264,11 +264,11 @@ add_action('wp_ajax_loadMlsIdx', 'loadMlsIdx');
 add_action('wp_ajax_nopriv_loadMlsIdx', 'loadMlsIdx');
 function loadMlsIdx() {
 
-//    if (isset($_SESSION['smartselect'])) {
-//
-//        $result = $_SESSION['smartselect'];
-//
-//    } else {
+    if (isset($_SESSION['smartselect'])) {
+
+        $result = $_SESSION['smartselect'];
+
+    } else {
 
         $mls = new MLS();
 	    $communities = new Communities();
@@ -360,7 +360,7 @@ function loadMlsIdx() {
         $_SESSION['smartselect'] = json_encode($result);
         $result                  = json_encode($result);
 
-//    }
+    }
 
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         echo $result;
@@ -374,11 +374,11 @@ add_action('wp_ajax_loadCommMapPins', 'loadCommMapPins');
 add_action('wp_ajax_nopriv_loadCommMapPins', 'loadCommMapPins');
 function loadCommMapPins(){
 
-//    if (isset($_SESSION['communitymap'])) {
-//
-//        $result = $_SESSION['communitymap'];
-//
-//    } else {
+    if (isset($_SESSION['communitymap'])) {
+
+        $result = $_SESSION['communitymap'];
+
+    } else {
 
 	    $mls = new MLS();
 	    $communities = new Communities();
@@ -488,7 +488,7 @@ function loadCommMapPins(){
         $_SESSION['communitymap'] = json_encode($return);
         $result                   = json_encode($return);
 
-//    }
+    }
 
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         echo $result;
