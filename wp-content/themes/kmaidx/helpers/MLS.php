@@ -1614,9 +1614,6 @@ class MLS
 
         }
 
-        echo $query;
-        exit;
-
         return "SELECT * FROM (" . $query . ") Q GROUP BY Q.mls_account";
     }
 
