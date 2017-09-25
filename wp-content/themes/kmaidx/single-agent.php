@@ -50,7 +50,10 @@ if($agent['name'] != '') {
     $agentIds[] = $agentMLSInfo->short_ids;
 
     if($agent['mls_names'] != '') {
-        $agentIds[] = ($post->contact_info_additional_mls_names != ''  ? $post->contact_info_additional_mls_names : null);
+        $additionalNames = explode(',',$agent['mls_names']);
+        foreach($additionalNames as $additionalName){
+            $agentIds[] = $additionalName;
+        }
     }
 
     $agentMLSInfo = $mls->getAgentByName($agent['name']);
