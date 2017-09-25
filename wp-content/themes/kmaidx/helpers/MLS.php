@@ -1589,7 +1589,8 @@ class MLS
         $query .= " AND ";
         for ($i = 0; $i < count($short_ids); $i++) {
 
-            $query .= "listing_member_shortid LIKE '{$short_ids[$i]}' OR colisting_member_shortid LIKE '{$short_ids[$i]}'";
+            $query .= "listing_member_shortid LIKE '{$short_ids[$i]}' OR colisting_member_shortid LIKE '{$short_ids[$i]}' 
+            OR office_id LIKE '{$short_ids[$i]}' OR colist_office_id LIKE '{$short_ids[$i]}' ";
 
             if ($i < count($short_ids) - 1) {
                 $query .= ' OR ';
