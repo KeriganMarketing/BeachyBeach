@@ -46,20 +46,23 @@ $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'price';
 $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'DESC';
 
 if($agent['name'] != '') {
-    $agentMLSInfo = $mls->getAgentByName($agent['name']);
-    $agentListings = $mls->getAgentListings($agentMLSInfo->short_ids, $sortBy, $orderBy);
-}
 
-if($agent['mls_names'] != '') {
-    if(is_array($agent['mls_names'])) {
-        foreach ($agent['mls_names'] as $mlsId) {
-            $additionalListings = $mls->getAgentListings($mlsId, $sortBy, $orderBy);
-            $agentListings      = array_merge($agentListings, $additionalListings);
+    $agentIds = $agentMLSInfo->short_ids;
+
+    if($agent['mls_names'] != '') {
+        if(is_array($agent['mls_names'])) {
+            foreach ($agent['mls_names'] as $mlsId) {
+                $additionalListings = $mls->getAgentListings($mlsId, $sortBy, $orderBy);
+                $agentIds      = array_merge($agentIds, $additionalListings);
+            }
+        }else{
+            $additionalListings = $mls->getAgentListings($agent['mls_names'], $sortBy, $orderBy);
+            $agentIds      = array_merge($agentIds, $additionalListings);
         }
-    }else{
-        $additionalListings = $mls->getAgentListings($agent['mls_names'], $sortBy, $orderBy);
-        $agentListings      = array_merge($agentListings, $additionalListings);
     }
+
+    $agentMLSInfo = $mls->getAgentByName($agent['name']);
+    $agentListings = $mls->getAgentListings($agentIds, $sortBy, $orderBy);
 }
 
 $agentEmail         = '';
