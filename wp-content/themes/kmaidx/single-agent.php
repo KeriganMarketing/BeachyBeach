@@ -37,15 +37,24 @@ $agent = array(
                 'youtube'       => ($post->social_media_info_youtube    != '' ? 'https://www.youtube.com/user'.$post->social_media_info_youtube : ''),
                 'google_plus'   => ($post->social_media_info_google     != '' ? 'https://plus.google.com'.$post->social_media_info_google : ''),
         ),
-        'categories'    => $agentCategories
+        'categories'    => $agentCategories,
+        'mls_names'     => ($post->contact_info_additional_mls_names != ''  ? $post->contact_info_additional_mls_names : null)
 );
 
+$mls = new MLS();
+$sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'price';
+$orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'DESC';
+
 if($agent['name'] != '') {
-    $mls = new MLS();
-    $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'price';
-    $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'DESC';
     $agentMLSInfo = $mls->getAgentByName($agent['name']);
     $agentListings = $mls->getAgentListings($agentMLSInfo->short_ids, $sortBy, $orderBy);
+}
+
+if($agent['mls_names'] != '') {
+    foreach($agent['mls_names'] as $mlsId){
+        $additionalListings = $mls->getAgentListings($mlsId, $sortBy, $orderBy);
+        $agentListings = array_merge($agentListings, $additionalListings);
+    }
 }
 
 $agentEmail         = '';
