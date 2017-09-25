@@ -84,6 +84,7 @@ $ogPhoto = ($agent['thumbnail'] != '' ? $agent['thumbnail'] : get_template_direc
 $ogUrl = get_the_permalink();
 
 get_header(); ?>
+    <!-- <?php print_r($agent['mls_names']); ?> -->
 <div id="content">
 
     <div id="primary" class="content-area">
