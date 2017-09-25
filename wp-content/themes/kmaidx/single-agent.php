@@ -62,7 +62,7 @@ if($agent['name'] != '') {
 //    }
 
     $agentMLSInfo = $mls->getAgentByName($agent['name']);
-    $agentListings = $mls->getAgentListings($agentIds, $sortBy, $orderBy);
+    $agentListings = $mls->getAgentListings($agentMLSInfo->short_ids, $sortBy, $orderBy);
 }
 
 $agentEmail         = '';
