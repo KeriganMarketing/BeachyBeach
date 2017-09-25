@@ -47,6 +47,7 @@ $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'DESC';
 
 if($agent['name'] != '') {
 
+    $agentMLSInfo = $mls->getAgentByName($agent['name']);
     $agentIds[] = $agentMLSInfo->short_ids;
 
     if($agent['mls_names'] != '') {
@@ -56,7 +57,7 @@ if($agent['name'] != '') {
         }
     }
 
-    $agentMLSInfo = $mls->getAgentByName($agent['name']);
+
     $agentListings = $mls->getAgentListings($agentIds, $sortBy, $orderBy);
 
 }
