@@ -1586,7 +1586,7 @@ class MLS
     {
         $query = "SELECT * FROM wp_bcar WHERE 1=1";
 
-        $query .= " AND ( ";
+        $query .= " AND ";
         for ($i = 0; $i < count($short_ids); $i++) {
 
             $query .= "listing_member_shortid LIKE '{$short_ids[$i]}' OR colisting_member_shortid LIKE '{$short_ids[$i]}' 
@@ -1594,8 +1594,6 @@ class MLS
 
             if ($i < count($short_ids) - 1) {
                 $query .= ' OR ';
-            }else{
-                $query .= ' ) ';
             }
 
         }
@@ -1604,7 +1602,7 @@ class MLS
 
         $query .= "SELECT * FROM wp_ecar WHERE 1=1";
 
-        $query .= " AND ( ";
+        $query .= " AND ";
         for ($i = 0; $i < count($short_ids); $i++) {
 
             $query .= "listing_member_shortid LIKE '{$short_ids[$i]}' OR colisting_member_shortid LIKE '{$short_ids[$i]}' 
@@ -1612,8 +1610,6 @@ class MLS
 
             if ($i < count($short_ids) - 1) {
                 $query .= ' OR ';
-            }else{
-                $query .= ' ) ';
             }
 
         }
