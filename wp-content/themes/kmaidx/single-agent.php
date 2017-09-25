@@ -51,9 +51,14 @@ if($agent['name'] != '') {
 }
 
 if($agent['mls_names'] != '') {
-    foreach($agent['mls_names'] as $mlsId){
-        $additionalListings = $mls->getAgentListings($mlsId, $sortBy, $orderBy);
-        $agentListings = array_merge($agentListings, $additionalListings);
+    if(is_array($agent['mls_names'])) {
+        foreach ($agent['mls_names'] as $mlsId) {
+            $additionalListings = $mls->getAgentListings($mlsId, $sortBy, $orderBy);
+            $agentListings      = array_merge($agentListings, $additionalListings);
+        }
+    }else{
+        $additionalListings = $mls->getAgentListings($agent['mls_names'], $sortBy, $orderBy);
+        $agentListings      = array_merge($agentListings, $additionalListings);
     }
 }
 
