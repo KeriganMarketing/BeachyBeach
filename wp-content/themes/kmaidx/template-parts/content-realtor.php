@@ -29,7 +29,7 @@
 	                        <?php if($agentEmail != ''){?><li class="email"><img src="<?php echo $mls->getSvg('email'); ?>" alt="Email <?php echo $agent['name']; ?>" ><a href="mailto:<?php echo $agentEmail; ?>" ><?php echo $agentEmail; ?></a></li><?php } ?>
 	                        <?php if($agentWebsite != ''){?><li class="web"><img src="<?php echo $mls->getSvg('url'); ?>" alt="View <?php echo $agent['name']; ?>'s Website" ><a target="_blank" href="<?php echo $agentWebsite; ?>" ><?php echo $agentWebsite; ?></a></li><?php } ?>
                             <?php foreach($agent['social'] as $social => $link){
-                                echo ( $link != '' ? '<li class="phone"><img src="'.$mls->getSvg($social).'" alt="Follow '.$agent['name'].' on '.$social.'" ><a href="'.$link.'" target="_blank">'.$link.'</a></li>' : '');
+                                echo ( $link != '' ? '<li class="phone"><img src="'.$mls->getSvg($social).'" alt="Follow '.$agent['name'].' on '.$social.'" ><a href="'.$socialLinks[$social].'" target="_blank">'.$link.'</a></li>' : '');
                             } ?>
                         </ul>
                     </div>
