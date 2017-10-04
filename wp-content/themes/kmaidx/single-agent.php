@@ -92,7 +92,7 @@ $ogPhoto = ($agent['thumbnail'] != '' ? $agent['thumbnail'] : get_template_direc
 $ogUrl = get_the_permalink();
 
 get_header(); ?>
-    <!-- <?php print_r($agentIds); ?> -->
+    <!-- <?php print_r($agentListings); ?> -->
 <div id="content">
 
     <div id="primary" class="content-area">
