@@ -1587,7 +1587,7 @@ class MLS
         $query = "SELECT * FROM wp_bcar WHERE 1=1";
 
         $query .= " AND ";
-        for ($i = 0; $i <= count($short_ids); $i++) {
+        for ($i = 0; $i < count($short_ids); $i++) {
 
             $shortId = (string) $short_ids[$i];
 
@@ -1605,7 +1605,7 @@ class MLS
         $query .= "SELECT * FROM wp_ecar WHERE 1=1";
 
         $query .= " AND ";
-        for ($i = 0; $i <= count($short_ids); $i++) {
+        for ($i = 0; $i < count($short_ids); $i++) {
 
             $shortId = (string) $short_ids[$i];
 
