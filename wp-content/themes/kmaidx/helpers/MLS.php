@@ -657,13 +657,13 @@ class MLS
         global $wpdb;
 
         $results = $wpdb->get_results(
-            "Select * FROM 
-            ((SELECT DISTINCT $column from wp_bcar as b) 
-            UNION 
-            (SELECT DISTINCT $column from wp_ecar as e)) as Q 
-            WHERE Q.$column IS NOT NULL 
-            AND 
-            Q.$column <> '' 
+            "Select * FROM
+            ((SELECT DISTINCT $column from wp_bcar as b)
+            UNION
+            (SELECT DISTINCT $column from wp_ecar as e)) as Q
+            WHERE Q.$column IS NOT NULL
+            AND
+            Q.$column <> ''
             ORDER BY Q.$column;");
 
         return $results;
@@ -898,8 +898,8 @@ class MLS
         global $wpdb;
 
         $mls_numbers = $wpdb->get_results(
-            "SELECT DISTINCT short_id 
-             FROM wp_agents 
+            "SELECT DISTINCT short_id
+             FROM wp_agents
              WHERE short_id NOT LIKE '%.%'");
 
         return $mls_numbers;
@@ -910,8 +910,8 @@ class MLS
         global $wpdb;
 
         $agents = $wpdb->get_results(
-            "SELECT DISTINCT full_name 
-             FROM wp_agents 
+            "SELECT DISTINCT full_name
+             FROM wp_agents
              WHERE short_id NOT LIKE '%.%'");
 
         foreach ($agents as $agent) {
@@ -931,8 +931,8 @@ class MLS
         global $wpdb;
 
         $return = $wpdb->get_row("
-                    SELECT ID FROM wp_posts 
-                    WHERE post_title LIKE '{$agentName}' 
+                    SELECT ID FROM wp_posts
+                    WHERE post_title LIKE '{$agentName}'
                     AND post_type LIKE 'agent'");
 
         if (empty($return)) {
@@ -1026,8 +1026,8 @@ class MLS
     {
         global $wpdb;
 
-        $query = "SELECT * FROM wp_agents 
-                  WHERE full_name LIKE '{$fullName}' 
+        $query = "SELECT * FROM wp_agents
+                  WHERE full_name LIKE '{$fullName}'
                   AND short_id NOT LIKE '%.%' LIMIT 2";
 
         $agentObjects = $wpdb->get_results($query);
@@ -1060,13 +1060,12 @@ class MLS
     {
         global $wpdb;
 
-        $query = "SELECT * FROM wp_agents 
+        $query = "SELECT * FROM wp_agents
                   WHERE short_id LIKE '{$mlsId}' LIMIT 1";
 
         $agent = $wpdb->get_results($query);
 
         return $agent[0];
-
     }
 
     public function getAgentListings($short_ids, $orderBy = 'price', $sortBy = 'DESC')
@@ -1172,22 +1171,22 @@ class MLS
     private function getCommercialPropertiesQuery($sortBy, $orderBy)
     {
         $query = "SELECT * FROM
-                  ((SELECT b.id, b.property_type, b.status, b.state, b.preferred_image, 
-                  b.mls_account, b.price, b.area, b.sub_area, b.subdivision, 
-                  b.city, b.street_number, b.street_name, b.unit_number, b.zip, 
-                  b.bedrooms, b.bathrooms, b.sq_ft, b.acreage, b.class, 
-                  b.waterfront, b.date_modified 
-                  FROM wp_bcar b 
-                  WHERE b.property_type LIKE 'E' OR b.property_type LIKE 'F') 
+                  ((SELECT b.id, b.property_type, b.status, b.state, b.preferred_image,
+                  b.mls_account, b.price, b.area, b.sub_area, b.subdivision,
+                  b.city, b.street_number, b.street_name, b.unit_number, b.zip,
+                  b.bedrooms, b.bathrooms, b.sq_ft, b.acreage, b.class,
+                  b.waterfront, b.date_modified
+                  FROM wp_bcar b
+                  WHERE b.property_type LIKE 'E' OR b.property_type LIKE 'F')
                   UNION
-                  (SELECT e.id, e.property_type, e.status, e.state, e.preferred_image, 
-                  e.mls_account, e.price, e.area, e.sub_area, e.subdivision, 
-                  e.city, e.street_number, e.street_name, e.unit_number, e.zip, 
-                  e.bedrooms, e.bathrooms, e.sq_ft, e.acreage, e.class, 
+                  (SELECT e.id, e.property_type, e.status, e.state, e.preferred_image,
+                  e.mls_account, e.price, e.area, e.sub_area, e.subdivision,
+                  e.city, e.street_number, e.street_name, e.unit_number, e.zip,
+                  e.bedrooms, e.bathrooms, e.sq_ft, e.acreage, e.class,
                   e.waterfront, e.date_modified
-                  FROM wp_ecar e 
-                  WHERE e.status like 'Active' 
-                  AND e.property_type LIKE 'E' OR e.property_type LIKE 'F')) Q  
+                  FROM wp_ecar e
+                  WHERE e.status like 'Active'
+                  AND e.property_type LIKE 'E' OR e.property_type LIKE 'F')) Q
                   ORDER BY Q." . $sortBy . " " . $orderBy;
 
         return $query;
@@ -1210,7 +1209,7 @@ class MLS
                     GROUP BY class
                     ORDER BY mycount DESC
                     )tsum ON t.id = tsum.id
-                    UNION 
+                    UNION
                     SELECT e.class, esum.mycount
                     FROM wp_ecar e
                     JOIN (
@@ -1220,9 +1219,9 @@ class MLS
                     GROUP BY class
                     ORDER BY mycount DESC
                     )esum ON e.id = esum.id
-                    
+
                     )Q
-                    
+
                      WHERE Q.class IS NOT NULL AND Q.class <> "" ORDER BY  Q.mycount DESC';
 
         return $query;
@@ -1234,10 +1233,10 @@ class MLS
      */
     private function getHotCommunitiesQuery($matchName)
     {
-        return "SELECT Q.id, Q.latitude, Q.longitude FROM 
+        return "SELECT Q.id, Q.latitude, Q.longitude FROM
                 ((SELECT e.id, e.latitude, e.longitude
-                FROM wp_ecar e 
-                WHERE  LOWER(`city`) 
+                FROM wp_ecar e
+                WHERE  LOWER(`city`)
                 REGEXP '^" . $matchName . "$'
                 OR LOWER(`sub_area`) REGEXP '^" . $matchName . "$'
                 OR LOWER(`subdivision`) REGEXP '^" . $matchName . "$'
@@ -1245,7 +1244,7 @@ class MLS
                 UNION ALL
                 (SELECT b.id, b.latitude, b.longitude
                 FROM wp_bcar b
-                WHERE  LOWER(`city`) 
+                WHERE  LOWER(`city`)
                 REGEXP '^" . $matchName . "$'
                 OR LOWER(`sub_area`) REGEXP '^" . $matchName . "$'
                 OR LOWER(`subdivision`) REGEXP '^" . $matchName . "$'
@@ -1588,13 +1587,11 @@ class MLS
 
         $query .= " AND ";
         for ($i = 0; $i < count($short_ids); $i++) {
-
             $query .= "listing_member_shortid LIKE '{$short_ids[$i]}' OR colisting_member_shortid LIKE '{$short_ids[$i]}'";
 
             if ($i < count($short_ids) - 1) {
                 $query .= ' OR ';
             }
-
         }
 
         $query .= " UNION ";

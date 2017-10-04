@@ -36,7 +36,6 @@ class Listing
         $results = $wpdb->get_results("SELECT mls_account, url, photo_description FROM {$table} WHERE listing_id LIKE {$listingId}");
 
         return $results;
-
     }
 
     public function isOurs($listingInfo)

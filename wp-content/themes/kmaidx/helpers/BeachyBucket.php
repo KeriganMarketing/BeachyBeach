@@ -2,7 +2,6 @@
 
 class BeachyBucket
 {
-
     public function handleFavorite($user_id, $mls_account)
     {
         global $wpdb;
@@ -18,7 +17,6 @@ class BeachyBucket
             $count    = $wpdb->get_results("SELECT COUNT(id) as items FROM wp_beachy_buckets WHERE user_id = {$user_id}");
             $listings = $count[0]->items;
 
-
             $response = [
                 'status'  => 'Success',
                 'message' => 'Listing ' . $mls_account . ' has been added to your Beachy Bucket!',
@@ -31,7 +29,6 @@ class BeachyBucket
         $this->removeListingFromBucket($user_id, $mls_account);
         $count    = $wpdb->get_results("SELECT COUNT(id) as items FROM wp_beachy_buckets WHERE user_id = {$user_id}");
         $listings = $count[0]->items;
-
 
         $response = [
             'status'  => 'Success',
@@ -91,6 +88,11 @@ class BeachyBucket
         return $listings;
     }
 
+    /**
+     * Returns array of mls numbers that were saved by the given user
+     * @param  integer $user_id
+     * @return array
+     */
     public function listingsSavedByUser($user_id)
     {
         global $wpdb;
@@ -107,11 +109,17 @@ class BeachyBucket
         return $mlsNumbers;
     }
 
+    /**
+     * Returns user information for the items in the beachy bucket so that agents can see who likes their stuff
+     * @param  string $agentName
+     * @return mixed|array
+     */
     public function clientBeachyBuckets($agentName)
     {
         global $wpdb;
         $mls        = new MLS();
         $userIDs    = [];
+        $userData   = [];
         $mlsNumbers = [];
         $query      = '';
 
@@ -119,6 +127,12 @@ class BeachyBucket
         if (!empty($results)) {
             foreach ($results as $result) {
                 array_push($userIDs, $result->user_id);
+            }
+
+            // We need to use 2 functions to get all the data we need because...Wordpress...yeah...
+            for ($i = 0; $i < sizeOf($userIDs); $i++) {
+                $userData[$i]          = get_user_meta($userIDs[$i]);
+                $userData[$i]['email'] = get_userdata($userIDs[$i])->user_email;
             }
 
             $query = "SELECT mls_account FROM wp_beachy_buckets WHERE 1=1";
@@ -148,8 +162,6 @@ class BeachyBucket
 
         $query = $this->buildBeachyBucketQuery($mlsNumberArray);
 
-        echo $query;
-
         $results = $wpdb->get_results($query);
 
         return $results;
@@ -176,7 +188,6 @@ class BeachyBucket
 
         $query .=
             "SELECT * FROM wp_ecar WHERE 1 AND ";
-
 
         for ($i = 0; $i < count($mlsNumberArray); $i++) {
             $query .= "mls_account LIKE '{$mlsNumberArray[$i]}'";

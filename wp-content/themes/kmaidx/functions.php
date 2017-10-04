@@ -495,7 +495,6 @@ function loadCommMapPins(){
     }
 
     wp_die();
-
 }
 
 add_action('wp_ajax_loadOfficePins', 'loadOfficePins');
@@ -519,7 +518,6 @@ function loadOfficePins() {
 
         $_SESSION['officemap'] = json_encode($return);
         $result                = json_encode($return);
-
     }
 
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -527,37 +525,36 @@ function loadOfficePins() {
     }
 
     wp_die();
-
 }
 
 add_action('admin_menu', 'my_admin_menu');
 
-function my_admin_menu(){
+function my_admin_menu()
+{
 
     add_menu_page('Beachy Bucket', 'Beachy Buckets', 'manage_options', 'bb-admin', 'bb_admin_page', 'dashicons-palmtree', 6);
-
 }
 
-function bb_admin_page(){
+function bb_admin_page()
+{
 
     $user_id    = get_current_user_id();
-    $userMeta      = get_user_meta($user_id);
-    $agentName = $userMeta['first_name'][0] . ' ' . $userMeta['last_name'][0];
+    $userMeta   = get_user_meta($user_id);
+    $agentName  = $userMeta['first_name'][0] . ' ' . $userMeta['last_name'][0];
     $bb         = new BeachyBucket();
     $mlsNumbers = $bb->clientBeachyBuckets($agentName);
     ?>
     <div class="wrap">
         <ul>
             <?php
-            foreach ($mlsNumbers as $mlsNumber)
+            foreach ($mlsNumbers as $mlsNumber) {
                 echo '<li><a href="/listing/?mls=' . $mlsNumber . '" target="_blank">' . $mlsNumber . '</a></li>';
+            }
             ?>
         </ul>
     </div>
     <?php
-
 }
-
 
 include(get_template_directory() . '/inc/members.php');
 
