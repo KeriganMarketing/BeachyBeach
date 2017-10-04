@@ -62,10 +62,9 @@ if($agent['name'] != '') {
     if($agent['mls_names'] != '') {
         $additionalNames = explode(',',$agent['mls_names']);
         foreach($additionalNames as $additionalName){
-            $agentIds[] = $additionalName;
+            array_push($agentIds,$additionalName);
         }
     }
-
 
     $agentListings = $mls->getAgentListings($agentIds, $sortBy, $orderBy);
 
