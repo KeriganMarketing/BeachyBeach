@@ -54,12 +54,13 @@ class mlsTeam {
         $team->add_meta_box(
             'Contact Info',
             array(
-                'AKA'       => 'text',
-                'Title'     => 'text',
-                'Photo'     => 'image',
-                'Email'     => 'text',
-                'Website'   => 'text',
-                'Phone'     => 'text',
+                'AKA'                  => 'text',
+                'Title'                => 'text',
+                'Photo'                => 'image',
+                'Email'                => 'text',
+                'Website'              => 'text',
+                'Phone'                => 'text',
+                'Additional MLS Names' => 'text'
             )
         );
 
@@ -121,6 +122,9 @@ class mlsTeam {
                 );
             }
 
+            $additionalMLSNames = (isset($member->contact_info_additional_mls_names)  ? $member->contact_info_additional_mls_names : null);
+            $additionalMLSNames = explode(',',$additionalMLSNames);
+
 			array_push($agentArray, array(
 				'id'            => (isset($member->ID)                  ? $member->ID : null),
 				'name'          => (isset($member->post_title)          ? $member->post_title : null),
@@ -140,7 +144,8 @@ class mlsTeam {
                     'youtube'       => (isset($member->social_media_info_youtube)   ? $member->social_media_info_youtube : null),
                     'google_plus'   => (isset($member->social_media_info_google)    ? $member->social_media_info_google : null),
                 ),
-                'categories'    => $agentCategories
+                'categories'    => $agentCategories,
+                'mls_names'     => $additionalMLSNames
 			));
 
             //echo '<pre>',print_r($agentArray),'</pre>';

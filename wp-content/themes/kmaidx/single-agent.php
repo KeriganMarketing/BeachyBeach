@@ -30,22 +30,47 @@ $agent = array(
         'thumbnail'     => (isset($post->contact_info_photo)  ? $post->contact_info_photo : null),
         'link'          => get_permalink($post->ID),
         'social'        => array(
-                'facebook'      => ($post->social_media_info_facebook   != '' ? 'https://facebook.com'.$post->social_media_info_facebook : ''),
-                'twitter'       => ($post->social_media_info_twitter    != '' ? 'https://twitter.com'.$post->social_media_info_twitter : ''),
-                'linkedin'      => ($post->social_media_info_linkedin   != '' ? 'https://www.linkedin.com/in'.$post->social_media_info_linkedin : ''),
-                'instagram'     => ($post->social_media_info_instagram  != '' ? 'https://instagram.com'.$post->social_media_info_instagram : ''),
-                'youtube'       => ($post->social_media_info_youtube    != '' ? 'https://www.youtube.com/user'.$post->social_media_info_youtube : ''),
-                'google_plus'   => ($post->social_media_info_google     != '' ? 'https://plus.google.com'.$post->social_media_info_google : ''),
+                'facebook'      => ($post->social_media_info_facebook   != '' ? $post->social_media_info_facebook : ''),
+                'twitter'       => ($post->social_media_info_twitter    != '' ? $post->social_media_info_twitter : ''),
+                'linkedin'      => ($post->social_media_info_linkedin   != '' ? $post->social_media_info_linkedin : ''),
+                'instagram'     => ($post->social_media_info_instagram  != '' ? $post->social_media_info_instagram : ''),
+                'youtube'       => ($post->social_media_info_youtube    != '' ? $post->social_media_info_youtube : ''),
+                'google_plus'   => ($post->social_media_info_google     != '' ? $post->social_media_info_google : ''),
         ),
-        'categories'    => $agentCategories
+        'categories'    => $agentCategories,
+        'mls_names'     => ($post->contact_info_additional_mls_names != ''  ? $post->contact_info_additional_mls_names : null)
 );
 
+$socialLinks = [
+    'facebook'      => ($post->social_media_info_facebook   != '' ? 'https://facebook.com'.$post->social_media_info_facebook : ''),
+    'twitter'       => ($post->social_media_info_twitter    != '' ? 'https://twitter.com'.$post->social_media_info_twitter : ''),
+    'linkedin'      => ($post->social_media_info_linkedin   != '' ? 'https://www.linkedin.com/in'.$post->social_media_info_linkedin : ''),
+    'instagram'     => ($post->social_media_info_instagram  != '' ? 'https://instagram.com'.$post->social_media_info_instagram : ''),
+    'youtube'       => ($post->social_media_info_youtube    != '' ? 'https://www.youtube.com/user'.$post->social_media_info_youtube : ''),
+    'google_plus'   => ($post->social_media_info_google     != '' ? 'https://plus.google.com'.$post->social_media_info_google : '')
+];
+
+$mls = new MLS();
+$sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'price';
+$orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'DESC';
+
 if($agent['name'] != '') {
-    $mls = new MLS();
-    $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'price';
-    $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'DESC';
+
+    $agentIds = [];
     $agentMLSInfo = $mls->getAgentByName($agent['name']);
-    $agentListings = $mls->getAgentListings($agentMLSInfo->short_ids, $sortBy, $orderBy);
+    foreach($agentMLSInfo->short_ids as $short_id) {
+        array_push($agentIds, $short_id);
+    }
+
+    if($agent['mls_names'] != '') {
+        $additionalNames = explode(',',$agent['mls_names']);
+        foreach($additionalNames as $additionalName){
+            array_push($agentIds,$additionalName);
+        }
+    }
+
+    $agentListings = $mls->getAgentListings($agentIds, $sortBy, $orderBy);
+
 }
 
 $agentEmail         = '';
@@ -70,6 +95,7 @@ $ogPhoto = ($agent['thumbnail'] != '' ? $agent['thumbnail'] : get_template_direc
 $ogUrl = get_the_permalink();
 
 get_header(); ?>
+    <!-- <?php print_r($agentIds); ?> -->
 <div id="content">
 
     <div id="primary" class="content-area">

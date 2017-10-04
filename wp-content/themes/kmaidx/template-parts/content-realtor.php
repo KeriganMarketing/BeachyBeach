@@ -29,7 +29,7 @@
 	                        <?php if($agentEmail != ''){?><li class="email"><img src="<?php echo $mls->getSvg('email'); ?>" alt="Email <?php echo $agent['name']; ?>" ><a href="mailto:<?php echo $agentEmail; ?>" ><?php echo $agentEmail; ?></a></li><?php } ?>
 	                        <?php if($agentWebsite != ''){?><li class="web"><img src="<?php echo $mls->getSvg('url'); ?>" alt="View <?php echo $agent['name']; ?>'s Website" ><a target="_blank" href="<?php echo $agentWebsite; ?>" ><?php echo $agentWebsite; ?></a></li><?php } ?>
                             <?php foreach($agent['social'] as $social => $link){
-                                echo ( $link != '' ? '<li class="phone"><img src="'.$mls->getSvg($social).'" alt="Follow '.$agent['name'].' on '.$social.'" ><a href="'.$link.'" target="_blank">'.$link.'</a></li>' : '');
+                                echo ( $link != '' ? '<li class="phone"><img src="'.$mls->getSvg($social).'" alt="Follow '.$agent['name'].' on '.$social.'" ><a href="'.$socialLinks[$social].'" target="_blank">'.$link.'</a></li>' : '');
                             } ?>
                         </ul>
                     </div>
@@ -68,6 +68,8 @@
 
                 </div>
             </div>
+            <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
+
         </div>
 	</div><!-- .entry-content -->
 
