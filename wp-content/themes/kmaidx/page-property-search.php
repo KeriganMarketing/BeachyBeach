@@ -61,7 +61,6 @@ get_header(); ?>
             <?php } ?>
 
         </div>
-        <p class="footnote disclaimer">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
         <nav aria-label="Search results navigation" class="text-center mx-auto">
             <ul class="pagination">
                 <?php
@@ -76,6 +75,8 @@ get_header(); ?>
                 ?>
             </ul>
         </nav>
+        <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
+
     </div>
 </div>
 <?php get_template_part( 'template-parts/mls', 'mortgage-calulator' ); ?>
