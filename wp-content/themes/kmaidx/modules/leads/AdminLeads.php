@@ -87,7 +87,17 @@ class AdminLeads
                 </thead>
                 <tbody>
                 <?php
-                foreach ($userData as $user) { ?>
+                foreach ($userData as $user) {
+                    $user['zip'][0]            = isset($user['zip'][0]) ? $user['zip'][0] : '';
+                    $user['city'][0]           = isset($user['city'][0]) ? $user['city'][0] : '';
+                    $user['addr1'][0]          = isset($user['addr1'][0]) ? $user['addr1'][0] : '';
+                    $user['addr2'][0]          = isset($user['addr2'][0]) ? $user['addr2'][0] : '';
+                    $user['phone1'][0]         = isset($user['phone1'][0]) ? $user['phone1'][0] : '';
+                    $user['thestate'][0]       = isset($user['thestate'][0]) ? $user['thestate'][0] : '';
+                    $user['last_name'][0]      = isset($user['last_name'][0]) ? $user['last_name'][0] : '';
+                    $user['first_name'][0]     = isset($user['first_name'][0]) ? $user['first_name'][0] : '';
+
+                    ?>
                     <tr>
                         <td><strong><?php echo $user['first_name'][0] . ' ' . $user['last_name'][0]; ?></strong></td>
                         <td>
@@ -120,6 +130,8 @@ class AdminLeads
         </div>
 
         <?php
+
+
     }
 
 
@@ -136,6 +148,9 @@ class AdminLeads
         //FOR AGENT DROPDOWN
         $agents     = new mlsTeam();
         $agentArray = $agents->getAgentNames();
+
+        add_thickbox();
+        $thickboxes ='';
 
         ?>
         <div class="wrap">
@@ -179,16 +194,17 @@ class AdminLeads
                         $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
                     }
 
-                    add_thickbox();
-                    echo '<div id="assignagent'.$user['first_name'][0] . $user['last_name'][0].'" class="modal hide fade" style="display:none; ">
-                            <form class="form" id="agentselect"  enctype="multipart/form-data" method="post" action="#' . $user['first_name'][0] . $user['last_name'][0] . '-form">
+                    $thickboxes .= '<div id="assignagent'.$user['first_name'][0] . $user['last_name'][0].'" class="modal hide fade" style="display:none; ">
+                        <div>
+                            <form class="form" id="agentselect" method="post" action="'.$_SERVER['REQUEST_URI'].'" >
                                 <input type="hidden" name="formID" value="agentselect" >
-                                <input type="hidden" name="cid" value="'.$userId.'">
+                                <input type="hidden" name="cid" value="'.$user['id'].'" >
                                 '.$agentOptions.'
                                 <div class="stuck" style="position: absolute; top: 50px; right: 30px;">
-                                <button style="padding: .5rem 1rem; height: auto; font-size: 1.2em;" type="submit" class="button button-primary" >SAVE</button>
+                                <button style="padding: .5rem 1rem; height: auto; font-size: 1.2em;" class="button button-primary" >SAVE</button>
                                 </div>
                             </form>
+                            </div>
                         </div>';
                     ?>
 
@@ -212,14 +228,18 @@ class AdminLeads
             </table>
 
         </div>
-
         <?php
+
+        echo $thickboxes;
 
     }
 
     private function save(){
 
-        //do something with submitted data
+        $formSubmitted = isset($_POST['formID']) ? $_POST['formID'] : null;
+        if($formSubmitted == 'agentselect'){
+            update_user_meta( $_POST['cid'], 'selected_agent', $_POST['agentassignment'] );
+        }
 
     }
 
