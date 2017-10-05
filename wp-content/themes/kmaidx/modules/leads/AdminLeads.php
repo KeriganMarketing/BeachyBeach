@@ -105,7 +105,7 @@ class AdminLeads
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <a target="_blank" href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" >View Properties (<?php echo count($user['buckets']); ?>)</a>
+                            <a target="_blank" href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" >View All <?php echo count($user['buckets']); ?> Properties</a>
                             <p>Saved Properties: &nbsp;
                                 <?php
                                 foreach ($user['buckets'] as $mlsNumber) {
@@ -167,7 +167,7 @@ class AdminLeads
                     }
 
                     if($user['selected_agent'][0] == 'First Available'){
-                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Assign Agent</a>';
+                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-secondary thickbox" style="float: right; color: #FFF; background-color: darkred; box-shadow: inset 0 -2px 0 rgba(0,0,0,.3); border-color: rgba(0,0,0,.3);" >Assign Agent</a>';
                     }else{
                         $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
                     }
@@ -198,7 +198,7 @@ class AdminLeads
                                 <?php echo $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0]; ?></strong>
                         </td>
                         <td><strong><?php echo $user['selected_agent'][0]; ?></strong>  <?php echo $changeButton; ?></td>
-                        <td align="center"><a href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" target="_blank" >View Properties <?php echo count($user['buckets']); ?></a></td>
+                        <td align="center"><a href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" target="_blank" ><?php echo count($user['buckets']); ?> Properties</a></td>
                     </tr>
                 <?php } ?>
                 </tbody>
