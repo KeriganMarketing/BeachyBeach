@@ -147,7 +147,7 @@ class BeachyBucket
         $userIDs  = [];
         $userData = [];
 
-        $results = $wpdb->get_results("SELECT user_id from wp_beachy_buckets WHERE 1=1");
+        $results = $wpdb->get_results("SELECT DISTINCT user_id from wp_beachy_buckets WHERE 1=1");
 
         if (! empty($results)) {
             foreach ($results as $result) {
