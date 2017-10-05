@@ -19,7 +19,7 @@ global $wpdb;
 $paged   = (get_query_var('paged')) ? abs((int)get_query_var('paged')) : 1;
 $mls     = new MLS();
 $bb      = new BeachyBucket();
-$user_id = get_current_user_id();
+$user_id = (isset($_GET['users_bucket']) ? $_GET['users_bucket'] : get_current_user_id());
 
 $mlsNumbers = $bb->listingsSavedByUser($user_id);
 ?>
