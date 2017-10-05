@@ -39,8 +39,7 @@ class AdminLeads
     {
 
         $userMeta     = get_user_meta($userId);
-        $accessLevels = unserialize($userMeta['wp_capabilities'][0]);
-        echo '<pre>',print_r($accessLevels),'</pre>';
+        $accessLevels = [unserialize($userMeta['wp_capabilities'][0])];
 
         $output = [];
         if (count($accessLevels) > 0) {
