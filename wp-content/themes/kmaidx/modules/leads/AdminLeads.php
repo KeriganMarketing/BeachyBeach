@@ -157,15 +157,15 @@ class AdminLeads
                 <tbody>
                 <?php
                 foreach ($userData as $user) {
+                    $user['zip'][0]            = isset($user['zip'][0]) ? $user['zip'][0] : '';
+                    $user['city'][0]           = isset($user['city'][0]) ? $user['city'][0] : '';
+                    $user['addr1'][0]          = isset($user['addr1'][0]) ? $user['addr1'][0] : '';
+                    $user['addr2'][0]          = isset($user['addr2'][0]) ? $user['addr2'][0] : '';
+                    $user['phone1'][0]         = isset($user['phone1'][0]) ? $user['phone1'][0] : '';
+                    $user['thestate'][0]       = isset($user['thestate'][0]) ? $user['thestate'][0] : '';
+                    $user['last_name'][0]      = isset($user['last_name'][0]) ? $user['last_name'][0] : '';
+                    $user['first_name'][0]     = isset($user['first_name'][0]) ? $user['first_name'][0] : '';
                     $user['selected_agent'][0] = isset($user['selected_agent'][0]) ? $user['selected_agent'][0] : '';
-                    $user['first_name'][0] = isset($user['first_name'][0]) ? $user['first_name'][0] : '';
-                    $user['last_name'][0] = isset($user['last_name'][0]) ? $user['last_name'][0] : '';
-                    $user['phone1'][0] = isset($user['phone1'][0]) ? $user['phone1'][0] : '';
-                    $user['addr1'][0] = isset($user['addr1'][0]) ? $user['addr1'][0] : '';
-                    $user['addr2'][0] = isset($user['addr2'][0]) ? $user['addr2'][0] : '';
-                    $user['city'][0] = isset($user['city'][0]) ? $user['city'][0] : '';
-                    $user['thestate'][0] = isset($user['thestate'][0]) ? $user['thestate'][0] : '';
-                    $user['zip'][0] = isset($user['zip'][0]) ? $user['zip'][0] : '';
 
                     //SELECT OPTIONS
                     $agentOptions = '';
