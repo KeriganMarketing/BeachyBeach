@@ -90,15 +90,20 @@ class AdminLeads
                 <tbody>
                 <?php
                 foreach ($userData as $user) {
-                    $user['id']                = isset($user['id']) ? $user['id'] : 0;
-                    $user['zip'][0]            = isset($user['zip'][0]) ? $user['zip'][0] : '';
-                    $user['city'][0]           = isset($user['city'][0]) ? $user['city'][0] : '';
-                    $user['addr1'][0]          = isset($user['addr1'][0]) ? $user['addr1'][0] : '';
-                    $user['addr2'][0]          = isset($user['addr2'][0]) ? $user['addr2'][0] : '';
-                    $user['phone1'][0]         = isset($user['phone1'][0]) ? $user['phone1'][0] : '';
-                    $user['thestate'][0]       = isset($user['thestate'][0]) ? $user['thestate'][0] : '';
-                    $user['last_name'][0]      = isset($user['last_name'][0]) ? $user['last_name'][0] : '';
-                    $user['first_name'][0]     = isset($user['first_name'][0]) ? $user['first_name'][0] : '';
+                    $user['id']            = isset($user['id']) ? $user['id'] : 0;
+                    $user['zip'][0]        = isset($user['zip'][0]) ? $user['zip'][0] : '';
+                    $user['city'][0]       = isset($user['city'][0]) ? $user['city'][0] : '';
+                    $user['addr1'][0]      = isset($user['addr1'][0]) ? $user['addr1'][0] : '';
+                    $user['addr2'][0]      = isset($user['addr2'][0]) ? $user['addr2'][0] : '';
+                    $user['phone1'][0]     = isset($user['phone1'][0]) ? $user['phone1'][0] : '';
+                    $user['thestate'][0]   = isset($user['thestate'][0]) ? $user['thestate'][0] : '';
+                    $user['last_name'][0]  = isset($user['last_name'][0]) ? $user['last_name'][0] : '';
+                    $user['first_name'][0] = isset($user['first_name'][0]) ? $user['first_name'][0] : '';
+
+                    $address = '';
+                    if ($user['addr1'][0] != '') {
+                        $address = $user['addr1'][0] . ($user['addr2'][0] != '' ? ', ' . $user['addr2'][0] : '') . '<br>' . $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0];
+                    }
                     ?>
                     <tr>
                         <td><strong><?php echo $user['first_name'][0] . ' ' . $user['last_name'][0]; ?></strong></td>
@@ -108,14 +113,14 @@ class AdminLeads
                         <td>
                             <strong><a href="mailto:<?php echo $user['email']; ?>"><?php echo $user['email']; ?></a></strong>
                         </td>
-                        <td><strong><?php echo $user['addr1'][0];
-                                echo $user['addr2'][0] != '' ? ', ' . $user['addr2'][0] : ''; ?><br>
-                                <?php echo $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0]; ?></strong>
+                        <td><strong><?php echo $address; ?></strong>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <a target="_blank" href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" >View All <?php echo count($user['buckets']); ?> Properties</a>
+                            <a target="_blank" href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>"
+                               role="button" class="button button-primary" style="float: right">View
+                                All <?php echo count($user['buckets']); ?> Properties</a>
                             <p>Saved Properties: &nbsp;
                                 <?php
                                 foreach ($user['buckets'] as $mlsNumber) {
@@ -145,7 +150,7 @@ class AdminLeads
         $agentArray = $agents->getAgentNames();
 
         add_thickbox();
-        $thickboxes ='';
+        $thickboxes = '';
 
         ?>
         <div class="wrap">
@@ -177,6 +182,11 @@ class AdminLeads
                     $user['first_name'][0]     = isset($user['first_name'][0]) ? $user['first_name'][0] : '';
                     $user['selected_agent'][0] = isset($user['selected_agent'][0]) ? $user['selected_agent'][0] : '';
 
+                    $address = '';
+                    if ($user['addr1'][0] != '') {
+                        $address = $user['addr1'][0] . ($user['addr2'][0] != '' ? ', ' . $user['addr2'][0] : '') . '<br>' . $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0];
+                    }
+
                     //SELECT OPTIONS
                     $agentOptions = '';
                     foreach ($agentArray as $agent) {
@@ -184,17 +194,17 @@ class AdminLeads
                     }
 
                     if ($user['selected_agent'][0] == 'First Available') {
-                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-secondary thickbox" style="float: right; color: #FFF; background-color: darkred; box-shadow: inset 0 -2px 0 rgba(0,0,0,.3); border-color: rgba(0,0,0,.3);" >Assign Agent</a>';
+                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $user['first_name'][0] . $user['last_name'][0] . '" role="button" data-toggle="modal" class="button button-secondary thickbox" style="float: right; color: #FFF; background-color: darkred; box-shadow: inset 0 -2px 0 rgba(0,0,0,.3); border-color: rgba(0,0,0,.3);" >Assign Agent</a>';
                     } else {
-                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
+                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $user['first_name'][0] . $user['last_name'][0] . '" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
                     }
 
-                    $thickboxes .= '<div id="assignagent'.$user['first_name'][0] . $user['last_name'][0].'" class="modal hide fade" style="display:none; ">
+                    $thickboxes .= '<div id="assignagent' . $user['first_name'][0] . $user['last_name'][0] . '" class="modal hide fade" style="display:none; ">
                         <div>
-                            <form class="form" id="agentselect" method="post" action="'.$_SERVER['REQUEST_URI'].'" >
+                            <form class="form" id="agentselect" method="post" action="' . $_SERVER['REQUEST_URI'] . '" >
                                 <input type="hidden" name="formID" value="agentselect" >
-                                <input type="hidden" name="cid" value="'.$user['id'].'" >
-                                '.$agentOptions.'
+                                <input type="hidden" name="cid" value="' . $user['id'] . '" >
+                                ' . $agentOptions . '
                                 <div class="stuck" style="position: absolute; top: 50px; right: 30px;">
                                 <button style="padding: .5rem 1rem; height: auto; font-size: 1.2em;" class="button button-primary" >SAVE</button>
                                 </div>
@@ -211,12 +221,12 @@ class AdminLeads
                         <td>
                             <strong><a href="mailto:<?php echo $user['email']; ?>"><?php echo $user['email']; ?></a></strong>
                         </td>
-                        <td><strong><?php echo $user['addr1'][0];
-                                echo $user['addr2'][0] != '' ? ', ' . $user['addr2'][0] : ''; ?><br>
-                                <?php echo $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0]; ?></strong>
+                        <td><strong><?php echo $address; ?></strong>
                         </td>
-                        <td><strong><?php echo $user['selected_agent'][0]; ?></strong>  <?php echo $changeButton; ?></td>
-                        <td align="center"><a href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" target="_blank" ><?php echo count($user['buckets']); ?> Properties</a></td>
+                        <td><strong><?php echo $user['selected_agent'][0]; ?></strong> <?php echo $changeButton; ?></td>
+                        <td align="center"><a href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>"
+                                              role="button" class="button button-primary" style="float: right"
+                                              target="_blank"><?php echo count($user['buckets']); ?> Properties</a></td>
                     </tr>
                 <?php } ?>
                 </tbody>
