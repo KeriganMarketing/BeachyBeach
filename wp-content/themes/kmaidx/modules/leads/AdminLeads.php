@@ -49,7 +49,7 @@ class AdminLeads
                         <td><strong><?php echo $user['first_name'][0] . ' ' . $user['last_name'][0]; ?></strong></td>
                         <td><strong><a href="tel:<?php echo $user['phone1'][0]; ?>" ><?php echo $user['phone1'][0]; ?></a></strong></td>
                         <td><strong><a href="mailto:<?php echo $user['email']; ?>" ><?php echo $user['email']; ?></a></strong></td>
-                        <td><strong><?php echo $user['addr1'][0]; echo $user['addr2'] != '' ? ', ' . $user['addr2'] : ''; ?><br>
+                        <td><strong><?php echo $user['addr1'][0]; echo $user['addr2'][0] != '' ? ', ' . $user['addr2'][0] : ''; ?><br>
                                 <?php echo $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0]; ?></strong></td>
                     </tr>
                     <tr>
