@@ -99,7 +99,6 @@ class AdminLeads
         </div>
 
         <?php
-
     }
 
     private function getBuckets($agentName)
