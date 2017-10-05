@@ -40,6 +40,7 @@ class AdminLeads
 
         $userMeta     = get_user_meta($userId);
         $accessLevels = unserialize($userMeta['wp_capabilities'][0]);
+        echo '<pre>',print_r($accessLevels),'</pre>';
 
         $output = [];
         if (count($accessLevels) > 0) {
@@ -128,14 +129,9 @@ class AdminLeads
                 <?php } ?>
                 </tbody>
             </table>
-
         </div>
-
         <?php
-
-
     }
-
 
     private function createAllBeachyBuckets()
     {
@@ -144,8 +140,6 @@ class AdminLeads
         $userMeta  = get_user_meta($userId);
         $agentName = $userMeta['first_name'][0] . ' ' . $userMeta['last_name'][0];
         $userData  = $this->getBuckets($agentName, true);
-
-//        echo '<pre>',print_r($userData),'</pre>';
 
         //FOR AGENT DROPDOWN
         $agents     = new mlsTeam();
@@ -190,9 +184,9 @@ class AdminLeads
                         $agentOptions .= '<label style="padding: .5rem 1rem; display: block;"><input type="radio" name="agentassignment" value="' . $agent . '" ' . ($user['selected_agent'][0] == $agent ? 'checked' : '') . ' /> ' . $agent . '</label>';
                     }
 
-                    if($user['selected_agent'][0] == 'First Available'){
+                    if ($user['selected_agent'][0] == 'First Available') {
                         $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-secondary thickbox" style="float: right; color: #FFF; background-color: darkred; box-shadow: inset 0 -2px 0 rgba(0,0,0,.3); border-color: rgba(0,0,0,.3);" >Assign Agent</a>';
-                    }else{
+                    } else {
                         $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
                     }
 
@@ -233,16 +227,13 @@ class AdminLeads
         <?php
 
         echo $thickboxes;
-
     }
 
-    private function save(){
-
+    private function save()
+    {
         $formSubmitted = isset($_POST['formID']) ? $_POST['formID'] : null;
-        if($formSubmitted == 'agentselect'){
-            update_user_meta( $_POST['cid'], 'selected_agent', $_POST['agentassignment'] );
+        if ($formSubmitted == 'agentselect') {
+            update_user_meta($_POST['cid'], 'selected_agent', $_POST['agentassignment']);
         }
-
     }
-
 }
