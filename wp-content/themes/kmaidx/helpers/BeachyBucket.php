@@ -140,6 +140,32 @@ class BeachyBucket
         return $userData;
     }
 
+    public function allBuckets()
+    {
+        global $wpdb;
+
+        $userIDs  = [];
+        $userData = [];
+
+        $results = $wpdb->get_results("SELECT user_id from wp_beachy_buckets WHERE 1=1");
+
+        if (! empty($results)) {
+            foreach ($results as $result) {
+                array_push($userIDs, $result->user_id);
+            }
+
+            // We need to use 2 functions to get all the data we need because...Wordpress...yeah...
+            for ($i = 0; $i < sizeOf($userIDs); $i++) {
+                $userData[$i]          = get_user_meta($userIDs[$i]);
+                $userData[$i]['email'] = get_userdata($userIDs[$i])->user_email;
+                $userData[$i]['buckets'] = $this->savedProperties($userIDs[$i]);
+            }
+        }
+
+        return $userData;
+    }
+
+
     protected function savedProperties($userId)
     {
         global $wpdb;
