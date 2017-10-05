@@ -156,8 +156,9 @@ class BeachyBucket
 
             // We need to use 2 functions to get all the data we need because...Wordpress...yeah...
             for ($i = 0; $i < sizeOf($userIDs); $i++) {
-                $userData[$i]          = get_user_meta($userIDs[$i]);
-                $userData[$i]['email'] = get_userdata($userIDs[$i])->user_email;
+                $userData[$i]            = get_user_meta($userIDs[$i]);
+                $userData[$i]['id']      = $userIDs[$i];
+                $userData[$i]['email']   = get_userdata($userIDs[$i])->user_email;
                 $userData[$i]['buckets'] = $this->savedProperties($userIDs[$i]);
             }
         }
