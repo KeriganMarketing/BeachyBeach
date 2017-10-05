@@ -90,6 +90,11 @@ if (!function_exists('kmaidx_setup')) :
         require get_template_directory() . '/helpers/BeachyBucket.php';
 	    require get_template_directory() . '/helpers/Offices.php';
 	    require get_template_directory() . '/helpers/Communities.php';
+	    require get_template_directory() . '/modules/leads/AdminLeads.php';
+
+	    $beachyBuckets = new AdminLeads();
+        $beachyBuckets->createNavLabel();
+
     }
 endif;
 add_action('after_setup_theme', 'kmaidx_setup');
@@ -525,35 +530,6 @@ function loadOfficePins() {
     }
 
     wp_die();
-}
-
-add_action('admin_menu', 'my_admin_menu');
-
-function my_admin_menu()
-{
-
-    add_menu_page('Beachy Bucket', 'Beachy Buckets', 'manage_options', 'bb-admin', 'bb_admin_page', 'dashicons-palmtree', 6);
-}
-
-function bb_admin_page()
-{
-
-    $user_id    = get_current_user_id();
-    $userMeta   = get_user_meta($user_id);
-    $agentName  = $userMeta['first_name'][0] . ' ' . $userMeta['last_name'][0];
-    $bb         = new BeachyBucket();
-    $mlsNumbers = $bb->clientBeachyBuckets($agentName);
-    ?>
-    <div class="wrap">
-        <ul>
-            <?php
-            foreach ($mlsNumbers as $mlsNumber) {
-                echo '<li><a href="/listing/?mls=' . $mlsNumber . '" target="_blank">' . $mlsNumber . '</a></li>';
-            }
-            ?>
-        </ul>
-    </div>
-    <?php
 }
 
 include(get_template_directory() . '/inc/members.php');
