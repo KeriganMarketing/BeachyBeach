@@ -32,21 +32,40 @@ class AdminLeads
         $mlsNumbers = $this->getBuckets( $agentName );
 
         ?>
-        <h1>Clients and Leads assigned to <?php echo $agentName; ?></h1>
-
-
-
-
-
-
         <div class="wrap">
-            <ul>
-                <?php
-                foreach ($mlsNumbers as $mlsNumber) {
-                    echo '<li><a href="/listing/?mls=' . $mlsNumber . '" target="_blank">' . $mlsNumber . '</a></li>';
-                }
-                ?>
-            </ul>
+            <h1 class="wp-heading-inline">Clients and Leads assigned to <?php echo $agentName; ?></h1>
+
+            <table class="wp-list-table widefat fixed striped pages">
+                <thead>
+                <tr>
+                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span class="sorting-indicator"></span></a></th>
+                    <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="properties" class="manage-column column-properties"><span>Saved Properties</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>Ted</strong></td>
+                    <td><strong>123-123-1234</strong></td>
+                    <td><strong>user@domain.com</strong></td>
+                    <td><strong><?php echo count($mlsNumbers); ?></strong></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <p>Saved Properties:</p>
+                        <ul>
+                            <?php
+                            foreach ($mlsNumbers as $mlsNumber) {
+                                echo '<li><a href="/listing/?mls=' . $mlsNumber . '" target="_blank">' . $mlsNumber . '</a></li>';
+                            }
+                            ?>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
         </div>
         <?php
     }
