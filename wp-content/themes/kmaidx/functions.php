@@ -92,9 +92,10 @@ if (!function_exists('kmaidx_setup')) :
 	    require get_template_directory() . '/helpers/Communities.php';
 	    require get_template_directory() . '/modules/leads/AdminLeads.php';
 
-	    $beachyBuckets = new AdminLeads();
-        $beachyBuckets->createNavLabel();
-
+        if (is_admin()) {
+            $beachyBuckets = new AdminLeads();
+            $beachyBuckets->createNavLabel();
+        }
     }
 endif;
 add_action('after_setup_theme', 'kmaidx_setup');
