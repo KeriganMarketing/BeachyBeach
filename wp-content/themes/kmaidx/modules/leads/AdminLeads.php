@@ -14,19 +14,47 @@ class AdminLeads
 
     public function createNavLabel()
     {
+
+        $userId    = get_current_user_id();
+        $accessLevel = $this->getAccessLevel($userId);
+
         add_action('admin_menu', function () {
-            add_menu_page('Beachy Bucket', 'Beachy Buckets', 'manage_options', 'bb-admin', function () {
-                $this->createPageContent();
+            add_menu_page('My Beachy Buckets', 'My Beachy Buckets', 'manage_options', 'bb-buckets', function () {
+                $this->createMyBeachyBuckets();
             }, 'dashicons-palmtree', 6);
         });
+
+        if(in_array('administrator', $accessLevel) || in_array_r('editor', $accessLevel)){
+            add_action('admin_menu', function () {
+                add_menu_page('All Beachy Buckets', 'All Beachy Buckets', 'manage_options', 'bb-admin', function () {
+                    $this->createAllBeachyBuckets();
+                }, 'dashicons-palmtree', 5);
+            });
+        }
+
     }
 
-    private function createPageContent()
+    private function getAccessLevel( $userId ){
+
+        $userMeta     = get_user_meta($userId);
+        $accessLevels = unserialize($userMeta['wp_capabilities'][0]);
+
+        $output = [];
+        foreach ($accessLevels as $level => $code){
+            array_push($output, $level);
+        }
+        return $output;
+
+    }
+
+    private function createMyBeachyBuckets()
     {
-        $user_id    = get_current_user_id();
-        $userMeta   = get_user_meta($user_id);
+        $userId    = get_current_user_id();
+        $userMeta   = get_user_meta($userId);
         $agentName  = $userMeta['first_name'][0] . ' ' . $userMeta['last_name'][0];
         $userData   = $this->getBuckets($agentName);
+
+        echo '<pre>',print_r($userMeta),'</pre>';
 
         echo '<!--<pre>',print_r($userData),'</pre>-->';
         ?>
@@ -35,12 +63,12 @@ class AdminLeads
 
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
-                <tr>
-                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span class="sorting-indicator"></span></a></th>
-                    <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
-                    <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
-                    <th scope="col" id="email" class="manage-column column-address"><span>Physical Address</span></th>
-                </tr>
+                    <tr>
+                        <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span class="sorting-indicator"></span></a></th>
+                        <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                        <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
+                        <th scope="col" id="email" class="manage-column column-address"><span>Physical Address</span></th>
+                    </tr>
                 </thead>
                 <tbody>
                 <?php
@@ -55,7 +83,7 @@ class AdminLeads
                     <tr>
                         <td colspan="4">
                             <p>Saved Properties ( <?php echo count($user['buckets']); ?> ):</p>
-                            <ul>
+                            <ul style="margin-left: 2rem;">
                                 <?php
                                 foreach ($user['buckets'] as $mlsNumber) {
                                     echo '<li><a href="/listing/?mls=' . $mlsNumber . '" target="_blank">' . $mlsNumber . '</a></li>';
@@ -81,4 +109,18 @@ class AdminLeads
 
         return $userData;
     }
+
+    private function createAllBeachyBuckets() {
+
+        $bb         = new BeachyBucket();
+        $userData   = $bb->allBuckets();
+
+        return $userData;
+
+    }
+
+    private function buildPage(){
+
+    }
+
 }
