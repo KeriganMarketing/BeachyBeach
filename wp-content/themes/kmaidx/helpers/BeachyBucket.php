@@ -133,18 +133,20 @@ class BeachyBucket
             for ($i = 0; $i < sizeOf($userIDs); $i++) {
                 $userData[$i]          = get_user_meta($userIDs[$i]);
                 $userData[$i]['email'] = get_userdata($userIDs[$i])->user_email;
-            }
-
-            $query = "SELECT mls_account FROM wp_beachy_buckets WHERE 1=1";
-            $query .= " AND ";
-            for ($i = 0; $i < count($userIDs); $i++) {
-                $query .= "user_id LIKE '{$userIDs[$i]}'";
-
-                if ($i < count($userIDs) - 1) {
-                    $query .= " OR ";
-                }
+                $userData[$i]['buckets'] = $this->savedProperties($userIDs[$i]);
             }
         }
+
+        return $userData;
+    }
+
+    protected function savedProperties($userId)
+    {
+        global $wpdb;
+        $mlsNumbers = [];
+
+        $query = "SELECT mls_account FROM wp_beachy_buckets WHERE user_id = {$userId}";
+
         $results = $wpdb->get_results($query);
 
         if (count($results) > 0) {
@@ -155,6 +157,7 @@ class BeachyBucket
 
         return $mlsNumbers;
     }
+
 
     public function beachyBucketResults($mlsNumberArray)
     {
