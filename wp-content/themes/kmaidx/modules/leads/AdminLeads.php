@@ -105,14 +105,14 @@ class AdminLeads
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <p>Saved Properties ( <?php echo count($user['buckets']); ?> ):</p>
-                            <ul style="margin-left: 2rem;">
+                            <a target="_blank" href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" >View Properties (<?php echo count($user['buckets']); ?>)</a>
+                            <p>Saved Properties: &nbsp;
                                 <?php
                                 foreach ($user['buckets'] as $mlsNumber) {
-                                    echo '<li><a href="/listing/?mls=' . $mlsNumber . '" target="_blank">' . $mlsNumber . '</a></li>';
+                                    echo '<a href="/listing/?mls=' . $mlsNumber . '" target="_blank">' . $mlsNumber . '</a>, ';
                                 }
                                 ?>
-                            </ul>
+                            </p>
                         </td>
                     </tr>
                 <?php } ?>
@@ -133,14 +133,15 @@ class AdminLeads
         $agentName = $userMeta['first_name'][0] . ' ' . $userMeta['last_name'][0];
         $userData  = $this->getBuckets($agentName, true);
 
+//        echo '<pre>',print_r($userData),'</pre>';
+
         //FOR AGENT DROPDOWN
         $agents     = new mlsTeam();
         $agentArray = $agents->getAgentNames();
 
         ?>
         <div class="wrap">
-            <h1 class="wp-heading-inline" style="margin-bottom: 1rem;">Clients and Leads assigned
-                to <?php echo $agentName; ?></h1>
+            <h1 class="wp-heading-inline" style="margin-bottom: 1rem;">All Clients and Leads</h1>
 
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
@@ -152,7 +153,7 @@ class AdminLeads
                     <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
                     <th scope="col" id="address" class="manage-column column-address"><span>Physical Address</span></th>
                     <th scope="col" id="agent" class="manage-column column-agent"><span>Assigned Agent</span></th>
-                    <th scope="col" id="properties" class="manage-column column-properties"><span>Beachy Buckets</span></th>
+                    <th scope="col" id="properties" class="manage-column column-properties"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -166,9 +167,9 @@ class AdminLeads
                     }
 
                     if($user['selected_agent'][0] == 'First Available'){
-                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" >Assign Agent</a>';
+                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Assign Agent</a>';
                     }else{
-                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" >Change Agent</a>';
+                        $changeButton = '<a title="Select an Agent for ' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" href="#TB_inline?width=300&height=500&inlineId=assignagent'.$user['first_name'][0] . $user['last_name'][0].'" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
                     }
 
                     add_thickbox();
@@ -197,7 +198,7 @@ class AdminLeads
                                 <?php echo $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0]; ?></strong>
                         </td>
                         <td><strong><?php echo $user['selected_agent'][0]; ?></strong>  <?php echo $changeButton; ?></td>
-                        <td align="center"><strong><?php echo count($user['buckets']); ?></strong> <a href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo ''; ?>" role="button" class="button button-primary" >View Buckets</a></td>
+                        <td align="center"><a href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" target="_blank" >View Properties <?php echo count($user['buckets']); ?></a></td>
                     </tr>
                 <?php } ?>
                 </tbody>
