@@ -88,6 +88,7 @@ class AdminLeads
                 <tbody>
                 <?php
                 foreach ($userData as $user) {
+                    $user['id']                = isset($user['id']) ? $user['id'] : 0;
                     $user['zip'][0]            = isset($user['zip'][0]) ? $user['zip'][0] : '';
                     $user['city'][0]           = isset($user['city'][0]) ? $user['city'][0] : '';
                     $user['addr1'][0]          = isset($user['addr1'][0]) ? $user['addr1'][0] : '';
@@ -96,7 +97,6 @@ class AdminLeads
                     $user['thestate'][0]       = isset($user['thestate'][0]) ? $user['thestate'][0] : '';
                     $user['last_name'][0]      = isset($user['last_name'][0]) ? $user['last_name'][0] : '';
                     $user['first_name'][0]     = isset($user['first_name'][0]) ? $user['first_name'][0] : '';
-
                     ?>
                     <tr>
                         <td><strong><?php echo $user['first_name'][0] . ' ' . $user['last_name'][0]; ?></strong></td>
@@ -113,7 +113,7 @@ class AdminLeads
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <a target="_blank" href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" >View All <?php echo count($user['buckets']); ?> Properties</a>
+                            <a target="_blank" href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" >View All <?php echo count($user['buckets']); ?> Properties</a>
                             <p>Saved Properties: &nbsp;
                                 <?php
                                 foreach ($user['buckets'] as $mlsNumber) {
@@ -221,7 +221,7 @@ class AdminLeads
                                 <?php echo $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0]; ?></strong>
                         </td>
                         <td><strong><?php echo $user['selected_agent'][0]; ?></strong>  <?php echo $changeButton; ?></td>
-                        <td align="center"><a href="https://beachybeach.com/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" target="_blank" ><?php echo count($user['buckets']); ?> Properties</a></td>
+                        <td align="center"><a href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>" role="button" class="button button-primary" style="float: right" target="_blank" ><?php echo count($user['buckets']); ?> Properties</a></td>
                     </tr>
                 <?php } ?>
                 </tbody>
