@@ -90,12 +90,6 @@ if (!function_exists('kmaidx_setup')) :
         require get_template_directory() . '/helpers/BeachyBucket.php';
 	    require get_template_directory() . '/helpers/Offices.php';
 	    require get_template_directory() . '/helpers/Communities.php';
-	    require get_template_directory() . '/modules/leads/AdminLeads.php';
-
-        if (is_admin()) {
-            $beachyBuckets = new AdminLeads();
-            $beachyBuckets->createNavLabel();
-        }
     }
 endif;
 add_action('after_setup_theme', 'kmaidx_setup');
@@ -191,6 +185,12 @@ function loadModules() {
     require('modules/team/team.php');
     require('modules/testimonials/testimonials.php');
     require('modules/social/sociallinks.php');
+    require('modules/leads/AdminLeads.php');
+
+    if (is_admin()) {
+        $beachyBuckets = new AdminLeads();
+        $beachyBuckets->createNavLabel();
+    }
 
 }
 add_action('after_setup_theme', 'loadModules');

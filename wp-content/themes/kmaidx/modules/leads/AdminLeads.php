@@ -187,6 +187,11 @@ class AdminLeads
                         $address = $user['addr1'][0] . ($user['addr2'][0] != '' ? ', ' . $user['addr2'][0] : '') . '<br>' . $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0];
                     }
 
+                    $properties = '';
+                    foreach ($user['buckets'] as $mlsNumber) {
+                        $properties .= $mlsNumber . ', ';
+                    }
+
                     //SELECT OPTIONS
                     $agentOptions = '';
                     foreach ($agentArray as $agent) {
@@ -204,6 +209,11 @@ class AdminLeads
                             <form class="form" id="agentselect" method="post" action="' . $_SERVER['REQUEST_URI'] . '" >
                                 <input type="hidden" name="formID" value="agentselect" >
                                 <input type="hidden" name="cid" value="' . $user['id'] . '" >
+                                <input type="hidden" name="cname" value="' . $user['first_name'][0] . ' ' . $user['last_name'][0] . '" >
+                                <input type="hidden" name="cphone" value="' . $user['phone1'][0] . '" >
+                                <input type="hidden" name="cemail" value="' . $user['email'] . '" >
+                                <input type="hidden" name="caddress" value="' . $address . '" >
+                                <input type="hidden" name="cbuckets" value="' . $properties . '" >
                                 ' . $agentOptions . '
                                 <div class="stuck" style="position: absolute; top: 50px; right: 30px;">
                                 <button style="padding: .5rem 1rem; height: auto; font-size: 1.2em;" class="button button-primary" >SAVE</button>
@@ -242,7 +252,71 @@ class AdminLeads
     {
         $formSubmitted = isset($_POST['formID']) ? $_POST['formID'] : null;
         if ($formSubmitted == 'agentselect') {
-            update_user_meta($_POST['cid'], 'selected_agent', $_POST['agentassignment']);
+
+            $mlsLead       = new kmaLeads();
+            $mls           = new MLS();
+            $agent         = new mlsTeam();
+            $selectedAgent = $_POST['agentassignment'];
+
+            $agentInfo    = $agent->getSingleAgent($selectedAgent);
+            $agentMLSInfo = $mls->getAgentByName($agentInfo['name']);
+            $ADMIN_EMAIL  = ($agentMLSInfo != false ? $agentMLSInfo->email : 'info@beachybeach.com');
+            $ADMIN_EMAIL  = ($agentInfo['email'] != '' ? $agentInfo['email'] : $ADMIN_EMAIL);
+            $leadFor = $selectedAgent;
+
+            //BEGIN EMAIL
+            $sendadmin = array(
+                'to'		=> $ADMIN_EMAIL,
+                'from'		=> get_bloginfo().' <noreply@beachybeach.com>',
+                'subject'	=> 'A lead has been assigned to you',
+                'bcc'		=> 'support@kerigan.com',
+                'cc'        => 'lacey@beachybeach.com',
+                'replyto'   => 'info@beachybeach.com'
+            );
+
+            $emailvars = array(
+                'Name'              => $_POST['cname'],
+                'Email Address'     => $_POST['cemail'],
+                'Phone Number'      => $_POST['cphone'],
+                'Physical Address'  => $_POST['caddress'],
+                'Properties saved'  => $_POST['cbuckets']
+            );
+
+            $fontstyle          = 'font-family: sans-serif;';
+            $headlinestyle      = 'style="font-size:20px; '.$fontstyle.' color:#42BC7B;"';
+            $copystyle          = 'style="font-size:16px; '.$fontstyle.' color:#333;"';
+            $labelstyle         = 'style="padding:4px 8px; background:#F7F6F3; border:1px solid #FFFFFF; font-weight:bold; '.$fontstyle.' font-size:14px; color:#4D4B47; width:150px;"';
+            $datastyle          = 'style="padding:4px 8px; background:#F7F6F3; border:1px solid #FFFFFF; '.$fontstyle.' font-size:14px;"';
+
+            $headline           = '<h2 '.$headlinestyle.'>You have a new lead</h2>';
+            $adminintrocopy     = '<p '.$copystyle.'>You have been assigned a new lead. Details are below:</p>';
+            $dateofemail        = '<p '.$copystyle.'>Date Submitted: '.date('M j, Y').' @ '.date('g:i a').'</p>';
+
+            $submittedData = '<table cellpadding="0" cellspacing="0" border="0" style="width:100%" ><tbody>';
+            foreach($emailvars as $key => $var ){
+                if(!is_array($var)){
+                    $submittedData .= '<tr><td '.$labelstyle.' >'.$key.'</td><td '.$datastyle.'>'.$var.'</td></tr>';
+                }else{
+                    $submittedData .= '<tr><td '.$labelstyle.' >'.$key.'</td><td '.$datastyle.'>';
+                    foreach($var as $k => $v){
+                        $submittedData .= '<span style="display:block;width:100%;">'.$v.'</span><br>';
+                    }
+                    $submittedData .= '</ul></td></tr>';
+                }
+            }
+            $submittedData .= '</tbody></table>';
+
+            $adminContent = $adminintrocopy.$submittedData.$dateofemail;
+
+            $emaildata = array(
+                'headline'	=> $headline,
+                'introcopy'	=> $adminContent,
+            );
+
+            $mlsLead->sendEmail( $sendadmin, $emaildata );
+
+            update_user_meta($_POST['cid'], 'selected_agent', $selectedAgent);
+
         }
     }
 }
