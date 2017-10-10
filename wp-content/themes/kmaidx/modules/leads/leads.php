@@ -32,6 +32,7 @@ class kmaLeads {
                 'menu_position'      => null,
                 'public'             => false,
                 'publicly_queryable' => false,
+                'capability_type'    => array('lead','leads'),
             )
         );
 
@@ -90,6 +91,28 @@ class kmaLeads {
                     break;
             }
         }
+
+    }
+
+    public function getLeads($args = []){
+        $request = [
+            'posts_per_page' => - 1,
+            'offset'         => 0,
+            'post_type'      => 'lead',
+            'post_status'    => 'publish',
+        ];
+
+        $args = array_merge( $request, $args );
+        $results = get_posts( $args );
+
+        $resultArray = [];
+        foreach ( $results as $item ){
+
+            array_push( $resultArray, $item );
+
+        }
+
+        return $resultArray;
 
     }
 

@@ -14,7 +14,7 @@
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-if (!function_exists('kmaidx_setup')) :
+if ( ! function_exists('kmaidx_setup')) :
 
     function kmaidx_setup()
     {
@@ -28,7 +28,7 @@ if (!function_exists('kmaidx_setup')) :
 
         function startSession()
         {
-            if (!session_id()) {
+            if ( ! session_id()) {
                 session_start();
             }
         }
@@ -88,39 +88,55 @@ if (!function_exists('kmaidx_setup')) :
         require get_template_directory() . '/helpers/MLS.php';
         require get_template_directory() . '/helpers/Listing.php';
         require get_template_directory() . '/helpers/BeachyBucket.php';
-	    require get_template_directory() . '/helpers/Offices.php';
-	    require get_template_directory() . '/helpers/Communities.php';
+        require get_template_directory() . '/helpers/Offices.php';
+        require get_template_directory() . '/helpers/Communities.php';
     }
 endif;
 add_action('after_setup_theme', 'kmaidx_setup');
 
-function kmaidx_scripts() {
+function kmaidx_scripts()
+{
 
     wp_deregister_script('jquery');
-    wp_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js', false, false, true);
+    wp_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js', false, false,
+        true);
 
     //styles
-    wp_register_style('fullcalendar-style', '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css', null);
-    wp_register_style('lightbox-styles', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css', false);
-    wp_register_style('select2-styles', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css', false);
+    wp_register_style('fullcalendar-style', '//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.1/fullcalendar.min.css',
+        null);
+    wp_register_style('lightbox-styles', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css',
+        false);
+    wp_register_style('select2-styles', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css',
+        false);
 
     //scripts
-    wp_register_script('tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', array('jquery'), null, true);
-    wp_register_script('bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', array('jquery'), null, true);
-    wp_register_script('images-loaded', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.min.js', array('jquery'), null, true);
+    wp_register_script('tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js',
+        array('jquery'), null, true);
+    wp_register_script('bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js',
+        array('jquery'), null, true);
+    wp_register_script('images-loaded',
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.min.js', array('jquery'), null,
+        true);
     wp_register_script('custom-scripts', get_template_directory_uri() . '/js/scripts.js', array(), null, true);
-    wp_register_script('lightbox', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.min.js', array('jquery'), null, true);
-    wp_register_script('lazy-js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js', array('jquery'), null, true);
-    wp_register_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js', array('jquery'), null, true);
-    wp_register_script('jquery-ui-slider', get_template_directory_uri() . '/js/jquery-ui.min.js', array('jquery'), null, true);
+    wp_register_script('lightbox', 'https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.min.js',
+        array('jquery'), null, true);
+    wp_register_script('lazy-js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js',
+        array('jquery'), null, true);
+    wp_register_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+        array('jquery'), null, true);
+    wp_register_script('jquery-ui-slider', get_template_directory_uri() . '/js/jquery-ui.min.js', array('jquery'), null,
+        true);
     //wp_register_script('chart-js', get_template_directory_uri() . '/js/chartjs/Chart.js', array('jquery'), null, true);
-    wp_register_script('chart-js', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js', array('jquery'), null, true);
-    wp_register_script('mortgage-calc', get_template_directory_uri() . '/js/mortgagecalc.js', array('jquery'), null, true);
+    wp_register_script('chart-js', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js',
+        array('jquery'), null, true);
+    wp_register_script('mortgage-calc', get_template_directory_uri() . '/js/mortgagecalc.js', array('jquery'), null,
+        true);
     wp_register_script('listing-js', get_template_directory_uri() . '/js/listing.js', array('jquery'), null, true);
     wp_register_script('team-js', get_template_directory_uri() . '/js/team.js', array('jquery'), null, true);
 
     //wp ajax scripts
-    wp_register_script('communities-ajax', get_template_directory_uri() . '/js/communities.ajax.js', array('jquery'), null, true);
+    wp_register_script('communities-ajax', get_template_directory_uri() . '/js/communities.ajax.js', array('jquery'),
+        null, true);
     wp_localize_script('communities-ajax', 'wpAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
     wp_register_script('search-ajax', get_template_directory_uri() . '/js/search.ajax.js', array('jquery'), null, true);
     wp_localize_script('search-ajax', 'wpAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
@@ -141,14 +157,16 @@ function kmaidx_scripts() {
 
 add_action('wp_enqueue_scripts', 'kmaidx_scripts');
 
-function prefix_add_footer_styles() {
+function prefix_add_footer_styles()
+{
     wp_enqueue_style('kmaidx-footer-styles', get_template_directory_uri() . '/style.css');
 }
 
 ;
 add_action('get_footer', 'prefix_add_footer_styles');
 
-function disable_wp_stuff() {
+function disable_wp_stuff()
+{
 
     remove_action('wp_head', 'rsd_link'); // Removes the Really Simple Discovery link
     remove_action('wp_head', 'wlwmanifest_link'); // Removes the Windows Live Writer link
@@ -173,12 +191,14 @@ function disable_wp_stuff() {
     // Remove oEmbed-specific JavaScript from the front-end and back-end.
     remove_action('wp_head', 'wp_oembed_add_host_js');
 }
+
 add_action('init', 'disable_wp_stuff');
 
 /*
 * Pull in our favorite KMA add-ons.
 */
-function loadModules() {
+function loadModules()
+{
 
     //modules
     require('modules/leads/leads.php');
@@ -190,18 +210,55 @@ function loadModules() {
     if (is_admin()) {
         $beachyBuckets = new AdminLeads();
         $beachyBuckets->createNavLabel();
+        $beachyBuckets->addUserRole('Author', [
+            'edit_agent'              => true,
+            'publish_agents'          => true,
+            'delete_published_agents' => false,
+            'edit_agents'             => true,
+            'delete_agents'           => false,
+            'edit_others_agents'      => false,
+            'delete_others_posts'     => false,
+        ]);
+        $beachyBuckets->addUserRole('Administrator', [
+            'read_agents'             => true,
+            'edit_agent'              => true,
+            'edit_agents'             => true,
+            'edit_others_agents'      => true,
+            'delete_agents'           => true,
+            'publish_agents'          => true,
+            'read_offices'            => true,
+            'edit_offices'            => true,
+            'edit_office'             => true,
+            'edit_others_offices'     => true,
+            'delete_offices'          => true,
+            'publish_offices'         => true,
+            'read_communities'        => true,
+            'edit_communities'        => true,
+            'edit_communitiess'       => true,
+            'edit_others_communities' => true,
+            'delete_communities'      => true,
+            'publish_communities'     => true,
+            'read_leads'              => true,
+            'edit_leads'              => true,
+            'edit_lead'               => true,
+            'edit_others_leads'       => true,
+            'delete_leads'            => true,
+            'publish_leads'           => true,
+        ]);
     }
 
 }
+
 add_action('after_setup_theme', 'loadModules');
 
-function loadCustomPostTypes(){
+function loadCustomPostTypes()
+{
 
     $offices = new Offices();
     $offices->createPostType();
 
-	$communities = new Communities();
-	$communities->createPostType();
+    $communities = new Communities();
+    $communities->createPostType();
 
     $leads = new kmaLeads();
     $leads->createPostType();
@@ -212,14 +269,16 @@ function loadCustomPostTypes(){
     //$team->createAdminColumns();
 
 }
+
 add_action('after_setup_theme', 'loadCustomPostTypes');
 
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/extras.php';
 require get_template_directory() . '/inc/customizer.php';
 
-if (!function_exists('kmaidx_inline')) :
-    function kmaidx_inline() {
+if ( ! function_exists('kmaidx_inline')) :
+    function kmaidx_inline()
+    {
         ?>
         <style type="text/css">
             <?php echo file_get_contents('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css' ) ?>
@@ -241,7 +300,8 @@ if (!function_exists('kmaidx_inline')) :
 endif;
 add_action('wp_head', 'kmaidx_inline');
 
-function in_array_r($needle, $haystack, $strict = false){
+function in_array_r($needle, $haystack, $strict = false)
+{
     foreach ($haystack as $item) {
         if (is_array($item)) {
             foreach ($item as $arr) {
@@ -268,7 +328,8 @@ function in_array_r($needle, $haystack, $strict = false){
 
 add_action('wp_ajax_loadMlsIdx', 'loadMlsIdx');
 add_action('wp_ajax_nopriv_loadMlsIdx', 'loadMlsIdx');
-function loadMlsIdx() {
+function loadMlsIdx()
+{
 
     if (isset($_SESSION['smartselect'])) {
 
@@ -276,10 +337,10 @@ function loadMlsIdx() {
 
     } else {
 
-        $mls = new MLS();
-	    $communities = new Communities();
+        $mls         = new MLS();
+        $communities = new Communities();
 
-        $result['typeArray']   = array();
+        $result['typeArray'] = array();
 
         $typeArray = $mls->getPropertyTypes();
 
@@ -314,7 +375,7 @@ function loadMlsIdx() {
             );
         }
         foreach ($subareaArray as $value) {
-            if (!in_array_r($value->sub_area, $result['areaArray'][0]['children'])) {
+            if ( ! in_array_r($value->sub_area, $result['areaArray'][0]['children'])) {
                 $result['areaArray'][0]['children'][] = array(
                     'id'    => $value->sub_area,
                     'text'  => $value->sub_area,
@@ -328,7 +389,7 @@ function loadMlsIdx() {
             'children' => array()
         );
         foreach ($cityArray as $value) {
-            if (!in_array_r($value->city, $result['areaArray'][0]['children'])) {
+            if ( ! in_array_r($value->city, $result['areaArray'][0]['children'])) {
                 $result['areaArray'][1]['children'][] = array(
                     'id'    => $value->city,
                     'text'  => $value->city,
@@ -337,19 +398,19 @@ function loadMlsIdx() {
             }
         }
 
-	    $communitylist = $communities->getCommunities();
+        $communitylist = $communities->getCommunities();
 
-	    $result['areaArray'][2] = array(
-			'text'          => 'HOT COMMUNITIES',
-			'children'      => array()
-		);
-	    foreach ($communitylist as $community) {
-		    $result['areaArray'][2]['children'][] = array(
+        $result['areaArray'][2] = array(
+            'text'     => 'HOT COMMUNITIES',
+            'children' => array()
+        );
+        foreach ($communitylist as $community) {
+            $result['areaArray'][2]['children'][] = array(
                 'id'    => $community['name'],
                 'text'  => $community['title'],
                 'class' => 'option',
             );
-	    }
+        }
 
         $result['areaArray'][3] = array(
             'text'     => 'Zip Code',
@@ -368,7 +429,7 @@ function loadMlsIdx() {
 
     }
 
-    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+    if ( ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         echo $result;
     }
 
@@ -378,7 +439,8 @@ function loadMlsIdx() {
 
 add_action('wp_ajax_loadCommMapPins', 'loadCommMapPins');
 add_action('wp_ajax_nopriv_loadCommMapPins', 'loadCommMapPins');
-function loadCommMapPins(){
+function loadCommMapPins()
+{
 
     if (isset($_SESSION['communitymap'])) {
 
@@ -386,10 +448,10 @@ function loadCommMapPins(){
 
     } else {
 
-	    $mls = new MLS();
-	    $communities = new Communities();
+        $mls           = new MLS();
+        $communities   = new Communities();
         $communitylist = $communities->getCommunities();
-        $return = array();
+        $return        = array();
 
         foreach ($communitylist as $community) {
 
@@ -421,12 +483,12 @@ function loadCommMapPins(){
 
         }
 
-	    $offices = new Offices();
-	    $locationlist = $offices->getAllOffices();
+        $offices      = new Offices();
+        $locationlist = $offices->getAllOffices();
 
-	    foreach ($locationlist as $location) {
-		    $return[] = $location;
-	    }
+        foreach ($locationlist as $location) {
+            $return[] = $location;
+        }
 
         $return[] = array(
             'name' => 'Laguna Beach',
@@ -496,7 +558,7 @@ function loadCommMapPins(){
 
     }
 
-    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+    if ( ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         echo $result;
     }
 
@@ -505,7 +567,8 @@ function loadCommMapPins(){
 
 add_action('wp_ajax_loadOfficePins', 'loadOfficePins');
 add_action('wp_ajax_nopriv_loadOfficePins', 'loadOfficePins');
-function loadOfficePins() {
+function loadOfficePins()
+{
 
     if (isset($_SESSION['officemap'])) {
 
@@ -515,18 +578,18 @@ function loadOfficePins() {
 
         $return = array();
 
-	    $offices = new Offices();
-	    $locationlist = $offices->getAllOffices();
+        $offices      = new Offices();
+        $locationlist = $offices->getAllOffices();
 
-	    foreach ($locationlist as $location) {
-		    $return[] = $location;
-	    }
+        foreach ($locationlist as $location) {
+            $return[] = $location;
+        }
 
         $_SESSION['officemap'] = json_encode($return);
         $result                = json_encode($return);
     }
 
-    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+    if ( ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
         echo $result;
     }
 
@@ -535,28 +598,28 @@ function loadOfficePins() {
 
 include(get_template_directory() . '/inc/members.php');
 
-add_filter( 'get_the_archive_title', function ($title) {
+add_filter('get_the_archive_title', function ($title) {
 
-	if ( is_category() ) {
+    if (is_category()) {
 
-		$title = single_cat_title( 'Beachy Blog ', false );
+        $title = single_cat_title('Beachy Blog ', false);
 
-	} elseif ( is_tag() ) {
+    } elseif (is_tag()) {
 
-		$title = single_tag_title( 'Beachy Tag: ', false );
+        $title = single_tag_title('Beachy Tag: ', false);
 
-	} elseif ( is_author() ) {
+    } elseif (is_author()) {
 
-		$title = '<span class="vcard">' . get_the_author() . '</span>' ;
+        $title = '<span class="vcard">' . get_the_author() . '</span>';
 
-	}
+    }
 
-	return $title;
+    return $title;
 
 });
 
 
-add_filter('wpseo_title','listing_page_titles',100);
+add_filter('wpseo_title', 'listing_page_titles', 100);
 function listing_page_titles($metaTitle)
 {
     global $post;
@@ -572,10 +635,11 @@ function listing_page_titles($metaTitle)
             $newTitle = $metaTitle;
         }
     }
+
     return $newTitle;
 }
 
-add_filter('wpseo_metadesc','listing_page_description',100,1);
+add_filter('wpseo_metadesc', 'listing_page_description', 100, 1);
 function listing_page_description($metaDescription)
 {
     global $post;
@@ -591,14 +655,15 @@ function listing_page_description($metaDescription)
             $newDescription = $metaDescription;
         }
     }
+
     return $newDescription;
 }
 
-add_filter('wpseo_opengraph_image','listing_og_image', 100,1);
+add_filter('wpseo_opengraph_image', 'listing_og_image', 100, 1);
 function listing_og_image($ogPhoto)
 {
-	global $post;
-	$newImage = $ogPhoto;
+    global $post;
+    $newImage = $ogPhoto;
     if ($post->post_name == 'listing') {
         global $ogPhoto;
         if (isset($ogPhoto)) {
@@ -610,11 +675,12 @@ function listing_og_image($ogPhoto)
             $newImage = $ogPhoto;
         }
     }
-	return $newImage;
+
+    return $newImage;
 }
 
-add_filter('wpseo_canonical','listing_og_url',100,1);
-add_filter('wpseo_opengraph_url','listing_og_url',100,1);
+add_filter('wpseo_canonical', 'listing_og_url', 100, 1);
+add_filter('wpseo_opengraph_url', 'listing_og_url', 100, 1);
 function listing_og_url($ogUrl)
 {
     global $post;
@@ -630,5 +696,6 @@ function listing_og_url($ogUrl)
             $newUrl = $ogUrl;
         }
     }
+
     return $newUrl;
 }

@@ -16,6 +16,7 @@ $quote = new Custom_Post_Type(
 		'menu_position'      => null,
 		'public'             => true,
 		'publicly_queryable' => true,
+        'capability_type'    => array('testimonial','testimonials'),
 	)
 );
 

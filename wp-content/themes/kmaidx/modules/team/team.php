@@ -40,13 +40,13 @@ class mlsTeam {
                     'feeds' 		=> true, 				//bool Should a feed permalink structure be built for this post type. Defaults to has_archive value
                     'pages' 		=> false				//bool Should the permalink structure provide for pagination. Defaults to true
                 ),
-                /*'capability_type'    => array('agent','agents'),
-                'capabilities' => array(
-                    'edit_post'          => 'edit_agents',
-                    'read_post'          => 'read_agents',
-                    'publish_posts'      => 'publish_agents',
-                    'edit_others_posts'  => 'edit_others_agents'
-                ),*/
+                'capability_type'    => array('agent','agents'),
+//                'capabilities' => array(
+//                    'edit_post'          => 'edit_agents',
+//                    'read_post'          => 'read_agents',
+//                    'publish_posts'      => 'publish_agents',
+//                    'edit_others_posts'  => 'edit_others_agents'
+//                ),
             )
         );
         $team->add_taxonomy( 'office' );

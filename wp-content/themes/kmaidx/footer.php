@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 my-auto mx-auto justify-content-center text-center">
-                        <p class="copyright">&copy;<?php echo date('Y'); ?> Beachy Beach Real Estate. All Rights Reserved. <span class="line"><img src="<?php echo get_template_directory_uri() ?>/img/realtors-association-logo-small.png" alt="Realtors Associattion" id="realtors-association"> <img src="<?php echo get_template_directory_uri() ?>/img/equal-housing-logo-small.png" alt="Equal Housing Opportunity" id="equal-housing"></span></p>
+                        <p class="copyright">&copy;<?php echo date('Y'); ?> Beachy Beach Real Estate. All Rights Reserved. <a style="text-decoration: underline;" href="/privacy-policy/" >Privacy Policy</a> <span class="line"><img src="<?php echo get_template_directory_uri() ?>/img/realtors-association-logo-small.png" alt="Realtors Associattion" id="realtors-association"> <img src="<?php echo get_template_directory_uri() ?>/img/equal-housing-logo-small.png" alt="Equal Housing Opportunity" id="equal-housing"></span></p>
                     </div>
                     <div class="col-md-3 my-auto justify-content-center justify-content-sm-end text-center text-sm-right">
                         <p class="siteby"><svg version="1.1" id="kma" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12.5 8.7" style="enable-background:new 0 0 12.5 8.7;" xml:space="preserve">

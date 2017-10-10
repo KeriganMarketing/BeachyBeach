@@ -12,27 +12,49 @@ class AdminLeads
     {
         //listen for data save
         $this->save();
+
+    }
+
+    private function getUserRole($role){
+
+        $userRole = get_role(strtolower(str_replace(' ', '_', $role)));
+        //var_dump($userRole);
+
+        return $userRole;
+    }
+
+    public function addUserRole($role, $capabilities = []){
+
+        if ( ! $this->getUserRole($role)) { //role doesn't exist
+            add_role(
+                strtolower(str_replace(' ', '_', $role)),
+                __($role), $capabilities
+            );
+        } else { //role exists. Just add capabilities
+            $userRole = $this->getUserRole($role);
+            foreach ($capabilities as $capability => $bool) {
+                $userRole->add_cap($capability, $bool);
+            }
+//            echo '<pre>',print_r($userRole),'</pre>';
+        }
+
     }
 
     public function createNavLabel()
     {
 
-        $userId      = get_current_user_id();
-        $accessLevel = $this->getAccessLevel($userId);
-
         add_action('admin_menu', function () {
-            add_menu_page('My Beachy Buckets', 'My Beachy Buckets', 'manage_options', 'bb-buckets', function () {
+            add_menu_page('My Beachy Buckets', 'My Beachy Buckets', 'edit_agent', 'bb-buckets', function () {
                 $this->createMyBeachyBuckets();
             }, 'dashicons-palmtree', 6);
         });
 
-        if (in_array('administrator', $accessLevel) || in_array_r('editor', $accessLevel)) {
-            add_action('admin_menu', function () {
-                add_menu_page('All Beachy Buckets', 'All Beachy Buckets', 'manage_options', 'bb-admin', function () {
-                    $this->createAllBeachyBuckets();
-                }, 'dashicons-palmtree', 5);
-            });
-        }
+        add_action('admin_menu', function () {
+            add_menu_page('All Beachy Buckets', 'All Beachy Buckets', 'manage_options', 'bb-admin', function () {
+                $this->createAllBeachyBuckets();
+            }, 'dashicons-palmtree', 5);
+        });
+
     }
 
     private function getAccessLevel($userId)
@@ -41,12 +63,16 @@ class AdminLeads
         $userMeta     = get_user_meta($userId);
         $accessLevels = [unserialize($userMeta['wp_capabilities'][0])];
 
+        echo '<pre>',print_r($accessLevels),'</pre>';
+
         $output = [];
-        if (count($accessLevels) > 0) {
-            foreach ($accessLevels as $level => $code) {
+        if (count($accessLevels[0]) > 0) {
+            foreach ($accessLevels[0] as $level => $code) {
                 array_push($output, $level);
             }
         }
+
+        echo '<pre>',print_r($output),'</pre>';
 
         return $output;
     }
@@ -70,6 +96,7 @@ class AdminLeads
         $userMeta  = get_user_meta($userId);
         $agentName = $userMeta['first_name'][0] . ' ' . $userMeta['last_name'][0];
         $userData  = $this->getBuckets($agentName);
+        $mlsLead   = new kmaLeads();
 
         ?>
         <div class="wrap">
@@ -89,7 +116,10 @@ class AdminLeads
                 </thead>
                 <tbody>
                 <?php
+                add_thickbox();
+                $thickboxes = '';
                 foreach ($userData as $user) {
+                    //echo '<pre>',print_r($user),'</pre>';
                     $user['id']            = isset($user['id']) ? $user['id'] : 0;
                     $user['zip'][0]        = isset($user['zip'][0]) ? $user['zip'][0] : '';
                     $user['city'][0]       = isset($user['city'][0]) ? $user['city'][0] : '';
@@ -100,6 +130,11 @@ class AdminLeads
                     $user['last_name'][0]  = isset($user['last_name'][0]) ? $user['last_name'][0] : '';
                     $user['first_name'][0] = isset($user['first_name'][0]) ? $user['first_name'][0] : '';
 
+                    $emails    = $mlsLead->getLeads([
+                        'meta_key'   => 'lead_info_email_address',
+                        'meta_value' => $user['email']
+                    ]);
+
                     $address = '';
                     if ($user['addr1'][0] != '') {
                         $address = $user['addr1'][0] . ($user['addr2'][0] != '' ? ', ' . $user['addr2'][0] : '') . '<br>' . $user['city'][0] . ', ' . $user['thestate'][0] . $user['zip'][0];
@@ -107,14 +142,9 @@ class AdminLeads
                     ?>
                     <tr>
                         <td><strong><?php echo $user['first_name'][0] . ' ' . $user['last_name'][0]; ?></strong></td>
-                        <td>
-                            <strong><a href="tel:<?php echo $user['phone1'][0]; ?>"><?php echo $user['phone1'][0]; ?></a></strong>
-                        </td>
-                        <td>
-                            <strong><a href="mailto:<?php echo $user['email']; ?>"><?php echo $user['email']; ?></a></strong>
-                        </td>
-                        <td><strong><?php echo $address; ?></strong>
-                        </td>
+                        <td><strong><a href="tel:<?php echo $user['phone1'][0]; ?>"><?php echo $user['phone1'][0]; ?></a></strong></td>
+                        <td><strong><a href="mailto:<?php echo $user['email']; ?>"><?php echo $user['email']; ?></a></strong></td>
+                        <td><strong><?php echo $address; ?></strong></td>
                     </tr>
                     <tr>
                         <td colspan="4">
@@ -128,6 +158,35 @@ class AdminLeads
                                 }
                                 ?>
                             </p>
+
+                            <?php if(count($emails) > 0) { ?>
+                                <p>Recent Website Communications:</p>
+                                <?php
+                                foreach ($emails as $email) {
+                                    //echo '<pre>', print_r($email), '</pre>';
+
+                                    echo $email->lead_info_date;
+                                    echo '<a href="#TB_inline?width=680&height=500&inlineId=viewlead-' . $email->ID . '" role="button" data-toggle="modal" class="button button-info thickbox" >View lead</a>';
+
+                                    $thickboxes .= '<div id="viewlead-' . $email->ID . '" class="modal hide fade" style="display:none; ">
+                                        <div>'
+                                        . $email->lead_info_notification_preview .
+                                        '</div>
+                                    </div>';
+
+//                                    'Name' 			        => 'locked',
+//                                    'Date' 			        => 'locked',
+//                                    'Phone Number'	        => 'locked',
+//                                    'Email Address'	        => 'locked',
+//                                    'Selected Agent'        => 'locked',
+//                                    'MLS Number' 		    => 'locked',
+//                                    'Address'               => 'locked',
+//                                    'Property Type'         => 'locked',
+//                                    'Message' 		        => 'locked',
+//                                    'Notification Preview'  => 'locked'
+                                }
+                            }
+                            ?>
                         </td>
                     </tr>
                 <?php } ?>
@@ -135,6 +194,9 @@ class AdminLeads
             </table>
         </div>
         <?php
+
+        echo $thickboxes;
+
     }
 
     private function createAllBeachyBuckets()
