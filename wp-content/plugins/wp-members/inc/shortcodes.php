@@ -26,6 +26,11 @@
  * - wpmem_sc_tos
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit();
+}
+
 /**
  * Function for forms called by shortcode.
  *
@@ -333,7 +338,7 @@ function wpmem_sc_user_profile( $atts, $content, $tag ) {
 		 *
 		 * @param string The default edit mode heading.
 		 */
-		$heading = apply_filters( 'wpmem_user_edit_heading', __( 'Edit Your Information', 'wp-members' ) );
+		$heading = apply_filters( 'wpmem_user_edit_heading', $wpmem->get_text( 'profile_heading' ) );
 
 		switch( $wpmem->action ) {
 
@@ -467,7 +472,7 @@ function wpmem_sc_fields( $atts, $content = null, $tag ) {
 	
 	// What user?
 	if ( isset( $atts['id'] ) ) {
-		$the_ID = ( $atts['id'] == 'get' ) ? wpmem_get( 'uid', '', 'get' ) : $atts['id'];
+		$the_ID = ( $atts['id'] == 'get' ) ? filter_var( wpmem_get( 'uid', '', 'get' ), FILTER_SANITIZE_NUMBER_INT ) : $atts['id']; // Ultimately, the_ID will be checked to determine if it is numeric by WP_User::get_data_by().
 	} else {
 		$the_ID = get_current_user_id();
 	}
@@ -524,9 +529,20 @@ function wpmem_sc_fields( $atts, $content = null, $tag ) {
 		
 		// Handle line breaks for textarea fields
 		if ( isset( $field_type ) && 'textarea' == $field_type ) {
-			$result = nl2br( $user_info->{$field} );
+			$result = ( isset( $atts['display'] ) && 'raw' == $atts['display'] ) ? $user_info->{$field} : nl2br( $user_info->{$field} );
 		}
 
+		// Handle date fields.
+		if ( isset( $field_type ) && 'date' == $field_type ) {
+			if ( isset( $atts['format'] ) ) {
+				// Formats date: http://php.net/manual/en/function.date.php
+				$result =  date( $atts['format'], strtotime( $user_info->{$field} ) );
+			} else {
+				// Formats date to whatever the WP setting is.
+				$result = date_i18n( get_option( 'date_format' ), strtotime( $user_info->{$field} ) );
+			}
+		}
+		
 		// Remove underscores from value if requested (default: on).
 		if ( isset( $atts['underscores'] ) && 'off' == $atts['underscores'] && $user_info ) {
 			$result = str_replace( '_', ' ', $result );

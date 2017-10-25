@@ -1,12 +1,12 @@
-﻿=== WP-Members: Membership Framework ===
+﻿=== WP-Members Membership Plugin ===
 Contributors: cbutlerjr
 Tags: access, authentication, content, login, member, membership, password, protect, register, registration, restriction, subscriber
 Requires at least: 3.6
-Tested up to: 4.7
-Stable tag: 3.1.8
+Tested up to: 4.8
+Stable tag: 3.1.9.3
 License: GPLv2
 
-WP-Members&trade; is a free membership management framework for WordPress&reg; that restricts content to registered users.
+WP-Members membership plugin turns your WordPress site into a membership site.  Restrict premium content, require registration with custom fields, and more.
 
 == Description ==
 
@@ -112,7 +112,8 @@ Premium priority support is available at the plugin's site [RocketGeek.com](http
 
 == Upgrade Notice ==
 
-WP-Members 3.1.8 is a major update. There are no database changes (rollback is possible). See changelog for important details. Minimum WP version is 3.6.
+WP-Members 3.1.9 is a major update. There are no database changes (rollback is possible). See changelog for important details. Minimum WP version is 3.6.
+WP-Members 3.1.9.3 is a bug fix and security update. All users running 3.1.9 or higher should update.
 
 == Screenshots ==
 
@@ -135,6 +136,38 @@ WP-Members 3.1.8 is a major update. There are no database changes (rollback is p
 
 == Changelog ==
 
+= 3.1.9.3 =
+
+* Security update for 3.1.9.
+* Fix for multiple checkbox and multiple select field types if "comma" was selected as the delimiter (previously, this would break the field settings array option assembly).
+* Improvements on field manager add/edit field screen.
+* Improvements to multiple checkbox and radio groups: better handling of non-value selections and span wrapper for group separators.
+
+= 3.1.9.2 =
+
+* Fix for Users > All Users user search if no search meta have been selected in Fields tab.
+* Added User ID as an optional column to add to Users > All Users.
+
+= 3.1.9.1 =
+
+* Added missing (new) files.
+
+= 3.1.9 =
+
+* Improved user search in Users > All Users.
+* Fully deprecated obsolete reCAPTCHA v1. If v1 is selected as a setting, it will be automatically changed to v2. (v1 users check your API keys for compatibility.)
+* Removed obsolete comments_template.php.
+* Set image field to display "medium" image in dashboard/admin user profile. Admin profile image display links to media editor.
+* Added default format to date field shortcode to date format set in WP settings.
+* Added format attribute to date field shortcode for custom date formatting.
+* Deprecated wpmem_user_profile(), wpmem_profile_update(), wpmem_user_profile_multipart(), wpmem_admin_fields(), wpmem_admin_update().
+* Rebuild of dashboard profile functions incorporated into new user profile object class.
+* Fields tab bulk action now checks for both page and tab (rather than just tab) to prevent namespace collisions.
+* Removed $requested_redirect_to argument from login_redirect filter hook.
+* Removed height property of button_div for generic stylesheets.
+* Fixed user edit shortcode to display updated user data without page refresh.
+* Fixed password change so that login state is maintained after password update.
+
 = 3.1.8 =
 
 * Added new native registration handling to accommodate WooCommerce 3.0.
@@ -153,6 +186,10 @@ WP-Members 3.1.8 is a major update. There are no database changes (rollback is p
 * Fields Tab: improved field add/edit screen: return link at bottom of page, display current field upon successful form submission, success message include return link.
 * Fields Tab: added support for HTML5 field types: number, date.
 * Fields Tab: added support for HTML5 field attributes: placeholder, pattern (regex), title, min, max.
+* Corrects an issue with user profile display/update of textarea fields that are not the WP default bio field.
+* Added display=raw attribute handling to textarea fields to allow display without converting line breaks to HTML br tags.
+* Fixes issue with User Profile form heading not using the get_text() value.
+* Improves logic for displaying register link in login form if login page is not set.
 
 = 3.1.7 =
 

@@ -2,7 +2,7 @@
 <div id="smart-search-box">
 	<div class="row">
 		<form action="/property-search/" class="form-inline" method="get">
-
+<div class="search-control"></div>
 			<input type="hidden" name="q" value="search" >
 			<div class="col-12">
 				<div class="input-container smart-select">

@@ -195,7 +195,7 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
 			$mlsLead->sendEmail( $sendadmin, $emaildata );
 			$mlsLead->sendEmail( $sendreceipt, $receiptdata );
 
-            $emailTemplate  = file_get_contents(get_template_directory().'/modules/leads/emailtemplate.php');
+            $emailTemplate  = wp_normalize_path(file_get_contents(get_template_directory().'/modules/leads/emailtemplate.php'));
             $split          = strrpos($emailTemplate, '<!--[content]-->');
             $templatebot    = substr($emailTemplate, $split);
             $templatetop    = substr($emailTemplate, 0, $split);

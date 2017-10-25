@@ -415,7 +415,7 @@ div#beach-bucket #bucket-right p.logged-in a{
 }
 
 div#beach-bucket span.user-name {
-    font-family: 'BebasNeue',sans-serif;
+    font-family: 'Bebas Neue',sans-serif;
     font-style: normal;
     font-size: 1.5em;
     font-weight: 400;
@@ -460,7 +460,7 @@ div#beach-bucket p.logout-link {
 }
 
 form legend {
-    font-family: 'BebasNeue',sans-serif;
+    font-family: 'Bebas Neue',sans-serif;
     font-size: 0px;
     color: transparent;
 }
@@ -498,7 +498,7 @@ form legend {
 }
 
 div#map-header p, h1#main-title, h1.entry-title {
-    font-family: 'BebasNeue';
+    font-family: 'Bebas Neue';
     text-align: center;
     margin: 0;
     padding: 65px 0 0;
@@ -879,7 +879,7 @@ div#smart-search-box .input-group-lg>.input-group-btn>.btn {
 #content #blogheader h1,
 #content article>header h1 {
     color:#FFF;
-    font-family:"BebasNeue",sans-serif;
+    font-family:'Bebas Neue', sans-serif;
     font-size: 40px;
     line-height: 1.3em;
     text-shadow: 2px 2px 0 rgba(26,110,138,.8);
@@ -1001,7 +1001,7 @@ span#beach-toggle {
 }
 
 h3.comm-title {
-    font-family: "BebasNeue",sans-serif;
+    font-family: 'Bebas Neue',sans-serif;
     font-size: 20px;
     padding-bottom: 5px;
     margin-bottom: 5px;
@@ -1045,13 +1045,13 @@ h3.comm-title {
 }
 
 .blog-link a {
-    font-family: "BebasNeue",sans-serif;
+    font-family: 'Bebas Neue',sans-serif;
     color: #999;
     font-size: 1.5em;
 }
 
 .blog-article h2 a {
-    font-family:"BebasNeue",sans-serif;
+    font-family:'Bebas Neue',sans-serif;
     margin:1rem 0;
     text-decoration: none;
     color:#28C2E8;
@@ -1205,7 +1205,7 @@ div#mortgage-calculator div#ins span.label {
 
 div#mortgage-calculator h2 {
     font-size: 40px;
-    font-family: "BebasNeue";
+    font-family: 'Bebas Neue';
     color: rgb( 18, 106, 143 );
     text-align: center;
     line-height:22px;
@@ -1513,12 +1513,12 @@ span.subhead.small {
 .contact-info h4,
 h4.card-title {
     margin-bottom: 0;
-    font-family: 'BebasNeue',sans-serif;
+    font-family: 'Bebas Neue',sans-serif;
     color: #42BC7B;
     font-size: 2em;
 }
 h5.card-subtitle {
-    font-family: 'BebasNeue',sans-serif;
+    font-family: 'Bebas Neue',sans-serif;
     color: #999;
     margin-bottom: .5rem;
 }
@@ -1565,7 +1565,7 @@ form h3 {
 }
 
 .contact-info span.label {
-    font-family: 'BebasNeue';
+    font-family: 'Bebas Neue', sans-serif;
     color: #999;
     font-size: .9em;
 }

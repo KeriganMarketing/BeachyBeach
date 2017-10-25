@@ -5,8 +5,9 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Google Search Console, Content analysis, Readability
 Requires at least: 4.6
-Tested up to: 4.7
-Stable tag: 4.8
+Tested up to: 4.8.2
+Stable tag: 5.7.1
+Requires PHP: 5.2.4
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
 
@@ -29,7 +30,7 @@ Using the snippet preview, you can see a rendering of what your post or page wil
 = Page Analysis =
 The Yoast SEO plugins [Page Analysis](https://yoast.com/content-seo-wordpress-linkdex/) functionality checks simple things you're bound to forget. It checks, for instance, if you have images in your post and whether they have an alt tag containing the focus keyword for that post. It also checks whether your posts are long enough, whether you've written a meta description and if that meta description contains your focus keyword, if you've used any subheadings within your post, etc. etc.
 
-The plugin alsgruo allows you to write meta titles and descriptions for all your category, tag and custom taxonomy archives, giving you the option to further optimize those pages.
+The plugin also allows you to write meta titles and descriptions for all your category, tag and custom taxonomy archives, giving you the option to further optimize those pages.
 
 Combined, this plugin makes sure that your content is the type of content search engines will love!
 
@@ -124,36 +125,79 @@ You'll find answers to many of your questions on [kb.yoast.com](https://kb.yoast
 
 == Changelog ==
 
-= 4.8.0 =
+= 5.7.1 =
 
-Release Date: May 23rd, 2017
+Release Date: October 25th, 2017
+
+Bugfixes:
+	* Fixes a bug where the message "You are not receiving updates or support!" is shown incorrectly.
+	* Changes the reference to the correct ACF Content Analysis for Yoast SEO plugin.
+
+Enhancements:
+	* Adds a plugin suggestion for WooCommerce SEO when WooCommerce is installed.
+
+= 5.7.0 =
+
+Release Date: October 24th, 2017
+
+Enhancements:
+	* Adds notifications when we detect certain plugins are installed to suggest our AMP and ACF glue plugins.
+	* Adds the ability to start the configuration wizard from the admin bar menu.
+	* Adds better responsive styling for the video tabs in the Help Center.
+	* Replaces the link to Google AdWords with the https variant, props [Shane Gray](https://github.com/shane-gray).
+	* Changes to the desired spelling of `plugin` and `setup`, props [Pedro Mendonça](https://github.com/pedro-mendonca).
+
+Bugfixes:
+	* Fixes a bug where the text link counter doesn't count links for scheduled posts when they get published.
+	* Fixes a bug where the internal link count is not updated when a post is removed permanently.
+
+= 5.6.1 =
+
+Release Date: October 13th, 2017
+
+Bugfixes
+	* Fixes a bug where the SEO Manager role was not being able to save SEO settings.
+
+= 5.6.0 =
+
+Release Date: October 10th, 2017
+
+Enhancements
+	* Removes legacy license page and shows the new license page by default.
+	* Changes references from licenses to subscriptions and sites on the premium submenu page.
+	* Changes the appearance of the Help Center in line with our design approach.
+	* Introduces an explanation bar when the `Cornerstone content` filter is active.
+
+Bugfixes
+	* Fixes a bug where Hebrew slugs aren't decoded on display in the bulk editor.
+	* Fixes a bug where the internal link count is not updated when there are no links to that page or post anymore.
+	* Fixes the `Cornerstone content` filter to behave consistently with existing WordPress filters.
+
+= 5.5.1 =
+
+Release Date: September 28th, 2017
 
 * Bugfixes
-	* Fixes a bug where the tabs in the social and advanced metabox section are gone when keyword analysis has been disabled.
+	* Fixes Snippet preview error when Yoast metabox has been removed.
+
+* Changes
+	* Change Yoast Blog feed to new endpoint.
+
+= 5.5.0 =
+
+Release Date: September 26th, 2017
 
 * Enhancements
-	* Optimizes the way the cornerstone flag is saved.
-	* Analyzes the content using cornerstone assessors when a post or page is cornerstone content.
-
-= 4.7.1 =
-
-Release Date: May 9th, 2017
-
-* Bugfixes
-	* Fixes a bug where the analysis wouldn't work on Internet Explorer.
-
-= 4.7.0 =
-
-Release Date: May 2nd, 2017
-
-* Enhancements
-	* Adds transition words for Italian.
-	* Adds a new check in the analysis for the presence of at least one internal link.
+	* Updated the Dashboard Widget with a new design.
+	* Added additional explanations to the Configuration wizard.
+	* Added `contentinfo` landmark for assistive technologies to the Configuration wizard page.
+	* Introduces `wpseo_manager` and `wpseo_editor` roles.
+	* Introduces `wpseo_manage_options` capability to control which users have access to all SEO settings.
+	* Introduces `wpseo_edit_advanced_metadata` capability to control which users have access to the advanced SEO settings.
 
 * Bugfixes
-	* Fixes a bug where the `_yst_is_cornerstone` meta value was not prefixed, causing some themes/plugins to output this meta value.
-	* Fixes a bug where style and script elements were parsed for the prominent words.
-	* Fixes a bug where the cursor pointer was in front of the metabox.
+	* Fixed a bug where certain options (`site_type`, `environment_type` and `has_multiple_authors`) would be reset to their default value whenever one of the feature toggles were changed.
+	* Ensured that `has_multiple_authors` gets validated.
 
 = Earlier versions =
 

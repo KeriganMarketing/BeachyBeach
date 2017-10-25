@@ -7,13 +7,8 @@
  * @package KMA_DEMO
  */
 
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
+require('vendor/autoload.php');
+
 if ( ! function_exists('kmaidx_setup')) :
 
     function kmaidx_setup()
@@ -44,7 +39,7 @@ if ( ! function_exists('kmaidx_setup')) :
          * If you're building a theme based on KMA IDX, use a find and replace
          * to change 'kmaidx' to the name of your theme in all the template files.
          */
-        load_theme_textdomain('kmaidx', get_template_directory() . '/languages');
+        load_theme_textdomain('kmaidx', wp_normalize_path(get_template_directory() . '/languages'));
 
         // Add default posts and comments RSS feed links to head.
         add_theme_support('automatic-feed-links');
@@ -82,14 +77,14 @@ if ( ! function_exists('kmaidx_setup')) :
             'caption',
         ));
 
-        require get_template_directory() . '/inc/bootstrap-wp-navwalker.php';
-        require get_template_directory() . '/inc/cpt.php';
-        require get_template_directory() . '/inc/editor.php';
-        require get_template_directory() . '/helpers/MLS.php';
-        require get_template_directory() . '/helpers/Listing.php';
-        require get_template_directory() . '/helpers/BeachyBucket.php';
-        require get_template_directory() . '/helpers/Offices.php';
-        require get_template_directory() . '/helpers/Communities.php';
+        require wp_normalize_path(get_template_directory() . '/inc/bootstrap-wp-navwalker.php');
+        require wp_normalize_path(get_template_directory() . '/inc/cpt.php');
+        require wp_normalize_path(get_template_directory() . '/inc/editor.php');
+        require wp_normalize_path(get_template_directory() . '/helpers/MLS.php');
+        require wp_normalize_path(get_template_directory() . '/helpers/Listing.php');
+        require wp_normalize_path(get_template_directory() . '/helpers/BeachyBucket.php');
+        require wp_normalize_path(get_template_directory() . '/helpers/Offices.php');
+        require wp_normalize_path(get_template_directory() . '/helpers/Communities.php');
     }
 endif;
 add_action('after_setup_theme', 'kmaidx_setup');
@@ -272,9 +267,9 @@ function loadCustomPostTypes()
 
 add_action('after_setup_theme', 'loadCustomPostTypes');
 
-require get_template_directory() . '/inc/template-tags.php';
-require get_template_directory() . '/inc/extras.php';
-require get_template_directory() . '/inc/customizer.php';
+require wp_normalize_path(get_template_directory() . '/inc/template-tags.php');
+require wp_normalize_path(get_template_directory() . '/inc/extras.php');
+require wp_normalize_path(get_template_directory() . '/inc/customizer.php');
 
 if ( ! function_exists('kmaidx_inline')) :
     function kmaidx_inline()
@@ -284,16 +279,16 @@ if ( ! function_exists('kmaidx_inline')) :
             <?php echo file_get_contents('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css' ) ?>
         </style>
         <style type="text/css">
-            <?php echo file_get_contents(get_template_directory_uri() . '/modules/modulestyles.php') ?>
+            <?php echo file_get_contents(wp_normalize_path(get_template_directory() . '/modules/modulestyles.php' )) ?>
         </style>
         <style type="text/css">
-            <?php echo file_get_contents(get_template_directory_uri() . '/css/jquery-ui.min.css') ?>
+            <?php echo file_get_contents(wp_normalize_path(get_template_directory() . '/css/jquery-ui.min.css' )) ?>
         </style>
         <style type="text/css">
-            <?php echo file_get_contents(get_template_directory_uri() . '/css/inline.css' ) ?>
+            <?php echo file_get_contents(wp_normalize_path(get_template_directory() . '/css/inline.css' )) ?>
         </style>
         <style type="text/css">
-            <?php echo file_get_contents(get_template_directory_uri() . '/css/ie.css' ) ?>
+            <?php echo file_get_contents(wp_normalize_path(get_template_directory() . '/css/ie.css' )) ?>
         </style>
         <?php
     }
@@ -596,7 +591,7 @@ function loadOfficePins()
     wp_die();
 }
 
-include(get_template_directory() . '/inc/members.php');
+include(wp_normalize_path(get_template_directory() . '/inc/members.php'));
 
 add_filter('get_the_archive_title', function ($title) {
 

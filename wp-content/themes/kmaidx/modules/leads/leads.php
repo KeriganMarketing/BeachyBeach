@@ -136,8 +136,8 @@ class kmaLeads {
         $eol = "\r\n";
 
         //search for directory in active WP template
-        if(file_exists(get_template_directory().'/modules/leads/emailtemplate.php' )){
-            $emailTemplate = file_get_contents(get_template_directory().'/modules/leads/emailtemplate.php' );
+        if(file_exists(wp_normalize_path(get_template_directory().'/modules/leads/emailtemplate.php' ))){
+            $emailTemplate = file_get_contents(wp_normalize_path(get_template_directory().'/modules/leads/emailtemplate.php' ));
         }else{
 
             $emailTemplate = '<!doctype html>

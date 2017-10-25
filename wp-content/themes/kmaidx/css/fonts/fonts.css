@@ -91,9 +91,9 @@
 }
 
 @font-face {
-    font-family: 'BebasNeue';
-	src: local('BebasNeue'), url('BebasNeue-webfont.eot');
-    src: local('BebasNeue'), url('BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+    font-family: 'Bebas Neue';
+	src: local('Bebas Neue'), url('BebasNeue-webfont.eot');
+    src: local('Bebas Neue'), url('BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
 		 url('BebasNeue-webfont.woff') format('woff'),
 		 url('BebasNeue-webfont.ttf') format('truetype'),
          url('BebasNeue-webfont.svg#BebasNeue') format('svg');

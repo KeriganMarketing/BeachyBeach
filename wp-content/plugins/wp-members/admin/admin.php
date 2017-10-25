@@ -26,6 +26,10 @@
  * - wpmem_admin_enqueue_scripts
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit();
+}
 
 /**
  * Filter to add link to settings from plugin panel.
@@ -89,20 +93,24 @@ function wpmem_add_captcha_tab( $tabs ) {
  */
 function wpmem_admin() {
 
-	$did_update = ( isset( $_POST['wpmem_admin_a'] ) ) ? wpmem_admin_action( $_POST['wpmem_admin_a'] ) : false;
+	$did_update = ( isset( $_POST['wpmem_admin_a'] ) ) ? wpmem_admin_action( sanitize_text_field( $_POST['wpmem_admin_a'] ) ) : false;
 
 	global $wpmem;
 
 	if ( $wpmem->captcha ) {
-		add_filter( 'wpmem_admin_tabs', 'wpmem_add_captcha_tab' );
+		add_filter( 'wpmem_admin_tabs',   'wpmem_add_captcha_tab' );
 		add_action( 'wpmem_admin_do_tab', 'wpmem_a_captcha_tab', 1, 1 );
+	}
+	if ( $wpmem->dropins ) {
+		add_filter( 'wpmem_admin_tabs',   'wpmem_add_dropins_tab'          );
+		add_action( 'wpmem_admin_do_tab', 'wpmem_render_dropins_tab', 1, 1 );
 	} ?>
 
 	<div class="wrap">
 		<?php screen_icon( 'options-general' ); ?>
 		<!--<h2>WP-Members <?php _e('Settings', 'wp-members'); ?></h2>-->
 		<?php 
-		$tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'options';
+		$tab = ( isset( $_GET['tab'] ) ) ? sanitize_text_field( $_GET['tab'] ) : 'options';
 
 		// Render the tab being displayed.
 		$wpmem->admin->do_tabs( $tab );

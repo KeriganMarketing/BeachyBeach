@@ -203,7 +203,7 @@ div.switch-title {
 }
 
 div.switch-title span {
-	font-family: 'BebasNeue';
+	font-family: 'Bebas Neue', sans-serif;
 	padding: 0 5px;
 	background: #e6eaea;
 	font-size: 26px;
@@ -216,7 +216,7 @@ div.switch-title span {
 }
 
 h3.location-title {
-	font-family: 'BebasNeue';
+	font-family: 'Bebas Neue', sans-serif;
 	color: #188cb2;
 	font-size: 26px;
 	padding: 20px 0 0;
