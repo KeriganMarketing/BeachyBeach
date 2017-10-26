@@ -5,18 +5,32 @@ $mls   = new MLS();
 <hr>
 <div class="search-bar-container">
     <form class="form-inline" method="get" id="mainsearch" >
+        <div class="search-control"></div>
         <div class="search-bar">
             <div class="row">
-                <input type="hidden" name="q" value="search" >
+                <input type="hidden" name="qs" value="search" >
                 <div class="col-md-6">
                     <div class="input-container">
-                    <select class="area-select form-control" name="city[]" id="id-area-select" multiple="multiple" placeholder="City, area, subdivision or zip">
+                        <select class="form-control select2-omni-field" name="omniField" >
+                            <option value="">City, area, subdivision or zip</option>
+                        </select>
                     </select>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="input-container">
-                    <select class="prop-type-input form-control" name="class" ></select>
+                        <select class="form-control form-control-lg select2-property-type" name="propertyType" >
+                            <option value="">Property type</option>
+                            <option value="Single Family Home">Single Family Home</option>
+                            <option value="Condo / Townhome">Condo / Townhome</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Lots / Land">Lots / Land</option>
+                            <option value="Multi-Family Home">Multi-Family Home</option>
+                            <option value="Rental">Rental</option>
+                            <option value="Manufactured">Manufactured</option>
+                            <option value="Farms / Agricultural">Farms / Agricultural</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col text-right">
@@ -37,7 +51,7 @@ $mls   = new MLS();
                         <label class="sr-only" for="min_price">Min Price</label>
                         <div class="input-group mb-2 mb-sm-0">
                             <div class="input-group-addon">Min Price</div>
-                            <select name="min_price" id="min_price" class="form-control select-other" >
+                            <select name="minPrice" id="min_price" class="form-control select-other" >
                             <option value="" >Any</option>
                             <?php for($i = 50000; $i < 5000000; $i+=50000){
 	                            echo '<option value="' . $i . '">$' . number_format( $i, 0, ".", ",") . '</option>';
@@ -50,7 +64,7 @@ $mls   = new MLS();
                         <label class="sr-only" for="PRICE_MAX">Max Price</label>
                         <div class="input-group mb-2 mb-sm-0">
                             <div class="input-group-addon">Max Price</div>
-                            <select name="max_price" id="max_price" class="form-control select-other" >
+                            <select name="maxPrice" id="max_price" class="form-control select-other" >
                             <option value="" >Any</option>
 	                            <?php for($i = 50000; $i < 10000000; $i+=50000){
 		                            echo '<option value="' . $i . '">$' . number_format( $i, 0, ".", ",") . '</option>';
@@ -161,11 +175,6 @@ $mls   = new MLS();
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Sold</span>
                                 </label>
-                                <!--<label class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" <?php echo (in_array('contingent',$status) ? 'checked' : ''); ?> name="status[]" value="contingent">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Contingent</span>
-                                </label>-->
                                 <label class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" <?php echo (in_array('pending',$status) ? 'checked' : ''); ?> name="status[]" value="pending">
                                     <span class="custom-control-indicator"></span>
@@ -187,21 +196,11 @@ $mls   = new MLS();
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Waterfront</span>
                                 </label>
-                                <!--<label class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" <?php echo (isset($_GET['waterview']) ? 'checked' : ''); ?> name="waterview" value="1">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Waterview</span>
-                                </label>-->
                                 <label class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" <?php echo (isset($_GET['pool']) ? 'checked' : ''); ?> name="pool" value="1">
                                     <span class="custom-control-indicator"></span>
                                     <span class="custom-control-description">Pool</span>
                                 </label>
-                                <!--<label class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" <?php echo (isset($_GET['foreclosure']) ? 'checked' : ''); ?> name="foreclosure" value="1">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Foreclosure</span>
-                                </label>-->
                             </div>
                         </div>
                     </div>
@@ -212,17 +211,17 @@ $mls   = new MLS();
         <input type="hidden" name="orderBy" value="ASC">
     </form>
 
-	<?php if (isset($_GET['q'])) { ?>
+	<?php if (isset($_GET['qs'])) { ?>
         <div class="search-criteria">
             <form class="form form-inline text-right" method="get" >
 			<?php
-			if(isset($_GET['city']) && $_GET['city']!= '') {
+			if(isset($_GET['omniField']) && $_GET['omniField']!= '') {
 
-				if(is_array($_GET['city'])){
-					for($i=0;$i<count($_GET['city']);$i++){
+				if(is_array($_GET['omniField'])){
+					for($i=0;$i<count($_GET['omniField']);$i++){
 						echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" ';
-						echo ' data-call="city|' . urlencode(trim($_GET['city'][$i])) . '" >' . stripslashes( $_GET['city'][$i]);
-						echo '</a><input type="hidden" name="city[]" value="'.stripslashes( $_GET['city'][$i] ).'" > ';
+						echo ' data-call="omniField|' . urlencode(trim($_GET['omniField'][$i])) . '" >' . stripslashes( $_GET['omniField'][$i]);
+						echo '</a><input type="hidden" name="omniField[]" value="'.stripslashes( $_GET['omniField'][$i] ).'" > ';
 					}
 				}
 
@@ -251,10 +250,10 @@ $mls   = new MLS();
 			if(isset($_GET['class']) && $_GET['class']!= '') {
 				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="class" >' . $_GET['class'] . '</a><input type="hidden" name="class" value="'.$_GET['class'].'" > ';
 			}
-			if(isset($_GET['min_price']) && $_GET['min_price']!= '') {
+			if(isset($_GET['min_price']) && $_GET['minPrice']!= '') {
 				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="min_price" >$' . number_format($_GET['min_price']) . ' Min</a><input type="hidden" name="min_price" value="'.$_GET['min_price'].'" > ';
 			}
-			if(isset($_GET['max_price']) && $_GET['max_price']!= '') {
+			if(isset($_GET['max_price']) && $_GET['maxPrice']!= '') {
 				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="max_price" >$' . number_format($_GET['max_price']) . ' Max</a><input type="hidden" name="max_price" value="'.$_GET['max_price'].'" > ';
 			}
 			if(isset($_GET['bedrooms']) && $_GET['bedrooms']!= '') {
