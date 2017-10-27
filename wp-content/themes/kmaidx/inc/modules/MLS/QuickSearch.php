@@ -50,7 +50,7 @@ class QuickSearch
             }
         }
 
-        $client       = new Client(['base_uri' => 'http://mothership.kerigan.com/api/v1/']);
+        $client       = new Client(['base_uri' => 'https://mothership.kerigan.com/api/v1/']);
 
         // make the API call
         $apiCall = $client->request(

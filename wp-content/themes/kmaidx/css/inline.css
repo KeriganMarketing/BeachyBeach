@@ -1853,6 +1853,7 @@ form h3 {
 
 #mylistings h2 {
     color:#26C0E6;
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 @media screen and(min-width:768px){
@@ -1952,6 +1953,7 @@ form h3 {
     margin: 0;
     padding: 0 1rem .75rem;
     line-height: 1.8rem;
+    font-family: 'Bebas Neue';
 }
 
 .community-button-container:hover {

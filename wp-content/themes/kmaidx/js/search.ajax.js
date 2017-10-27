@@ -3,7 +3,7 @@
 $(".select2-omni-field").select2({
     placeholder: 'City, area, subdivision or zip',
     ajax: {
-        url: 'http://mothership.kerigan.com/api/v1/omnibar',
+        url: 'https://mothership.kerigan.com/api/v1/omnibar',
         dataType: 'json',
         delay: 250,
         cache: true,
@@ -42,8 +42,6 @@ window.onload = function(){
 }
 
 $( document ).ready(function(){
-
-    loadIdxAjax();
 
     $(".lazy").Lazy({
         scrollDirection: 'vertical',

@@ -21,7 +21,7 @@ class FullListing
 
     public function create()
     {
-        $client = new Client(['base_uri' => 'http://mothership.kerigan.com/api/v1/listing/']);
+        $client = new Client(['base_uri' => 'https://mothership.kerigan.com/api/v1/listing/']);
 
         // make the API call
         $raw = $client->request(
