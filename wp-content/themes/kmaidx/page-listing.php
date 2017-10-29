@@ -12,30 +12,34 @@
  * @package KMA_DEMO
  */
 
-$mls = new MLS();
-$bb  = new BeachyBucket();
+use Includes\Modules\MLS\FullListing;
+use Includes\Modules\MLS\BeachyBucket;
 
-if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
-    $bb->handleFavorite($_POST['user_id'], $_POST['mls_account']);
-}
+if (isset($_GET['mls'])) {
+    $mlsNumber   = $_GET['mls'];
+    $fullListing = new FullListing($mlsNumber);
+    $listingInfo = $fullListing->create();
 
-$listing     = new Listing($_GET['mls']); //this will be a $_GET variable
-$listingInfo = $listing->getInfo();
-$user_id     = get_current_user_id();
-$buttonText  = $listing->isInBucket($user_id, $listingInfo->mls_account) ? 'REMOVE FROM BUCKET' : 'SAVE TO BUCKET';
-$title       = $listingInfo->street_number . ' ' . $listingInfo->street_name;
-$isOurs      = $listing->isOurs($listingInfo);
-if($isOurs) {
-	$agent = $mls->getAgentByMLSId( $listingInfo->listing_member_shortid );
-}
-if ($listingInfo->unit_number != '') {
-    $title = $title . ' ' . $listingInfo->unit_number;
-}
+    $buttonText = $fullListing->isInBucket(get_current_user_id(),
+        $listingInfo->mls_account) ? 'REMOVE FROM BUCKET' : 'SAVE TO BUCKET';
+    if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
+        $bb = new BeachyBucket();
+        $bb->handleFavorite($_POST['user_id'], $_POST['mls_account']);
+    }
 
-$metaTitle = $title . ' | $' . number_format($listingInfo->price) . ' | ' . get_bloginfo('name');
-$metaDescription = $listingInfo->description;
-$ogPhoto = ($listingInfo->preferred_image != '' ? $listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg' );
-$ogUrl = get_the_permalink() . '?mls=' . $listingInfo->mls_account;
+    $isOurs = $fullListing->isOurs($listingInfo);
+
+    $title = $listingInfo->street_number . ' ' . $listingInfo->street_name;
+    if ($listingInfo->unit_number != '') {
+        $title = $title . ' ' . $listingInfo->unit_number;
+    }
+
+    $metaTitle = $title . ' | $' . number_format($listingInfo->price) . ' | ' . get_bloginfo('name');
+    $metaDescription = $listingInfo->description;
+    $ogPhoto = ($listingInfo->preferred_image != '' ? $listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg' );
+    $ogUrl = get_the_permalink() . '?mls=' . $listingInfo->mls_account;
+
+}
 
 get_header(); ?>
     <div id="content">

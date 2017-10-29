@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Bryan
- * Date: 5/16/2017
- * Time: 5:23 PM
- */
+use Includes\Modules\MLS\Offices;
 
 $offices = new Offices();
 $locationlist = $offices->getAllOffices();

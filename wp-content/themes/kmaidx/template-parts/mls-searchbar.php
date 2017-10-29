@@ -1,7 +1,3 @@
-<?php
-$mls   = new MLS();
-
-?>
 <hr>
 <div class="search-bar-container">
     <form class="form-inline" method="get" id="mainsearch" >

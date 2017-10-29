@@ -19,13 +19,15 @@ class Listing
      */
     public function getInfo()
     {
-        $mls = new MLS();
 
-        $listing = $mls->getListing($this->mls_number);
+        $listingInfo = '';
+        if (isset($_GET['mls'])) {
+            $mlsNumber   = $_GET['mls'];
+            $fullListing = new FullListing($mlsNumber);
+            $listingInfo = $fullListing->create();
+        }
 
-        $listing->photos = $this->getPhotosForListing($listing->id, $listing->association);
-
-        return $listing;
+        return $listingInfo;
     }
 
     private function getPhotosForListing($listingId, $association)

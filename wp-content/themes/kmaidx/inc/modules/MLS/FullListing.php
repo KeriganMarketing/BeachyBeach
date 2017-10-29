@@ -2,6 +2,8 @@
 namespace Includes\Modules\MLS;
 
 use GuzzleHttp\Client;
+use Includes\Modules\Agents\Agents;
+use Includes\Modules\MLS\BeachyBucket;
 
 /**
 * MLS Listing - Made by Daron Adkins
@@ -32,5 +34,42 @@ class FullListing
         $results = json_decode($raw->getBody());
 
         return $results;
+    }
+
+    public function isOurs($listingInfo)
+    {
+        $agents = new Agents();
+        $agentArray = $agents->getTeam();
+
+        $mlsArray = array();
+        foreach ($agentArray as $agent) {
+
+            $agentIds = explode(',',$agent['short_ids']);
+            foreach($agentIds as $agentId){
+                $mlsArray[] = $agentId;
+            }
+
+        }
+
+        if (in_array($listingInfo->listing_member_shortid, $mlsArray) ||
+            in_array($listingInfo->colisting_member_shortid, $mlsArray)
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isInBucket($user_id, $mls_number)
+    {
+        $bb = new BeachyBucket();
+
+        $results = $bb->findBucketItem($user_id, $mls_number);
+
+        if (empty($results)) {
+            return false;
+        }
+
+        return true;
     }
 }

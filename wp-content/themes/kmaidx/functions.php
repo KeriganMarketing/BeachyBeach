@@ -7,7 +7,55 @@
  * @package KMA_DEMO
  */
 
+use Includes\Modules\MLS\Offices;
+use Includes\Modules\Agents\Agents;
+use Includes\Modules\Helpers\CleanWP;
+use Includes\Modules\Layouts\Layouts;
+use Includes\Modules\Members\Members;
+use Includes\Modules\MLS\Communities;
+use Includes\Modules\Leads\AdminLeads;
+use Includes\Modules\MLS\BeachyBucket;
+use Includes\Modules\Leads\RequestInfo;
+use Includes\Modules\Leads\HomeValuation;
+use Includes\Modules\Social\SocialSettingsPage;
+
 require('vendor/autoload.php');
+
+new CleanWP();
+
+$members = new Members();
+
+$socialLinks = new SocialSettingsPage();
+if (is_admin()) {
+    $socialLinks->createPage();
+}
+
+$layouts = new Layouts();
+$layouts->createPostType();
+$layouts->createDefaultFormats();
+
+$agents = new Agents();
+$agents->createPostType();
+
+$leads = new RequestInfo;
+$leads->setupAdmin();
+
+$leads = new HomeValuation;
+$leads->setupAdmin();
+
+$offices = new Offices();
+$offices->createPostType();
+
+$communities = new Communities();
+$communities->createPostType();
+
+function getSvg($file = '')
+{
+    $activeTemplateDir     = get_template_directory_uri() . '/inc/modules/MLS/assets/';
+    $templateFileRequested = $file . '.svg';
+
+    return $activeTemplateDir . $templateFileRequested;
+}
 
 if ( ! function_exists('kmaidx_setup')) :
 
@@ -78,13 +126,13 @@ if ( ! function_exists('kmaidx_setup')) :
         ));
 
         require wp_normalize_path(get_template_directory() . '/inc/bootstrap-wp-navwalker.php');
-        require wp_normalize_path(get_template_directory() . '/inc/cpt.php');
-        require wp_normalize_path(get_template_directory() . '/inc/editor.php');
-        require wp_normalize_path(get_template_directory() . '/helpers/MLS.php');
-        require wp_normalize_path(get_template_directory() . '/helpers/Listing.php');
-        require wp_normalize_path(get_template_directory() . '/helpers/BeachyBucket.php');
-        require wp_normalize_path(get_template_directory() . '/helpers/Offices.php');
-        require wp_normalize_path(get_template_directory() . '/helpers/Communities.php');
+        //require wp_normalize_path(get_template_directory() . '/inc/cpt.php');
+        //require wp_normalize_path(get_template_directory() . '/inc/editor.php');
+        //require wp_normalize_path(get_template_directory() . '/helpers/MLS.php');
+        //require wp_normalize_path(get_template_directory() . '/helpers/Listing.php');
+        //require wp_normalize_path(get_template_directory() . '/helpers/BeachyBucket.php');
+        //require wp_normalize_path(get_template_directory() . '/helpers/Offices.php');
+        //require wp_normalize_path(get_template_directory() . '/helpers/Communities.php');
     }
 endif;
 add_action('after_setup_theme', 'kmaidx_setup');
@@ -196,11 +244,11 @@ function loadModules()
 {
 
     //modules
-    require('modules/leads/leads.php');
-    require('modules/team/team.php');
-    require('modules/testimonials/testimonials.php');
-    require('modules/social/sociallinks.php');
-    require('modules/leads/AdminLeads.php');
+    //require('modules/leads/leads.php');
+    //require('modules/team/team.php');
+    //require('modules/testimonials/testimonials.php');
+    //require('modules/social/sociallinks.php');
+    //require('modules/leads/AdminLeads.php');
 
     if (is_admin()) {
         $beachyBuckets = new AdminLeads();
@@ -245,27 +293,6 @@ function loadModules()
 }
 
 add_action('after_setup_theme', 'loadModules');
-
-function loadCustomPostTypes()
-{
-
-    $offices = new Offices();
-    $offices->createPostType();
-
-    $communities = new Communities();
-    $communities->createPostType();
-
-    $leads = new kmaLeads();
-    $leads->createPostType();
-    $leads->createAdminColumns();
-
-    $team = new mlsTeam();
-    $team->createPostType();
-    //$team->createAdminColumns();
-
-}
-
-add_action('after_setup_theme', 'loadCustomPostTypes');
 
 require wp_normalize_path(get_template_directory() . '/inc/template-tags.php');
 require wp_normalize_path(get_template_directory() . '/inc/extras.php');
@@ -321,117 +348,6 @@ function in_array_r($needle, $haystack, $strict = false)
     return false;
 }
 
-add_action('wp_ajax_loadMlsIdx', 'loadMlsIdx');
-add_action('wp_ajax_nopriv_loadMlsIdx', 'loadMlsIdx');
-function loadMlsIdx()
-{
-
-    if (isset($_SESSION['smartselect'])) {
-
-        $result = $_SESSION['smartselect'];
-
-    } else {
-
-        $mls         = new MLS();
-        $communities = new Communities();
-
-        $result['typeArray'] = array();
-
-        $typeArray = $mls->getPropertyTypes();
-
-        $result['typeArray'][] = array(
-            'id'    => '',
-            'text'  => '',
-            'class' => 'option',
-        );
-        foreach ($typeArray as $label => $types) {
-            $result['typeArray'][] = array(
-                'id'    => $label,
-                'text'  => $label,
-                'class' => 'option',
-            );
-        }
-
-        $areaArray    = $mls->getDistinctColumn('area');
-        $subareaArray = $mls->getDistinctColumn('sub_area');
-        $cityArray    = $mls->getDistinctColumn('city');
-        $zipArray     = $mls->getDistinctColumn('zip');
-
-        $result['areaArray']    = array();
-        $result['areaArray'][0] = array(
-            'text'     => 'AREAS',
-            'children' => array()
-        );
-        foreach ($areaArray as $value) {
-            $result['areaArray'][0]['children'][] = array(
-                'id'    => $value->area,
-                'text'  => $value->area,
-                'class' => 'option',
-            );
-        }
-        foreach ($subareaArray as $value) {
-            if ( ! in_array_r($value->sub_area, $result['areaArray'][0]['children'])) {
-                $result['areaArray'][0]['children'][] = array(
-                    'id'    => $value->sub_area,
-                    'text'  => $value->sub_area,
-                    'class' => 'option',
-                );
-            }
-        }
-
-        $result['areaArray'][1] = array(
-            'text'     => 'CITIES',
-            'children' => array()
-        );
-        foreach ($cityArray as $value) {
-            if ( ! in_array_r($value->city, $result['areaArray'][0]['children'])) {
-                $result['areaArray'][1]['children'][] = array(
-                    'id'    => $value->city,
-                    'text'  => $value->city,
-                    'class' => 'option',
-                );
-            }
-        }
-
-        $communitylist = $communities->getCommunities();
-
-        $result['areaArray'][2] = array(
-            'text'     => 'HOT COMMUNITIES',
-            'children' => array()
-        );
-        foreach ($communitylist as $community) {
-            $result['areaArray'][2]['children'][] = array(
-                'id'    => $community['name'],
-                'text'  => $community['title'],
-                'class' => 'option',
-            );
-        }
-
-        $result['areaArray'][3] = array(
-            'text'     => 'Zip Code',
-            'children' => array()
-        );
-        foreach ($zipArray as $value) {
-            $result['areaArray'][3]['children'][] = array(
-                'id'    => $value->zip,
-                'text'  => $value->zip,
-                'class' => 'option',
-            );
-        }
-
-        $_SESSION['smartselect'] = json_encode($result);
-        $result                  = json_encode($result);
-
-    }
-
-    if ( ! empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-        echo $result;
-    }
-
-    wp_die();
-
-}
-
 add_action('wp_ajax_loadCommMapPins', 'loadCommMapPins');
 add_action('wp_ajax_nopriv_loadCommMapPins', 'loadCommMapPins');
 function loadCommMapPins()
@@ -443,29 +359,13 @@ function loadCommMapPins()
 
     } else {
 
-        $mls           = new MLS();
         $communities   = new Communities();
         $communitylist = $communities->getCommunities();
-        $return        = array();
 
         foreach ($communitylist as $community) {
 
             if ($community['latitude'] == '' || $community['longitude'] == '') {
-                $gps = $mls->hotCommunities($community['name']);
-                if (count($gps) > 0) {
-                    $gpsobject = $gps[0];
-                    if ($gpsobject->latitude != '0.00000') {
-                        $return[] = array(
-                            'name' => $community['title'],
-                            'lat'  => $gpsobject->latitude,
-                            'lng'  => $gpsobject->longitude,
-                            'type' => 'neighborhood', //name of pin (_-pin.png)
-                            'link' => get_post_permalink($community['id'])
-                        );
-                        update_post_meta($community['id'], "community_info_latitude", $gpsobject->latitude);
-                        update_post_meta($community['id'], "community_info_longitude", $gpsobject->longitude);
-                    }
-                }
+
             } else {
                 $return[] = array(
                     'name' => $community['title'],

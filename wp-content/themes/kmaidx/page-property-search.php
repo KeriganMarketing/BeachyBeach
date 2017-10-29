@@ -13,6 +13,7 @@
  */
 
 use Includes\Modules\MLS\QuickSearch;
+use Includes\Modules\MLS\BeachyBucket;
 
 $currentPage  = (isset($_GET['pg']) ? $_GET['pg'] : 1);
 $searchCriteria = (isset($_GET['qs']) ? $_GET : [
@@ -31,8 +32,6 @@ $lastPage     = $results->last_page;
 $totalResults = $results->total;
 
 $currentUrl   = preg_replace("/&pg=\d+/", "", $_SERVER['REQUEST_URI']) . (isset($_GET['qs']) ? '' : '?browse=true');
-
-$mls = new MLS();
 
 get_header(); ?>
 <div id="content">

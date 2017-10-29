@@ -34,23 +34,9 @@ $('.select-other').select2({
 });
 
 window.onload = function(){
-
     $('.criterion').click(function(){
         var removed = $(this).attr("data-call");
         removeParam(removed, window.location.href );
     });
 }
-
-$( document ).ready(function(){
-
-    $(".lazy").Lazy({
-        scrollDirection: 'vertical',
-        effect: 'fadeIn',
-        visibleOnly: true,
-        onError: function(element) {
-            console.log('error loading ' + element.data('src'));
-        }
-    })
-
-});
 

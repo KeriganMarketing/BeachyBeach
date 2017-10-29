@@ -9,6 +9,8 @@
  * @package KMA_DEMO
  */
 
+use Includes\Modules\MLS\BeachyBucket;
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>

@@ -1,13 +1,6 @@
 <?php
-/**
- * The template for displaying the footer
- *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package KMA_DEMO
- */
+use Includes\Modules\Social\SocialSettingsPage;
+
 ?>
 
     <div id="sticky-footer" class="unstuck">
@@ -46,9 +39,12 @@
             <div class="container xwide">
                 <div class="row no-gutters justify-content-center justify-content-lg-start align-items-middle">
                     <div class="col-md-3 my-auto text-center text-md-left">
-                        <div class="social"><?php $socialLinks = getSocialLinks('svg','circle');
-                            if(is_array($socialLinks)) {
-                                foreach ( $socialLinks as $socialId => $socialLink ) {
+                        <div class="social">
+                            <?php
+                            $socialLinks = new SocialSettingsPage();
+                            $socialIcons = $socialLinks->getSocialLinks('svg', 'circle');
+                            if (is_array($socialIcons)) {
+                                foreach ($socialIcons as $socialId => $socialLink) {
                                     echo '<a class="' . $socialId . '" href="' . $socialLink[0] . '" target="_blank" >' . $socialLink[1] . '</a>';
                                 }
                             }

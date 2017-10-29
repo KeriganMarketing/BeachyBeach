@@ -12,28 +12,26 @@
  * @package KMA_DEMO
  */
 
-global $paged;
-global $wpdb;
+use Includes\Modules\MLS\QuickSearch;
+use Includes\Modules\MLS\BeachyBucket;
 
-$paged  = (get_query_var('paged')) ? abs((int)get_query_var('paged')) : 1;
-$mls    = new MLS();
+$currentPage  = (isset($_GET['pg']) ? $_GET['pg'] : 1);
+$searchCriteria = (isset($_GET['qs']) ? $_GET : [
+    'omniField'    => 'Panama City Beach',
+    'status'       => 'Active',
+    'propertyType' => 'Commercial',
+    'minPrice'     => 0,
+    'maxPrice'     => 9000000000,
+    'pg'           => $currentPage
+]);
 
-$query = $mls->buildQuery(array(
-    'property_type' => array(
-        'E',
-        'F'
-    )
-));
+$qs           = new QuickSearch($searchCriteria);
+$results      = $qs->create();
+$listings     = $results->data;
+$lastPage     = $results->last_page;
+$totalResults = $results->total;
 
-$sortBy          = isset($_GET['sortBy']) ? ' ORDER BY ' . $_GET['sortBy'] : '';
-$orderBy         = isset($_GET['orderBy']) ? ' ' . $_GET['orderBy'] : '';
-$total_query     = $mls->getTotalQuery($query);
-$total           = $wpdb->get_var($total_query);
-$listingsPerPage = 36;
-$page            = $mls->determinePagination();
-$offset          = $mls->determineOffset($page, $listingsPerPage);
-$finalQuery      = $query . $sortBy . $orderBy . " LIMIT " . $offset . ", " . $listingsPerPage;
-$results         = $wpdb->get_results($finalQuery);
+$currentUrl   = preg_replace("/&pg=\d+/", "", $_SERVER['REQUEST_URI']) . (isset($_GET['qs']) ? '' : '?browse=true');
 
 get_header(); ?>
 <div id="content">
@@ -57,7 +55,7 @@ get_header(); ?>
         </div>
         <div class="row">
 
-			<?php foreach ($results as $result) { ?>
+			<?php foreach ($listings as $result) { ?>
             <div class="listing-tile commercial col-sm-6 col-lg-3 text-center">
 			    <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
             </div>
@@ -66,16 +64,29 @@ get_header(); ?>
         </div>
         <nav aria-label="Search results navigation" class="text-center mx-auto">
             <ul class="pagination">
-                <?php
-                echo paginate_links(array(
-                    'base'      => add_query_arg('pg', '%#%'),
-                    'format'    => '',
-                    'prev_text' => __('&laquo;'),
-                    'next_text' => __('&raquo;'),
-                    'total'     => ceil($total / $listingsPerPage),
-                    'current'   => $page,
-                ));
-                ?>
+                <li class="page-item">
+                    <a class="page-link" <?php echo(1 != $currentPage ? 'href="'.$currentUrl.'&pg=1"' : 'disabled'); ?> aria-label="First">
+                        <span>First</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" <?php echo(1 != $currentPage ? 'href="'.$currentUrl.'&pg='.($currentPage - 1).'"' : 'disabled'); ?> aria-label="Previous">
+                        <span>Previous</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <span class="page-link disabled" ><?php echo $currentPage; ?></span>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" <?php echo($lastPage != $currentPage ? 'href="'.$currentUrl.'&pg='.($currentPage + 1).'"' : 'disabled'); ?> aria-label="Next">
+                        <span>Next</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" <?php echo($lastPage != $currentPage ? 'href="'.$currentUrl.'&pg='.$lastPage.'"' : 'disabled'); ?> aria-label="Next">
+                        <span>Last</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>

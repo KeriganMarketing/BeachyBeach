@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Bryan
- * Date: 10/20/2017
- * Time: 4:56 PM
- */
-
 namespace Includes\Modules\MLS;
 
 use Includes\Modules\CPT\CustomPostType;

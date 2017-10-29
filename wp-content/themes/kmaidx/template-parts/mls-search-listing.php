@@ -35,39 +35,39 @@
                     <div class="row">
                         <?php if ($result->bedrooms > 0 || $result->bathrooms > 0) { //RESIDENTIAL LISTINGS ?>
                             <div class="col text-center">
-                                <span class="icon"><img src="<?php echo $mls->getSvg('beds'); ?>" alt="bedrooms" class="img-fluid lazy" type="image/svg+xml"></span>
+                                <span class="icon"><img src="<?php echo getSvg('beds'); ?>" alt="bedrooms" class="img-fluid lazy" type="image/svg+xml"></span>
                                 <span class="baths-num icon-data"><?php echo $result->bedrooms; ?></span>
                                 <span class="icon-label">BEDS</span>
                             </div>
                             <div class="col text-center">
-                                <span class="icon"><img src="<?php echo $mls->getSvg('baths'); ?>" alt="bathrooms" class="img-fluid lazy" type="image/svg+xml"></span>
+                                <span class="icon"><img src="<?php echo getSvg('baths'); ?>" alt="bathrooms" class="img-fluid lazy" type="image/svg+xml"></span>
                                 <span class="baths-num icon-data"><?php echo $result->bathrooms; ?></span>
                                 <span class="icon-label">BATHS</span>
                             </div>
                             <div class="col text-xs-center">
-                                <span class="icon"><img src="<?php echo $mls->getSvg('sqft'); ?>" alt="sqft" class="img-fluid lazy" type="image/svg+xml"></span>
+                                <span class="icon"><img src="<?php echo getSvg('sqft'); ?>" alt="sqft" class="img-fluid lazy" type="image/svg+xml"></span>
                                 <span class="baths-num icon-data"><?php echo number_format($result->sq_ft); ?></span>
                                 <span class="icon-label">SQFT</span>
                             </div>
                         <?php } elseif ($result->sq_ft > 0) { //RESIDENTIAL LISTINGS ?>
                             <div class="col text-xs-center">
-                                <span class="icon"><img src="<?php echo $mls->getSvg('sqft'); ?>" alt="sqft" class="img-fluid lazy" type="image/svg+xml"></span>
+                                <span class="icon"><img src="<?php echo getSvg('sqft'); ?>" alt="sqft" class="img-fluid lazy" type="image/svg+xml"></span>
                                 <span class="baths-num icon-data"><?php echo number_format($result->sq_ft); ?></span>
                                 <span class="icon-label">SQFT</span>
                             </div>
                             <div class="col text-center">
-                                <span class="icon"><img src="<?php echo $mls->getSvg('lotsize'); ?>" alt="lot size" class="img-fluid lazy" type="image/svg+xml"></span>
+                                <span class="icon"><img src="<?php echo getSvg('lotsize'); ?>" alt="lot size" class="img-fluid lazy" type="image/svg+xml"></span>
                                 <span class="lot-dim-num icon-data"><?php ?></span>
                                 <span class="icon-label">LOT SIZE</span>
                             </div>
                         <?php } else { //LOTS & LAND ?>
                             <div class="col text-center">
-                                <span class="icon"><img src="<?php echo $mls->getSvg('lotsize'); ?>" alt="lot size" class="img-fluid lazy" type="image/svg+xml"></span>
+                                <span class="icon"><img src="<?php echo getSvg('lotsize'); ?>" alt="lot size" class="img-fluid lazy" type="image/svg+xml"></span>
                                 <span class="lot-dim-num icon-data"><?php echo (strlen($result->lot_dimensions) > 8 ? substr($result->lot_dimensions,0,8).'...' : $result->lot_dimensions); ?></span>
                                 <span class="icon-label">LOT SIZE</span>
                             </div>
                             <div class="col text-center">
-                                <span class="icon"><img src="<?php echo $mls->getSvg('acres'); ?>" alt="acres" class="img-fluid lazy" type="image/svg+xml"></span>
+                                <span class="icon"><img src="<?php echo getSvg('acres'); ?>" alt="acres" class="img-fluid lazy" type="image/svg+xml"></span>
                                 <span class="acres-num icon-data"><?php echo $result->acreage; ?></span>
                                 <span class="icon-label">ACRES</span>
                             </div>

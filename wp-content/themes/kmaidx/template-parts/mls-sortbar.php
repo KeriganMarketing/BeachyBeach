@@ -1,6 +1,4 @@
 <?php
-$mls   = new MLS();
-
 ?>
 <div class="search-bar-container">
     <div class="search-criteria">

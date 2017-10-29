@@ -1,16 +1,15 @@
 <?php
+use Includes\Modules\MLS\FullListing;
 
 $path = $_SERVER['DOCUMENT_ROOT'];
-
 include_once $path . '/wp-load.php';
 include_once $path . '/wp-includes/wp-db.php';
 include_once $path . '/wp-includes/pluggable.php';
 
-//echo '<h1>'.$_GET['mlsnum'].'</h1>';
+if(isset($_GET['mls'])) {
 
-$mls = new MLS();
-$result = $mls->quickListing($_GET['mlsnum']);
+    $fullListing = new FullListing($_GET['mls']);
+    $result      = $fullListing->create();
+    include( locate_template( 'template-parts/mls-search-listing.php' ) );
 
-//echo '<pre>',print_r($result),'</pre>';
-
-include( locate_template( 'template-parts/mls-search-listing.php' ) );
+}
