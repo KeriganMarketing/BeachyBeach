@@ -9,6 +9,7 @@ class Agents {
 
 	public $queryvar;
 	public $agentArray;
+	public $officeId;
 
 	public function __construct() {
 	}
@@ -113,6 +114,8 @@ class Agents {
 
 		$request = get_posts( array_merge( $request, $args ) );
 
+
+
 		$output = [];
 		foreach ( $request as $item ) {
 
@@ -128,7 +131,7 @@ class Agents {
 			}
 
 			array_push( $output, [
-                'id'           => (isset($itemID) ? $item->ID : null),
+                'post_id'      => $item->ID,
                 'mls_name'     => (isset($item->post_title) ? $item->post_title : null),
                 'name'         => (isset($item->contact_info_display_name) ? $item->contact_info_display_name : $item->post_title),
                 'aka'          => (isset($item->contact_info_aka) ? $item->contact_info_aka : null),
@@ -216,37 +219,126 @@ class Agents {
 
     }
 
-    protected function setAgentSeo( $agentData ){
+    public function setAgentSeo( $agentData ){
 
 	    global $metaTitle;
-        $metaTitle = $agentData['meta_title'];
-
+        $metaTitle = $agentData['name'] . ' | ' . $agentData['title'] . ' | ' . get_bloginfo('name');
         add_filter('wpseo_title', function ($metaTitle) {
-            global $post;
-            $newTitle = $metaTitle;
-            return $newTitle;
+            return $metaTitle;
         }, 100, 1);
 
+        global $metaDescription;
+        $metaDescription = strip_tags($agentData['bio']);
+        add_filter('wpseo_metadesc', function ($metaDescription) {
+            return $metaDescription;
+        }, 100, 1);
+
+        global $ogPhoto;
+        $ogPhoto = $agentData['thumbnail'];
+        add_filter('wpseo_opengraph_image', function ($ogPhoto) {
+            return $ogPhoto;
+        }, 100, 1);
+
+        global $ogUrl;
+        $ogUrl = get_the_permalink();
+        add_filter('wpseo_canonical',  function ($ogUrl) {
+            return $ogUrl;
+        }, 100, 1);
+        add_filter('wpseo_opengraph_url', function ($ogUrl) {
+            return $ogUrl;
+        }, 100, 1);
 
     }
 
-    public function assembleAgentData( $agentName ){
+    /*
+     * https://mothership.kerigan.com/api/v1/agents?{params}
+     * shortId = Agent MLS Short ID
+     * fullName = Agent Full Name
+     * lastName = Agent Last Name
+     * firstName = Agent First Name
+     * association = Agent Association
+     * officeShortId = Agent Office Short ID
+     */
+    protected function getFromMothership( $agentName )
+    {
 
-        $agent    = $this->getSingleAgent( $agentName );
-        $agentIds = trim(implode('|', explode(',', $agent['short_ids'])));
+        $client = new Client(['base_uri' => 'https://mothership.kerigan.com/api/v1/']);
 
-        $agentMLSInfo = false; //TODO: Get data from MLS
+        // make the API call
+        $apiCall = $client->request(
+            'GET',
+            'agents?'
+            .'fullName='. $agentName
+        );
 
-        $agentData['meta_title']       = $agent['name'] . ' | ' . $agent['title'] . ' | ' . get_bloginfo('name');
-        $agentData['meta_description'] = strip_tags($agent['bio']);
-        $agentData['listings']         = ($agent['short_ids'] != '' ? $this->getAgentListings($agentIds) : [] );
+        $results = json_decode($apiCall->getBody());
 
-        if(is_array($agent)) {
-            $agentData = array_merge($agent, $agentData);
+        $agentMothershipData = [
+            'email_address' => $this->assembleMothershipData('email', $results->data),
+            'website'       => $this->assembleMothershipData('url', $results->data),
+            'office_phone'  => $this->assembleMothershipData('office_phone', $results->data),
+            'cell_phone'    => $this->assembleMothershipData('cell_phone', $results->data),
+            'short_ids'     => $this->getShortIds($results->data)
+        ];
+
+        //echo '<pre>',print_r($agentMothershipData),'</pre>';
+
+        return $agentMothershipData;
+    }
+
+    protected function assembleMothershipData($parameter, $data){
+        foreach($data as $entry){
+            if($entry->$parameter != ''){
+                return $entry->$parameter;
+            }
         }
-        $this->setAgentSeo($agentData);
+    }
+
+    protected function getShortIds( $agentMothershipData )
+    {
+        $shortIds = [];
+        foreach ($agentMothershipData as $entry){
+            array_push($shortIds, $entry->short_id);
+        }
+        $shortIds = implode(',',$shortIds);
+        return $shortIds;
+    }
+
+    protected function updateAgentsByMotherShip($agentData, $postID)
+    {
+
+        $updates = [
+            'contact_info_display_name'  => $agentData['name'],
+            'contact_info_email'         => $agentData['email_address'],
+            'contact_info_office_phone'  => $agentData['office_phone'],
+            'contact_info_cell_phone'    => $agentData['cell_phone'],
+            'contact_info_website'       => $agentData['website'],
+            'contact_info_mls_ids'       => $agentData['short_ids']
+        ];
+
+        foreach($updates as $key => $var){
+            if(get_post_meta($postID, $key, true) == '') {
+                update_post_meta($postID, $key, $var);
+            }
+        }
+
+    }
+
+    public function assembleAgentData( $agentName )
+    {
+
+        $agentData = $this->getSingleAgent($agentName);
+        $agentData['short_ids']  = trim(implode('|', explode(',', $agentData['short_ids'])));
         return $agentData;
 
+    }
+
+    public function updateAgent($agentData)
+    {
+        //echo '<pre>',print_r($agentData),'</pre>';
+        $agentMothershipData = $this->getFromMothership($agentData['mls_name']);
+        $agentMothershipData['name'] = $agentData['mls_name'];
+        $this->updateAgentsByMotherShip( $agentMothershipData, $agentData['post_id']);
     }
 
 }

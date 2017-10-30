@@ -126,13 +126,7 @@ if ( ! function_exists('kmaidx_setup')) :
         ));
 
         require wp_normalize_path(get_template_directory() . '/inc/bootstrap-wp-navwalker.php');
-        //require wp_normalize_path(get_template_directory() . '/inc/cpt.php');
-        //require wp_normalize_path(get_template_directory() . '/inc/editor.php');
-        //require wp_normalize_path(get_template_directory() . '/helpers/MLS.php');
-        //require wp_normalize_path(get_template_directory() . '/helpers/Listing.php');
-        //require wp_normalize_path(get_template_directory() . '/helpers/BeachyBucket.php');
-        //require wp_normalize_path(get_template_directory() . '/helpers/Offices.php');
-        //require wp_normalize_path(get_template_directory() . '/helpers/Communities.php');
+
     }
 endif;
 add_action('after_setup_theme', 'kmaidx_setup');
@@ -208,47 +202,11 @@ function prefix_add_footer_styles()
 ;
 add_action('get_footer', 'prefix_add_footer_styles');
 
-function disable_wp_stuff()
-{
-
-    remove_action('wp_head', 'rsd_link'); // Removes the Really Simple Discovery link
-    remove_action('wp_head', 'wlwmanifest_link'); // Removes the Windows Live Writer link
-    remove_action('wp_head', 'wp_generator'); // Removes the WordPress version
-    remove_action('wp_head', 'start_post_rel_link'); // Removes the random post link
-    remove_action('wp_head', 'index_rel_link'); // Removes the index page link
-    remove_action('wp_head', 'adjacent_posts_rel_link'); // Removes the next and previous post links
-    remove_action('wp_head', 'parent_post_rel_link', 10, 0); // remove parent post link
-
-    //all things emoji
-    remove_action('admin_print_styles', 'print_emoji_styles');
-    remove_action('wp_head', 'print_emoji_detection_script', 7);
-    remove_action('admin_print_scripts', 'print_emoji_detection_script');
-    remove_action('wp_print_styles', 'print_emoji_styles');
-    remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
-    remove_filter('the_content_feed', 'wp_staticize_emoji');
-    remove_filter('comment_text_rss', 'wp_staticize_emoji');
-
-    // Remove oEmbed discovery links.
-    remove_action('wp_head', 'wp_oembed_add_discovery_links');
-
-    // Remove oEmbed-specific JavaScript from the front-end and back-end.
-    remove_action('wp_head', 'wp_oembed_add_host_js');
-}
-
-add_action('init', 'disable_wp_stuff');
-
 /*
 * Pull in our favorite KMA add-ons.
 */
 function loadModules()
 {
-
-    //modules
-    //require('modules/leads/leads.php');
-    //require('modules/team/team.php');
-    //require('modules/testimonials/testimonials.php');
-    //require('modules/social/sociallinks.php');
-    //require('modules/leads/AdminLeads.php');
 
     if (is_admin()) {
         $beachyBuckets = new AdminLeads();
@@ -524,11 +482,11 @@ function listing_page_titles($metaTitle)
         if (isset($metaTitle)) {
             $newTitle = $metaTitle;
         }
-    } elseif ($post->post_type == 'agent') {
-        global $metaTitle;
-        if (isset($metaTitle)) {
-            $newTitle = $metaTitle;
-        }
+//    } elseif ($post->post_type == 'agent') {
+//        global $metaTitle;
+//        if (isset($metaTitle)) {
+//            $newTitle = $metaTitle;
+//        }
     }
 
     return $newTitle;
@@ -544,11 +502,11 @@ function listing_page_description($metaDescription)
         if (isset($metaDescription)) {
             $newDescription = $metaDescription;
         }
-    } elseif ($post->post_type == 'agent') {
-        global $metaDescription;
-        if (isset($metaDescription)) {
-            $newDescription = $metaDescription;
-        }
+//    } elseif ($post->post_type == 'agent') {
+//        global $metaDescription;
+//        if (isset($metaDescription)) {
+//            $newDescription = $metaDescription;
+//        }
     }
 
     return $newDescription;

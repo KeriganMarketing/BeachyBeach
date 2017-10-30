@@ -52,7 +52,7 @@ class RequestInfo extends Leads
         parent::addToDashboard($dataSubmitted);
         if(parent::validateSubmission($dataSubmitted)){
             echo '<div class="alert alert-success" role="alert">
-            <strong>Your request has been received. Our staff will review your submission and get back with you soon.</strong>
+            <strong>Your request has been received. We will review your submission and get back with you soon.</strong>
             </div>';
         }else{
             echo '<div class="alert alert-danger" role="alert">

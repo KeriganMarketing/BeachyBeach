@@ -12,6 +12,7 @@ class Leads
     public    $ccEmail;
     public    $bccEmail;
     public    $additionalFields;
+    public    $siteName;
 
     /**
      * Leads constructor.
@@ -23,6 +24,7 @@ class Leads
 
         $this->postType   = 'Lead';
         $this->domain     = 'beachybeach.com';
+        $this->siteName   = 'Beachy Beach Real Estate';
 
         //separate multiple email addresses with a ';'
         $this->adminEmail = 'bbaird85@gmail.com';
@@ -135,7 +137,7 @@ class Leads
      *
      * @return string
      */
-    protected function fullAddress ($street, $street2, $city, $state, $zip)
+    public function toFullAddress ($street, $street2, $city, $state, $zip)
     {
         return $street . ' ' . $street2 . ' ' . $city . ', ' . $state . '  ' . $zip;
     }
@@ -148,7 +150,7 @@ class Leads
     protected function assembleLeadData ($input = [])
     {
         $default = [
-            'full_name'     => 'Name',
+            'full_name'     => 'Full Name',
             'email_address' => 'Email Address'
         ];
 
@@ -193,13 +195,13 @@ class Leads
         $this->sendEmail(
             [
                 'to'        => $this->adminEmail,
-                'from'      => get_bloginfo() . ' <noreply@' . $this->domain . '>',
+                'from'      => $this->siteName . ' <noreply@' . $this->domain . '>',
                 'subject'   => $this->postType . ' from website',
                 'cc'        => $this->ccEmail,
                 'bcc'       => $this->bccEmail,
                 'replyto'   => $fullName . '<' . $emailAddress . '>',
                 'headline'  => 'You have a new ' . strtolower($this->postType),
-                'introcopy' => 'A ' . strtolower($this->postType) . 'was received from the website. Details are below:',
+                'introcopy' => 'A ' . strtolower($this->postType) . ' was received from the website. Details are below:',
                 'leadData'  => $tableData
             ]
         );
@@ -207,7 +209,7 @@ class Leads
         $this->sendEmail(
             [
                 'to'        => $fullName . '<' . $emailAddress . '>',
-                'from'      => get_bloginfo() . ' <noreply@' . $this->domain . '>',
+                'from'      => $this->siteName . ' <noreply@' . $this->domain . '>',
                 'subject'   => 'Your website submission has been received',
                 'bcc'       => $this->bccEmail,
                 'headline'  => 'Thank you',

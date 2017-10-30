@@ -3,6 +3,10 @@
 foreach($team as $agent){
 
     $agentData = $wpTeam->assembleAgentData( $agent['mls_name'] );
+    //$wpTeam->updateAgent($agentData);
+
+    $phone = (isset($agentData['cell_phone']) ? $agentData['cell_phone'] : (isset($agentData['office_phone']) ? $agentData['office_phone'] : ''));
+
     $agentCategories = '';
 	$is30a = false;
     foreach($agentData['categories'] as $category){
@@ -30,8 +34,8 @@ foreach($team as $agent){
                 <h5 class="card-subtitle"><?php echo ($agentData['title'] != '' ? $agentData['title'] : 'Realtor' ); ?></h5>
                 <h5 class="card-subtitle company"><?php echo $company; ?></h5>
                 <ul class="contact-info">
-                    <?php if($agentData['email_address'] != ''){?><li class="email"><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:<?php echo $agentData['email_address']; ?>" ><?php echo $agentData['email_address']; ?></a></li><?php } ?>
-                    <?php if($agentData['cell_phone'] != ''){?><li class="phone"><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:<?php echo $agentData['cell_phone']; ?>" ><?php echo $agentData['cell_phone']; ?></a></li><?php } ?>
+                    <?php if($agentData['email_address'] != ''){?><li class="email"><img src="<?php echo getSvg('email'); ?>" alt="Email <?php echo $agentData['name'];?>" > <a href="mailto:<?php echo $agentData['email_address']; ?>" ><?php echo $agentData['email_address']; ?></a></li><?php } ?>
+                    <?php if($phone != ''){?><li class="phone"><img src="<?php echo getSvg('phone'); ?>" alt="Call <?php echo $agentData['name'];?>" > <a href="tel:<?php echo $phone; ?>" ><?php echo $phone; ?></a></li><?php }else{ '<li></li>'; } ?>
                 </ul>
                 <form class="form form-inline" action="/contact/" method="get" style="display:inline-block;" >
                     <input type="hidden" name="reason" value="Just reaching out" />

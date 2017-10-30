@@ -3,15 +3,18 @@ use Includes\Modules\Agents\Agents;
 
 $wpTeam     = new Agents();
 $agentData  = $wpTeam->assembleAgentData( $post->post_title );
+$wpTeam->setAgentSeo($agentData);
+$agentData['listings'] = ($agentData['short_ids'] != '' ? $wpTeam->getAgentListings($agentData['short_ids']) : '' );
+
 $agentTerms = wp_get_object_terms( $post->ID, 'office' );
 
 $agentCategories = array();
-foreach($agentTerms as $term){
+foreach ($agentTerms as $term) {
     array_push($agentCategories, array(
-                    'category-id'       => (isset($term->term_id)   ? $term->term_id : null),
-                    'category-name'     => (isset($term->name)      ? $term->name : null),
-                    'category-slug'     => (isset($term->slug)      ? $term->slug : null),
-            )
+            'category-id'   => (isset($term->term_id) ? $term->term_id : null),
+            'category-name' => (isset($term->name) ? $term->name : null),
+            'category-slug' => (isset($term->slug) ? $term->slug : null),
+        )
     );
 }
 

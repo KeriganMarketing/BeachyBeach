@@ -19,10 +19,10 @@ use Includes\Modules\Social\SocialSettingsPage;
                     <div class="contact-info bio">
                         <h4><?php echo ($agentData['title'] != '' ? $agentData['title'] : 'Realtor' ); ?></h4>
                         <ul class="contact-info">
-                            <?php if($agentData['cell_phone'] != ''){?><li class="phone"><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:<?php echo $agentData['cell_phone']; ?>" ><?php echo $agentData['cell_phone']; ?></a> <span class="label">Cell</span></li><?php } ?>
-                            <?php if($agentData['office_phone'] != ''){?><li class="phone"><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:<?php echo $agentData['office_phone']; ?>" ><?php echo $agentData['office_phone']; ?></a> <span class="label">Office</span></li><?php } ?>
-                            <?php if($agentData['email_address'] != ''){?><li class="email"><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:<?php echo $agentData['email_address']; ?>" ><?php echo $agentData['email_address']; ?></a></li><?php } ?>
-                            <?php if($agentData['website'] != ''){?><li class="web"><i class="fa fa-link" aria-hidden="true"></i><a target="_blank" href="<?php echo $agentData['website']; ?>" ><?php echo str_replace('http://','',$agentData['website']); ?></a></li><?php } ?>
+                            <?php if($agentData['cell_phone'] != ''){?><li class="phone"><img src="<?php echo getSvg('phone'); ?>" alt="Call <?php echo $agentData['name'];?>" > <a href="tel:<?php echo $agentData['cell_phone']; ?>" ><?php echo $agentData['cell_phone']; ?></a> <span class="label">Cell</span></li><?php } ?>
+                            <?php if($agentData['office_phone'] != ''){?><li class="phone"><img src="<?php echo getSvg('phone'); ?>" alt="Call <?php echo $agentData['name'];?>" > <a href="tel:<?php echo $agentData['office_phone']; ?>" ><?php echo $agentData['office_phone']; ?></a> <span class="label">Office</span></li><?php } ?>
+                            <?php if($agentData['email_address'] != ''){?><li class="email"><img src="<?php echo getSvg('email'); ?>" alt="Email <?php echo $agentData['name'];?>" > <a href="mailto:<?php echo $agentData['email_address']; ?>" ><?php echo $agentData['email_address']; ?></a></li><?php } ?>
+                            <?php if($agentData['website'] != ''){?><li class="web"><img src="<?php echo getSvg('url'); ?>" alt="Visit <?php echo $agentData['name'];?>'s website" > <a target="_blank" href="<?php echo $agentData['website']; ?>" ><?php echo str_replace('http://','',$agentData['website']); ?></a></li><?php } ?>
                         </ul>
                         <div class="social agent">
                             <?php
@@ -36,7 +36,6 @@ use Includes\Modules\Social\SocialSettingsPage;
                             ?>
                         </div>
                     </div>
-                    <?php echo '<!--<pre>',print_r($agentMLSInfo),'</pre>-->'; ?>
                 </div>
                 <div class="col-sm-6 col-lg-8">
                     <div class="text-md-right">

@@ -41,11 +41,11 @@ $mlsNumbers = $bb->listingsSavedByUser($user_id);
             <?php foreach ($mlsNumbers as $result) {
                 $fullListing = new FullListing($result);
                 $result      = $fullListing->create();
-                ?>
+                if($result){  ?>
                 <div class="listing-tile property-search col-sm-6 col-lg-3 text-center">
 		            <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
                 </div>
-            <?php } ?>
+            <?php }} ?>
         </div>
     </div>
 </div>

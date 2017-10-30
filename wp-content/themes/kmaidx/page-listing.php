@@ -20,24 +20,28 @@ if (isset($_GET['mls'])) {
     $fullListing = new FullListing($mlsNumber);
     $listingInfo = $fullListing->create();
 
-    $buttonText = $fullListing->isInBucket(get_current_user_id(),
-        $listingInfo->mls_account) ? 'REMOVE FROM BUCKET' : 'SAVE TO BUCKET';
-    if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
-        $bb = new BeachyBucket();
-        $bb->handleFavorite($_POST['user_id'], $_POST['mls_account']);
+    if($listingInfo) {
+
+        $buttonText = $fullListing->isInBucket(get_current_user_id(),
+            $listingInfo->mls_account) ? 'REMOVE FROM BUCKET' : 'SAVE TO BUCKET';
+        if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
+            $bb = new BeachyBucket();
+            $bb->handleFavorite($_POST['user_id'], $_POST['mls_account']);
+        }
+
+        $isOurs = $fullListing->isOurs($listingInfo);
+
+        $title = $listingInfo->street_number . ' ' . $listingInfo->street_name;
+        if ($listingInfo->unit_number != '') {
+            $title = $title . ' ' . $listingInfo->unit_number;
+        }
+
+        $metaTitle       = $title . ' | $' . number_format($listingInfo->price) . ' | ' . get_bloginfo('name');
+        $metaDescription = $listingInfo->description;
+        $ogPhoto         = ($listingInfo->preferred_image != '' ? $listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+        $ogUrl           = get_the_permalink() . '?mls=' . $listingInfo->mls_account;
+
     }
-
-    $isOurs = $fullListing->isOurs($listingInfo);
-
-    $title = $listingInfo->street_number . ' ' . $listingInfo->street_name;
-    if ($listingInfo->unit_number != '') {
-        $title = $title . ' ' . $listingInfo->unit_number;
-    }
-
-    $metaTitle = $title . ' | $' . number_format($listingInfo->price) . ' | ' . get_bloginfo('name');
-    $metaDescription = $listingInfo->description;
-    $ogPhoto = ($listingInfo->preferred_image != '' ? $listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg' );
-    $ogUrl = get_the_permalink() . '?mls=' . $listingInfo->mls_account;
 
 }
 
@@ -46,12 +50,15 @@ get_header(); ?>
         <article id="post-<?php echo $listingInfo->mls_account; ?>" class="listing">
             <header class="entry-header">
                 <div class="container wide">
+                    <?php if($listingInfo) { ?>
                     <h1 class="entry-title"><?php echo $title; ?> <span class="subhead small">MLS# <?php echo $listingInfo->mls_account; ?></span></h1>
+                    <?php } else{ ?><h1>404</h1><?php } ?>
                 </div>
             </header><!-- .entry-header -->
 
             <div class="entry-content">
                 <div class="container wide">
+                    <?php if($listingInfo) { ?>
                     <div class="row">
                         <div class="col-lg-5 listing-left">
                             <div class="listing-slider">
@@ -99,7 +106,9 @@ get_header(); ?>
 
                     </div>
                     <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
-
+                    <?php }else{ ?>
+                        <p class="center">The requested listing is no longer available.</p>
+                    <?php } ?>
                 </div>
             </div>
         </article>
