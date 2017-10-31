@@ -27,7 +27,7 @@ foreach($team as $agent){
     <div class="agent-card col-sm-6 col-lg-4 col-xl-3 mb-5<?php echo $agentCategories; ?> all-filter" >
         <div class="card" >
             <div class="card-image">
-                <img class="card-img-top" src="<?php echo $agentData['thumbnail']; ?>" alt="<?php echo $agentData['name']; ?>" >
+                <img class="card-img-top" src="<?php echo ($agentData['thumbnail'] != '' ? $agentData['thumbnail'] : get_template_directory_uri().'/img/beachybeach-placeholder.jpg' ); ?>" alt="<?php echo $agentData['name']; ?>" >
             </div>
             <div class="card-block">
                 <div class="agent-info">
