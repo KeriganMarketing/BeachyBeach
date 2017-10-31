@@ -408,7 +408,7 @@ class AdminLeads
                         if ($assignedAgent == 'NONE') {
                             $changeButton = '<a title="Select an Agent for ' . $lead['object']->post_title . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $lead['object']->ID . '" role="button" data-toggle="modal" class="button button-secondary thickbox" style="float: right; color: #FFF; background-color: darkred; box-shadow: inset 0 -2px 0 rgba(0,0,0,.3); border-color: rgba(0,0,0,.3);" >Assign Agent</a>';
                             if($leadfor!='') {
-                                //update_post_meta($lead['object']->ID, 'assigned_agent', $leadfor);
+                                update_post_meta($lead['object']->ID, 'assigned_agent', $leadfor);
                             }
                         } else {
                             $changeButton = '<a title="Select an Agent for ' . $lead['object']->post_title . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $lead['object']->ID . '" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
@@ -480,7 +480,7 @@ class AdminLeads
                     if ($assignedAgent == 'NONE') {
                         $changeButton = '<a title="Select an Agent for ' . $lead['object']->post_title . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $lead['object']->ID . '" role="button" data-toggle="modal" class="button button-secondary thickbox" style="float: right; color: #FFF; background-color: darkred; box-shadow: inset 0 -2px 0 rgba(0,0,0,.3); border-color: rgba(0,0,0,.3);" >Assign Agent</a>';
                         if($leadfor!='') {
-                            //update_post_meta($lead['object']->ID, 'assigned_agent', $leadfor);
+                            update_post_meta($lead['object']->ID, 'assigned_agent', $leadfor);
                         }
                     } else {
                         $changeButton = '<a title="Select an Agent for ' . $lead['object']->post_title . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $lead['object']->ID . '" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
