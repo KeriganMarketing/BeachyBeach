@@ -15,6 +15,7 @@ use Includes\Modules\Members\Members;
 use Includes\Modules\MLS\Communities;
 use Includes\Modules\Leads\AdminLeads;
 use Includes\Modules\MLS\BeachyBucket;
+use Includes\Modules\MLS\AdminSettings;
 use Includes\Modules\Leads\RequestInfo;
 use Includes\Modules\Leads\HomeValuation;
 use Includes\Modules\Social\SocialSettingsPage;
@@ -209,6 +210,10 @@ function loadModules()
 {
 
     if (is_admin()) {
+
+        $idxSettings = new AdminSettings();
+        $idxSettings->setupPage();
+
         $beachyBuckets = new AdminLeads();
         $beachyBuckets->createNavLabel();
         $beachyBuckets->addUserRole('Author', [
@@ -472,83 +477,83 @@ add_filter('get_the_archive_title', function ($title) {
 });
 
 
-add_filter('wpseo_title', 'listing_page_titles', 100);
-function listing_page_titles($metaTitle)
-{
-    global $post;
-    $newTitle = $metaTitle;
-    if ($post->post_name == 'listing') {
-        global $metaTitle;
-        if (isset($metaTitle)) {
-            $newTitle = $metaTitle;
-        }
+//add_filter('wpseo_title', 'listing_page_titles', 100);
+//function listing_page_titles($metaTitle)
+//{
+//    global $post;
+//    $newTitle = $metaTitle;
+//    if ($post->post_name == 'listing') {
+//        global $metaTitle;
+//        if (isset($metaTitle)) {
+//            $newTitle = $metaTitle;
+//        }
 //    } elseif ($post->post_type == 'agent') {
 //        global $metaTitle;
 //        if (isset($metaTitle)) {
 //            $newTitle = $metaTitle;
 //        }
-    }
-
-    return $newTitle;
-}
-
-add_filter('wpseo_metadesc', 'listing_page_description', 100, 1);
-function listing_page_description($metaDescription)
-{
-    global $post;
-    $newDescription = $metaDescription;
-    if ($post->post_name == 'listing') {
-        global $metaDescription;
-        if (isset($metaDescription)) {
-            $newDescription = $metaDescription;
-        }
+//    }
+//
+//    return $newTitle;
+//}
+//
+//add_filter('wpseo_metadesc', 'listing_page_description', 100, 1);
+//function listing_page_description($metaDescription)
+//{
+//    global $post;
+//    $newDescription = $metaDescription;
+//    if ($post->post_name == 'listing') {
+//        global $metaDescription;
+//        if (isset($metaDescription)) {
+//            $newDescription = $metaDescription;
+//        }
 //    } elseif ($post->post_type == 'agent') {
 //        global $metaDescription;
 //        if (isset($metaDescription)) {
 //            $newDescription = $metaDescription;
 //        }
-    }
-
-    return $newDescription;
-}
-
-add_filter('wpseo_opengraph_image', 'listing_og_image', 100, 1);
-function listing_og_image($ogPhoto)
-{
-    global $post;
-    $newImage = $ogPhoto;
-    if ($post->post_name == 'listing') {
-        global $ogPhoto;
-        if (isset($ogPhoto)) {
-            $newImage = $ogPhoto;
-        }
-    } elseif ($post->post_type == 'agent') {
-        global $ogPhoto;
-        if (isset($ogPhoto)) {
-            $newImage = $ogPhoto;
-        }
-    }
-
-    return $newImage;
-}
-
-add_filter('wpseo_canonical', 'listing_og_url', 100, 1);
-add_filter('wpseo_opengraph_url', 'listing_og_url', 100, 1);
-function listing_og_url($ogUrl)
-{
-    global $post;
-    $newUrl = $ogUrl;
-    if ($post->post_name == 'listing') {
-        global $ogUrl;
-        if (isset($ogUrl)) {
-            $newUrl = $ogUrl;
-        }
-    } elseif ($post->post_type == 'agent') {
-        global $ogUrl;
-        if (isset($ogUrl)) {
-            $newUrl = $ogUrl;
-        }
-    }
-
-    return $newUrl;
-}
+//    }
+//
+//    return $newDescription;
+//}
+//
+//add_filter('wpseo_opengraph_image', 'listing_og_image', 100, 1);
+//function listing_og_image($ogPhoto)
+//{
+//    global $post;
+//    $newImage = $ogPhoto;
+//    if ($post->post_name == 'listing') {
+//        global $ogPhoto;
+//        if (isset($ogPhoto)) {
+//            $newImage = $ogPhoto;
+//        }
+//    } elseif ($post->post_type == 'agent') {
+//        global $ogPhoto;
+//        if (isset($ogPhoto)) {
+//            $newImage = $ogPhoto;
+//        }
+//    }
+//
+//    return $newImage;
+//}
+//
+//add_filter('wpseo_canonical', 'listing_og_url', 100, 1);
+//add_filter('wpseo_opengraph_url', 'listing_og_url', 100, 1);
+//function listing_og_url($ogUrl)
+//{
+//    global $post;
+//    $newUrl = $ogUrl;
+//    if ($post->post_name == 'listing') {
+//        global $ogUrl;
+//        if (isset($ogUrl)) {
+//            $newUrl = $ogUrl;
+//        }
+//    } elseif ($post->post_type == 'agent') {
+//        global $ogUrl;
+//        if (isset($ogUrl)) {
+//            $newUrl = $ogUrl;
+//        }
+//    }
+//
+//    return $newUrl;
+//}
