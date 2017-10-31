@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
 @font-face {
-    font-family: 'BebasNeue';
+    font-family: 'Bebas';
     src: url('/wp-content/themes/kmaidx/css/fonts/BEBAS___-webfont.woff');
     src: url('/wp-content/themes/kmaidx/css/fonts/BEBAS___-webfont.eot?#iefix') format('embedded-opentype'),
     url('/wp-content/themes/kmaidx/css/fonts/BEBAS___-webfont.woff') format('woff'),
@@ -15,5 +15,5 @@
 }
 
 h1, h2, h3, h1 span, h2 span, h3 span {
-    font-family: 'BebasNeue', sans-serif;
+    font-family: 'Bebas', sans-serif;
 }
