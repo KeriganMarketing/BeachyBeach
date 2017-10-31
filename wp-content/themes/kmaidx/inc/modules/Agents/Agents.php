@@ -168,7 +168,10 @@ class Agents {
 			'posts_per_page' => 1,
 		] );
 
-		return $output[0];
+		if(count($output)>0){
+            return $output[0];
+        }
+
 	}
 
 	public function getOffices( $args = [], $limit = 0 ) {

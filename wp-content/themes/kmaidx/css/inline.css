@@ -1935,6 +1935,19 @@ form h3 {
     top: -332px !important;
 }
 
+#map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(4),
+#map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(2),
+#map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div {
+    width: 352px !important;
+    height: 379px !important;
+}
+#map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(3),
+#map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(1),
+#map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(1) {
+    left: 170px !important;
+    top: 381px !important;
+}
+
 /* Hot Communities */
 .community-button-container {
     width: 150px;

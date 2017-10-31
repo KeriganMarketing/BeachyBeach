@@ -1,7 +1,7 @@
 /* Functions used in search forms */
 
 $(".select2-omni-field").select2({
-    placeholder: 'City, area, subdivision or zip',
+    placeholder: 'City, address, subdivision or zip',
     ajax: {
         url: 'https://mothership.kerigan.com/api/v1/omnibar',
         dataType: 'json',

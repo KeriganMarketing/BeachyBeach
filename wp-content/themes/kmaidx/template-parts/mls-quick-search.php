@@ -4,14 +4,15 @@
 		<form action="/property-search/" class="form-inline" method="get">
             <div class="search-control"></div>
 			<input type="hidden" name="qs" value="true" >
+            <input type="hidden" name="status[]" value="active" >
 			<div class="col-12">
 				<div class="input-container smart-select">
 					<div class="input-group input-group-lg">
 						<select class="area-select form-control select2-omni-field" name="omniField" id="id-area-select" >
-                            <option value="">City, area, subdivision or zip</option>
+                            <option value="">City, address, subdivision or zip</option>
                         </select>
 						<span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary " ><img src="/wp-content/themes/kmaidx/helpers/assets/searchicon.svg" alt="Search" ></button>
+                            <button type="submit" class="btn btn-primary " ><img src="<?php echo getSvg('searchicon'); ?>" alt="Search" ></button>
                         </span>
 					</div>
 				</div>

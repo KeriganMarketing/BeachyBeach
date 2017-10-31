@@ -3,6 +3,8 @@ namespace Includes\Modules\Leads;
 
 use Includes\Modules\MLS\BeachyBucket;
 use Includes\Modules\Agents\Agents;
+use Includes\Modules\Leads\RequestInfo;
+use Includes\Modules\Leads\HomeValuation;
 
 class AdminLeads
 {
@@ -96,10 +98,24 @@ class AdminLeads
         $userData  = $this->getBuckets($agentName);
         $mlsLead   = new Leads();
 
+        $leads = new RequestInfo();
+        $infoRequests = $leads->getLeads([
+            'meta_key'   => 'assigned_agent',
+            'meta_value' => $agentName
+        ]);
+
+        $homeValuations = new HomeValuation();
+        $valuations = $homeValuations->getLeads([
+            'meta_key'   => 'assigned_agent',
+            'meta_value' => $agentName
+        ]);
+
         ?>
         <div class="wrap">
-            <h1 class="wp-heading-inline" style="margin-bottom: 1rem;">Clients and Leads assigned
-                to <?php echo $agentName; ?></h1>
+            <h1 class="wp-heading-inline" style="margin-bottom: .5rem;"><?php echo $agentName; ?>'s Lead Dashboard</h1>
+            <h2 id="accounts" class="wp-heading-inline" style="margin-bottom: 1rem;">
+                Go to: <strong>Client accounts (<?php echo count($userData); ?>)</strong> | <a href="#info-requests">Info requests (<?php echo count($infoRequests); ?>)</a> |  <a href="#home-valuations">Home valuations (<?php echo count($valuations); ?>)</a>
+            </h2>
 
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
@@ -157,29 +173,92 @@ class AdminLeads
                                 ?>
                             </p>
 
-                            <?php if(count($emails) > 0) { ?>
-                                <p>Recent Website Communications:</p>
-                                <?php
-                                foreach ($emails as $email) {
-                                    //echo '<pre>', print_r($email), '</pre>';
-
-                                    echo $email->lead_info_date;
-                                    echo '<a href="#TB_inline?width=680&height=500&inlineId=viewlead-' . $email->ID . '" role="button" data-toggle="modal" class="button button-info thickbox" >View lead</a>';
-
-                                    $thickboxes .= '<div id="viewlead-' . $email->ID . '" class="modal hide fade" style="display:none; ">
-                                        <div>'
-                                        . $email->lead_info_notification_preview .
-                                        '</div>
-                                    </div>';
-
-                                }
-                            }
-                            ?>
+<!--                            --><?php //if(count($emails) > 0) { ?>
+<!--                                <p>Recent Website Communications:</p>-->
+<!--                                --><?php
+//                                foreach ($emails as $email) {
+//                                    //echo '<pre>', print_r($email), '</pre>';
+//
+//                                    echo $email['object']->lead_info_date;
+//                                    echo '<a href="#TB_inline?width=680&height=500&inlineId=viewlead-' . $email['object']->ID . '" role="button" data-toggle="modal" class="button button-info thickbox" >View lead</a>';
+//
+//                                    $thickboxes .= '<div id="viewlead-' . $email['object']->ID . '" class="modal hide fade" style="display:none; ">
+//                                        <div>'
+//                                        . $email['object']->lead_info_notification_preview.
+//                                        '</div>
+//                                    </div>';
+//
+//                                }
+//                            }
+//                            ?>
                         </td>
                     </tr>
                 <?php } ?>
                 </tbody>
             </table>
+
+            <h2 id="info-requests" class="wp-heading-inline" style="margin-bottom: 1rem;">
+                Go to: <a href="#accounts">Client accounts</a> | <strong>Info requests</strong> |  <a href="#home-valuations">Home valuations</a>
+            </h2>
+            <table class="wp-list-table widefat fixed striped pages">
+                <thead>
+                <tr>
+                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                                href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
+                                    class="sorting-indicator"></span></a></th>
+                    <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="email" class="manage-column column-email"><span>MLS Number</span></th>
+                    <th scope="col" style="width:40%" id="cagent" class="manage-column column-agent"><span>Message</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach($infoRequests as $lead){ ?>
+                    <tr>
+                        <td><?php echo $lead['object']->post_title; ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_phone_number'][0]) ? $lead['meta']['lead_info_phone_number'][0] : ''); ?></td>
+                        <td><?php echo $lead['meta']['lead_info_email_address'][0]; ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_mls_number'][0]) ? $lead['meta']['lead_info_mls_number'][0] : ''); ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_message'][0]) ? $lead['meta']['lead_info_message'][0] : ''); ?></td>
+                    </tr>
+                <?php }
+                ?>
+                </tbody>
+            </table>
+
+            <h2 id="home-valuations" class="wp-heading-inline" style="margin-bottom: 1rem;">
+                Go to: <a href="#accounts">Client accounts</a> | <a href="#info-requests">Info requests</a> |  <strong>Home valuations</strong>
+            </h2>
+            <table class="wp-list-table widefat fixed striped pages">
+                <thead>
+                <tr>
+                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                                href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
+                                    class="sorting-indicator"></span></a></th>
+                    <th scope="col" id="vphone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="vemail" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="ptype" class="manage-column column-email"><span>Property Type</span></th>
+                    <th scope="col" id="paddress" class="manage-column column-email"><span>Property Address</span></th>
+                    <th style="width:40%" scope="col" id="vcagent" class="manage-column column-details"><span>Property Details</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach($valuations as $lead){ ?>
+                    <tr>
+                        <td><?php echo $lead['object']->post_title; ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_phone_number'][0]) ? $lead['meta']['lead_info_phone_number'][0] : ''); ?></td>
+                        <td><?php echo $lead['meta']['lead_info_email_address'][0]; ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_listing_property_type'][0]) ? $lead['meta']['lead_info_listing_property_type'][0] : ''); ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_property_address'][0]) ? $lead['meta']['lead_info_property_address'][0] : ''); ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_property_details'][0]) ? $lead['meta']['lead_info_property_details'][0] : ''); ?></td>
+                    </tr>
+                <?php }
+                ?>
+                </tbody>
+            </table>
+
         </div>
         <?php
 
@@ -199,13 +278,21 @@ class AdminLeads
         $agents     = new Agents();
         $agentArray = $agents->getAgentNames();
 
+        $leads = new RequestInfo();
+        $infoRequests = $leads->getLeads();
+
+        $homeValuations = new HomeValuation();
+        $valuations = $homeValuations->getLeads();
+
         add_thickbox();
         $thickboxes = '';
 
         ?>
         <div class="wrap">
-            <h1 class="wp-heading-inline" style="margin-bottom: 1rem;">All Clients and Leads</h1>
-
+            <h1 class="wp-heading-inline" style="margin-bottom: .5rem;">Lead Dashboard</h1>
+            <h2 id="accounts" class="wp-heading-inline" style="margin-bottom: 1rem;">
+                Go to: <strong>Client accounts (<?php echo count($userData); ?>)</strong> | <a href="#info-requests">Info requests (<?php echo count($infoRequests); ?>)</a> |  <a href="#home-valuations">Home valuations (<?php echo count($valuations); ?>)</a>
+            </h2>
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
                 <tr>
@@ -222,6 +309,7 @@ class AdminLeads
                 <tbody>
                 <?php
                 foreach ($userData as $user) {
+                    if($user['id']!=0){
                     $user['zip'][0]            = isset($user['zip'][0]) ? $user['zip'][0] : '';
                     $user['city'][0]           = isset($user['city'][0]) ? $user['city'][0] : '';
                     $user['addr1'][0]          = isset($user['addr1'][0]) ? $user['addr1'][0] : '';
@@ -288,7 +376,153 @@ class AdminLeads
                                               role="button" class="button button-primary" style="float: right"
                                               target="_blank"><?php echo count($user['buckets']); ?> Properties</a></td>
                     </tr>
-                <?php } ?>
+                <?php }} ?>
+                </tbody>
+            </table>
+
+            <h2 id="info-requests" class="wp-heading-inline" style="margin-bottom: 1rem;">
+                Go to: <a href="#accounts">Client accounts</a> | <strong>Info requests</strong> |  <a href="#home-valuations">Home valuations</a>
+            </h2>
+            <table class="wp-list-table widefat fixed striped pages">
+                <thead>
+                <tr>
+                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                                href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
+                                    class="sorting-indicator"></span></a></th>
+                    <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="email" class="manage-column column-email"><span>MLS Number</span></th>
+                    <th scope="col" id="cagent" class="manage-column column-agent"><span>Contacted Agent/Company</span></th>
+                    <th scope="col" id="agent" class="manage-column column-agent"><span>Assigned Agent</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                    foreach($infoRequests as $lead){
+                        //echo '<pre>',print_r($lead),'</pre>';
+                        $leadfor = ($lead['meta']['lead_info_selected_agent'][0]!='' ? $lead['meta']['lead_info_selected_agent'][0] :
+                            (isset($lead['meta']['lead_info_lead_for'][0]) ? $lead['meta']['lead_info_lead_for'][0] : '' ));
+
+                        $assignedAgent = (!isset($lead['meta']['assigned_agent'][0]) ? 'NONE' : $lead['meta']['assigned_agent'][0] );
+
+                        if ($assignedAgent == 'NONE') {
+                            $changeButton = '<a title="Select an Agent for ' . $lead['object']->post_title . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $lead['object']->ID . '" role="button" data-toggle="modal" class="button button-secondary thickbox" style="float: right; color: #FFF; background-color: darkred; box-shadow: inset 0 -2px 0 rgba(0,0,0,.3); border-color: rgba(0,0,0,.3);" >Assign Agent</a>';
+                            if($leadfor!='') {
+                                //update_post_meta($lead['object']->ID, 'assigned_agent', $leadfor);
+                            }
+                        } else {
+                            $changeButton = '<a title="Select an Agent for ' . $lead['object']->post_title . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $lead['object']->ID . '" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
+                        }
+
+                        $agentOptions = '';
+                        foreach ($agentArray as $agent) {
+                            $agentOptions .= '<label style="padding: .5rem 1rem; display: block;"><input type="radio" name="agentassignment" value="' . $agent . '" ' . ($assignedAgent == $agent ? 'checked' : '') . ' /> ' . $agent . '</label>';
+                        }
+
+                        $thickboxes .= '<div id="assignagent' . $lead['object']->ID . '" class="modal hide fade" style="display:none; ">
+                        <div>
+                            <form class="form" id="agentselect" method="post" action="' . $_SERVER['REQUEST_URI'] . '" >
+                                <input type="hidden" name="formID" value="agentselect" >
+                                <input type="hidden" name="lead_id" value="' . $lead['object']->ID . '" >
+                                <input type="hidden" name="cname" value="' . $lead['object']->post_title . '" >
+                                <input type="hidden" name="cphone" value="' . (isset($lead['meta']['lead_info_phone_number'][0]) ? $lead['meta']['lead_info_phone_number'][0] : '') . '" >
+                                <input type="hidden" name="cemail" value="' . $lead['meta']['lead_info_email_address'][0] . '" >
+                                <input type="hidden" name="message" value="' . (isset($lead['meta']['lead_info_message'][0]) ? $lead['meta']['lead_info_message'][0] : '') . '" >
+                                <input type="hidden" name="mls_number" value="' . (isset($lead['meta']['lead_info_mls_number'][0]) ? $lead['meta']['lead_info_mls_number'][0] : '') . '" >
+                                ' . $agentOptions . '
+                                <div class="stuck" style="position: absolute; top: 50px; right: 30px;">
+                                <button style="padding: .5rem 1rem; height: auto; font-size: 1.2em;" class="button button-primary" >SAVE</button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>';
+
+                        ?>
+                        <tr>
+                            <td><?php echo $lead['object']->post_title; ?></td>
+                            <td><?php echo (isset($lead['meta']['lead_info_phone_number'][0]) ? $lead['meta']['lead_info_phone_number'][0] : ''); ?></td>
+                            <td><?php echo $lead['meta']['lead_info_email_address'][0]; ?></td>
+                            <td><?php echo (isset($lead['meta']['lead_info_mls_number'][0]) ? $lead['meta']['lead_info_mls_number'][0] : ''); ?></td>
+                            <td><?php echo $leadfor; ?></td>
+                            <td><strong><?php echo $assignedAgent; ?></strong> <?php echo $changeButton; ?></td>
+                        </tr>
+                    <?php }
+                ?>
+                </tbody>
+            </table>
+
+            <h2 id="home-valuations" class="wp-heading-inline" style="margin-bottom: 1rem;">
+                Go to: <a href="#accounts">Client accounts</a> | <a href="#info-requests">Info requests</a> |  <strong>Home valuations</strong>
+            </h2>
+            <table class="wp-list-table widefat fixed striped pages">
+                <thead>
+                <tr>
+                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                                href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
+                                    class="sorting-indicator"></span></a></th>
+                    <th scope="col" id="vphone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="vemail" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="ptype" class="manage-column column-email"><span>Property Type</span></th>
+                    <th scope="col" id="paddress" class="manage-column column-email"><span>Property Address</span></th>
+                    <th scope="col" id="vcagent" class="manage-column column-agent"><span>Contacted Agent/Company</span></th>
+                    <th scope="col" id="vagent" class="manage-column column-agent"><span>Assigned Agent</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach($valuations as $lead){
+                    //echo '<pre>',print_r($lead),'</pre>';
+                    $leadfor = ($lead['meta']['lead_info_selected_agent'][0]!='' ? $lead['meta']['lead_info_selected_agent'][0] :
+                        (isset($lead['meta']['lead_info_lead_for'][0]) ? $lead['meta']['lead_info_lead_for'][0] : '' ));
+
+                    $assignedAgent = (!isset($lead['meta']['assigned_agent'][0]) ? 'NONE' : $lead['meta']['assigned_agent'][0] );
+
+                    if ($assignedAgent == 'NONE') {
+                        $changeButton = '<a title="Select an Agent for ' . $lead['object']->post_title . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $lead['object']->ID . '" role="button" data-toggle="modal" class="button button-secondary thickbox" style="float: right; color: #FFF; background-color: darkred; box-shadow: inset 0 -2px 0 rgba(0,0,0,.3); border-color: rgba(0,0,0,.3);" >Assign Agent</a>';
+                        if($leadfor!='') {
+                            //update_post_meta($lead['object']->ID, 'assigned_agent', $leadfor);
+                        }
+                    } else {
+                        $changeButton = '<a title="Select an Agent for ' . $lead['object']->post_title . '" href="#TB_inline?width=300&height=500&inlineId=assignagent' . $lead['object']->ID . '" role="button" data-toggle="modal" class="button button-info thickbox" style="float: right" >Change Agent</a>';
+                    }
+
+                    $agentOptions = '';
+                    foreach ($agentArray as $agent) {
+                        $agentOptions .= '<label style="padding: .5rem 1rem; display: block;"><input type="radio" name="agentassignment" value="' . $agent . '" ' . ($assignedAgent == $agent ? 'checked' : '') . ' /> ' . $agent . '</label>';
+                    }
+
+                    $thickboxes .= '<div id="assignagent' . $lead['object']->ID . '" class="modal hide fade" style="display:none; ">
+                        <div>
+                            <form class="form" id="agentselect" method="post" action="' . $_SERVER['REQUEST_URI'] . '" >
+                                <input type="hidden" name="formID" value="agentselect" >
+                                <input type="hidden" name="valuation_id" value="' . $lead['object']->ID . '" >
+                                <input type="hidden" name="cname" value="' . $lead['object']->post_title . '" >
+                                <input type="hidden" name="cphone" value="' . (isset($lead['meta']['lead_info_phone_number'][0]) ? $lead['meta']['lead_info_phone_number'][0] : '') . '" >
+                                <input type="hidden" name="cemail" value="' . $lead['meta']['lead_info_email_address'][0] . '" >
+                                <input type="hidden" name="ptype" value="' . (isset($lead['meta']['lead_info_listing_property_type'][0]) ? $lead['meta']['lead_info_listing_property_type'][0] : '') . '" >
+                                <input type="hidden" name="p_address" value="' . (isset($lead['meta']['lead_info_property_address'][0]) ? $lead['meta']['lead_info_property_address'][0] : '') . '" >
+                                <input type="hidden" name="p_details" value="' . (isset($lead['meta']['lead_info_property_details'][0]) ? $lead['meta']['lead_info_property_details'][0] : '') . '" >
+                                <input type="hidden" name="mls_number" value="' . (isset($lead['meta']['lead_info_mls_number'][0]) ? $lead['meta']['lead_info_mls_number'][0] : '') . '" >
+                                ' . $agentOptions . '
+                                <div class="stuck" style="position: absolute; top: 50px; right: 30px;">
+                                <button style="padding: .5rem 1rem; height: auto; font-size: 1.2em;" class="button button-primary" >SAVE</button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>';
+
+                    ?>
+                    <tr>
+                        <td><?php echo $lead['object']->post_title; ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_phone_number'][0]) ? $lead['meta']['lead_info_phone_number'][0] : ''); ?></td>
+                        <td><?php echo $lead['meta']['lead_info_email_address'][0]; ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_listing_property_type'][0]) ? $lead['meta']['lead_info_listing_property_type'][0] : ''); ?></td>
+                        <td><?php echo (isset($lead['meta']['lead_info_property_address'][0]) ? $lead['meta']['lead_info_property_address'][0] : ''); ?></td>
+                        <td><?php echo $leadfor; ?></td>
+                        <td><strong><?php echo $assignedAgent; ?></strong> <?php echo $changeButton; ?></td>
+                    </tr>
+                <?php }
+                ?>
                 </tbody>
             </table>
 
@@ -308,47 +542,125 @@ class AdminLeads
             $selectedAgent = $_POST['agentassignment'];
 
             $agentInfo    = $agent->assembleAgentData($selectedAgent);
-            $ADMIN_EMAIL  = ($agentInfo['email'] != '' ? $agentInfo['email'] : 'info@beachybeach.com');
+            $ADMIN_EMAIL  = ($agentInfo['email_address']!='' ? $agentInfo['email_address'] : 'info@beachybeach.com');
 
-            //BEGIN EMAIL
-            $sendadmin = array(
-                'to'		=> $ADMIN_EMAIL,
-                'from'		=> get_bloginfo().' <noreply@beachybeach.com>',
-                'subject'	=> 'A lead has been assigned to you',
-                'bcc'		=> 'support@kerigan.com',
-                'cc'        => 'lacey@beachybeach.com',
-                'replyto'   => 'info@beachybeach.com'
-            );
+            if(isset($_POST['lead_id'])){ //info request assignment
 
-            $emailvars = array(
-                'Name'              => $_POST['cname'],
-                'Email Address'     => $_POST['cemail'],
-                'Phone Number'      => $_POST['cphone'],
-                'Physical Address'  => $_POST['caddress'],
-                'Properties saved'  => $_POST['cbuckets']
-            );
+                //BEGIN EMAIL
+                $emailvars = array(
+                    'Name'              => $_POST['cname'],
+                    'Email Address'     => $_POST['cemail'],
+                    'Phone Number'      => $_POST['cphone'],
+                    'Lead Type'         => 'Info Request'
+                );
 
-            $tableData = '';
-            foreach ($emailvars as $key => $var) {
-                if($var != '') {
-                    $tableData .= '<tr><td class="label"><strong>' . $key . '</strong></td><td>' . htmlentities(stripslashes($var)) . '</td>';
+                if(isset($_POST['mls_number'])){
+                    $emailvars['MLS Number'] = $_POST['mls_number'];
                 }
+                if(isset($_POST['message'])){
+                    $emailvars['Message'] = $_POST['message'];
+                }
+
+                $tableData = '';
+                foreach ($emailvars as $key => $var) {
+                    if($var != '') {
+                        $tableData .= '<tr><td class="label"><strong>' . $key . '</strong></td><td>' . htmlentities(stripslashes($var)) . '</td>';
+                    }
+                }
+
+                $mlsLead->sendEmail(
+                    [
+                        'to'        => $ADMIN_EMAIL,
+                        'from'      => get_bloginfo() . ' <noreply@' . $mlsLead->domain . '>',
+                        'subject'   => 'A lead has been assigned to you',
+                        'cc'        => $mlsLead->ccEmail,
+                        'bcc'       => $mlsLead->bccEmail,
+                        'headline'  => 'You have a new lead',
+                        'introcopy' => 'You have been assigned a new lead. Details are below:',
+                        'leadData'  => $tableData
+                    ]
+                );
+
+                update_post_meta( $_POST['lead_id'], 'assigned_agent', $selectedAgent );
             }
 
-            $mlsLead->sendEmail(
-                [
-                    'to'        => $ADMIN_EMAIL,
-                    'from'      => get_bloginfo() . ' <noreply@' . $mlsLead->domain . '>',
-                    'subject'   => 'A lead has been assigned to you',
-                    'cc'        => $mlsLead->ccEmail,
-                    'bcc'       => $mlsLead->bccEmail,
-                    'headline'  => 'You have a new lead',
-                    'introcopy' => 'You have been assigned a new lead. Details are below:',
-                    'leadData'  => $tableData
-                ]
-            );
+            if(isset($_POST['valuation_id'])){ //home valuation assignment
 
-            update_user_meta($_POST['cid'], 'selected_agent', $selectedAgent);
+                $emailvars = array(
+                    'Name'              => $_POST['cname'],
+                    'Email Address'     => $_POST['cemail'],
+                    'Phone Number'      => $_POST['cphone'],
+                    'Lead Type'         => 'Home Valuation'
+                );
+
+                if(isset($_POST['p_type'])){
+                    $emailvars['Property Type'] = $_POST['p_type'];
+                }
+                if(isset($_POST['p_address'])){
+                    $emailvars['Property Address'] = $_POST['p_address'];
+                }
+                if(isset($_POST['p_details'])){
+                    $emailvars['Property Details'] = $_POST['p_details'];
+                }
+
+                $tableData = '';
+                foreach ($emailvars as $key => $var) {
+                    if($var != '') {
+                        $tableData .= '<tr><td class="label"><strong>' . $key . '</strong></td><td>' . htmlentities(stripslashes($var)) . '</td>';
+                    }
+                }
+
+                $mlsLead->sendEmail(
+                    [
+                        'to'        => $ADMIN_EMAIL,
+                        'from'      => get_bloginfo() . ' <noreply@' . $mlsLead->domain . '>',
+                        'subject'   => 'A lead has been assigned to you',
+                        'cc'        => $mlsLead->ccEmail,
+                        'bcc'       => $mlsLead->bccEmail,
+                        'headline'  => 'You have a new home valuation lead',
+                        'introcopy' => 'You have been assigned a home valuation lead. Details are below:',
+                        'leadData'  => $tableData
+                    ]
+                );
+
+                update_post_meta( $_POST['valuation_id'], 'assigned_agent', $selectedAgent );
+
+            }
+
+            if(isset($_POST['cid'])){ //leads with accounts assignment
+
+                //BEGIN EMAIL
+                $emailvars = array(
+                    'Name'              => $_POST['cname'],
+                    'Email Address'     => $_POST['cemail'],
+                    'Phone Number'      => $_POST['cphone'],
+                    'Physical Address'  => $_POST['caddress'],
+                    'Properties saved'  => $_POST['cbuckets']
+                );
+
+                $tableData = '';
+                foreach ($emailvars as $key => $var) {
+                    if($var != '') {
+                        $tableData .= '<tr><td class="label"><strong>' . $key . '</strong></td><td>' . htmlentities(stripslashes($var)) . '</td>';
+                    }
+                }
+
+                $mlsLead->sendEmail(
+                    [
+                        'to'        => $ADMIN_EMAIL,
+                        'from'      => get_bloginfo() . ' <noreply@' . $mlsLead->domain . '>',
+                        'subject'   => 'A client account has been assigned to you',
+                        'cc'        => $mlsLead->ccEmail,
+                        'bcc'       => $mlsLead->bccEmail,
+                        'headline'  => 'You have a new client account',
+                        'introcopy' => 'You have been assigned a new client account. Details are below:',
+                        'leadData'  => $tableData
+                    ]
+                );
+
+                update_user_meta($_POST['cid'], 'selected_agent', $selectedAgent);
+            }
+
 
         }
     }

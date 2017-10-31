@@ -9,6 +9,9 @@
                     <div class="input-container">
                         <select class="form-control select2-omni-field" name="omniField" >
                             <option value="">City, area, subdivision or zip</option>
+                            <?php echo (isset($_GET['omniField']) && $_GET['omniField'] != '' ? '
+                            <option value="'.$_GET['omniField'].'" selected >'.$_GET['omniField'].'</option>
+                            ' : ''); ?>
                         </select>
                     </select>
                     </div>
@@ -16,16 +19,16 @@
                 <div class="col-sm-6 col-lg-3">
                     <div class="input-container">
                         <select class="form-control form-control-lg select2-property-type" name="propertyType" >
-                            <option value="">Property type</option>
-                            <option value="Single Family Home">Single Family Home</option>
-                            <option value="Condo / Townhome">Condo / Townhome</option>
-                            <option value="Commercial">Commercial</option>
-                            <option value="Lots / Land">Lots / Land</option>
-                            <option value="Multi-Family Home">Multi-Family Home</option>
-                            <option value="Rental">Rental</option>
-                            <option value="Manufactured">Manufactured</option>
-                            <option value="Farms / Agricultural">Farms / Agricultural</option>
-                            <option value="Other">Other</option>
+                            <option value="" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == '' ? 'selected' : ''); ?> >Property type</option>
+                            <option value="Single Family Home" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Single Family Home' ? 'selected' : ''); ?> >Single Family Home</option>
+                            <option value="Condo / Townhome" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Condo / Townhome' ? 'selected' : ''); ?> >Condo / Townhome</option>
+                            <option value="Commercial" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Commercial' ? 'selected' : ''); ?> >Commercial</option>
+                            <option value="Lots / Land" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Lots / Land' ? 'selected' : ''); ?> >Lots / Land</option>
+                            <option value="Multi-Family Home" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Multi-Family Home' ? 'selected' : ''); ?> >Multi-Family Home</option>
+                            <option value="Rental" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Rental' ? 'selected' : ''); ?> >Rental</option>
+                            <option value="Manufactured" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Manufactured' ? 'selected' : ''); ?> Manufactured</option>
+                            <option value="Farms / Agricultural" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Farms / Agricultural' ? 'selected' : ''); ?> >Farms / Agricultural</option>
+                            <option value="Other" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Other' ? 'selected' : ''); ?> >Other</option>
                         </select>
                     </div>
                 </div>
@@ -50,7 +53,7 @@
                             <select name="minPrice" id="min_price" class="form-control select-other" >
                             <option value="" >Any</option>
                             <?php for($i = 50000; $i < 5000000; $i+=50000){
-	                            echo '<option value="' . $i . '">$' . number_format( $i, 0, ".", ",") . '</option>';
+	                            echo '<option value="' . $i . '" '. (isset($_GET['minPrice']) && $_GET['minPrice'] == $i ? 'selected' : '') .'>$' . number_format( $i, 0, ".", ",") . '</option>';
                             } ?>
                             </select>
                         </div>
@@ -63,7 +66,7 @@
                             <select name="maxPrice" id="max_price" class="form-control select-other" >
                             <option value="" >Any</option>
 	                            <?php for($i = 50000; $i < 10000000; $i+=50000){
-		                            echo '<option value="' . $i . '">$' . number_format( $i, 0, ".", ",") . '</option>';
+		                            echo '<option value="' . $i . '" '. (isset($_GET['maxPrice']) && $_GET['maxPrice'] == $i ? 'selected' : '') .'>$' . number_format( $i, 0, ".", ",") . '</option>';
 	                            } ?>
                             </select>
                         </div>
@@ -78,7 +81,7 @@
                                 <select name="sq_ft" id="sq_ft" class="form-control select-other" >
                                     <option value="" >Any</option>
 	                                <?php for($i = 800; $i < 10000; $i+=200){
-		                                echo '<option value="' . $i . '">' . number_format( $i, 0, ".", ",") . '</option>';
+		                                echo '<option value="' . $i . '" '. (isset($_GET['sq_ft']) && $_GET['sq_ft'] == $i ? 'selected' : '') .'>' . number_format( $i, 0, ".", ",") . '</option>';
 	                                } ?>
                                 </select>
                             </div>
@@ -103,7 +106,7 @@
                                     );
 
                                     foreach($acreageArray as $k => $v){
-		                                echo '<option value="' . $k . '">' . $v . '</option>';
+		                                echo '<option value="' . $k . '" '. (isset($_GET['acreage']) && $_GET['acreage'] == $k ? 'selected' : '') .' >' . $v . '</option>';
 	                                } ?>
                                 </select>
                             </div>
@@ -124,7 +127,7 @@
                             </label>
                             <?php for($i = 1; $i < 6; $i+=1){
                                 echo '<label class="custom-control custom-radio">
-                                <input type="radio" name="bedrooms" value="'.$i.'" class="custom-control-input" >
+                                <input type="radio" name="bedrooms" value="'.$i.'" class="custom-control-input" '. (isset($_GET['bedrooms']) && $_GET['bedrooms'] == $i ? 'checked' : '') .' >
                                 <span class="custom-control-indicator"></span>
                               <span class="custom-control-description">'.$i.' +</span>
                               </label>';
@@ -143,7 +146,7 @@
                             </label>
                             <?php for($i = 1; $i < 6; $i+=1){
                                 echo '<label class="custom-control custom-radio">
-                                <input type="radio" name="bathrooms" value="'.$i.'" class="custom-control-input" >
+                                <input type="radio" name="bathrooms" value="'.$i.'" class="custom-control-input" '. (isset($_GET['bathrooms']) && $_GET['bathrooms'] == $i ? 'checked' : '') .' >
                                 <span class="custom-control-indicator"></span>
                               <span class="custom-control-description">'.$i.' +</span>
                               </label>';
@@ -212,19 +215,10 @@
             <form class="form form-inline text-right" method="get" >
 			<?php
 			if(isset($_GET['omniField']) && $_GET['omniField']!= '') {
-
-				if(is_array($_GET['omniField'])){
-					for($i=0;$i<count($_GET['omniField']);$i++){
-						echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" ';
-						echo ' data-call="omniField|' . urlencode(trim($_GET['omniField'][$i])) . '" >' . stripslashes( $_GET['omniField'][$i]);
-						echo '</a><input type="hidden" name="omniField[]" value="'.stripslashes( $_GET['omniField'][$i] ).'" > ';
-					}
-				}
-
+                echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="omniField" >'.$_GET['omniField'].'</a><input type="hidden" name="pool" value="'.$_GET['omniField'].'" > ';
 			}
 
 			if(isset($_GET['status']) && $_GET['status']!= '') {
-
 				if(is_array($_GET['status'])){
 					for($i=0;$i<count($_GET['status']);$i++){
 					    if($_GET['status'][$i]!='') {
@@ -234,26 +228,19 @@
 					    }
 					}
 				}
-
 			}
 
-			if(isset($_GET['pool']) && $_GET['pool']!= '') {
-				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="pool" >Pool</a><input type="hidden" name="pool" value="'.$_GET['pool'].'" > ';
+			if(isset($_GET['propertyType']) && $_GET['propertyType']!= '') {
+				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="propertyType" >' . $_GET['propertyType'] . '</a><input type="hidden" name="propertyType" value="'.$_GET['propertyType'].'" > ';
 			}
-			if(isset($_GET['waterfront']) && $_GET['waterfront']!= '') {
-				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="waterfront" >Waterfront</a><input type="hidden" name="waterfront" value="'.$_GET['waterfront'].'" > ';
+			if(isset($_GET['minPrice']) && $_GET['minPrice']!= '') {
+				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="min_price" >$' . number_format($_GET['minPrice']) . ' Min</a><input type="hidden" name="min_price" value="'.$_GET['minPrice'].'" > ';
 			}
-			if(isset($_GET['class']) && $_GET['class']!= '') {
-				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="class" >' . $_GET['class'] . '</a><input type="hidden" name="class" value="'.$_GET['class'].'" > ';
-			}
-			if(isset($_GET['min_price']) && $_GET['minPrice']!= '') {
-				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="min_price" >$' . number_format($_GET['min_price']) . ' Min</a><input type="hidden" name="min_price" value="'.$_GET['min_price'].'" > ';
-			}
-			if(isset($_GET['max_price']) && $_GET['maxPrice']!= '') {
-				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="max_price" >$' . number_format($_GET['max_price']) . ' Max</a><input type="hidden" name="max_price" value="'.$_GET['max_price'].'" > ';
+			if(isset($_GET['maxPrice']) && $_GET['maxPrice']!= '') {
+				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="max_price" >$' . number_format($_GET['maxPrice']) . ' Max</a><input type="hidden" name="max_price" value="'.$_GET['maxPrice'].'" > ';
 			}
 			if(isset($_GET['bedrooms']) && $_GET['bedrooms']!= '') {
-				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="bedrooms" >' . $_GET['bedrooms'] . '+ Beds</a><input type="hidden" name="bedrooms[ value="'.$_GET['bedrooms'].'" > ';
+				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="bedrooms" >' . $_GET['bedrooms'] . '+ Beds</a><input type="hidden" name="bedrooms" value="'.$_GET['bedrooms'].'" > ';
 			}
 			if(isset($_GET['bathrooms']) && $_GET['bathrooms']!= '') {
 				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="bathrooms" >' . $_GET['bathrooms'] . '+ Baths</a><input type="hidden" name="bathrooms" value="'.$_GET['bathrooms'].'" > ';
@@ -264,10 +251,17 @@
 			if(isset($_GET['acreage']) && $_GET['acreage']!= '') {
 				echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="acreage" >' . $_GET['acreage'] . '+ Acres</a><input type="hidden" name="acreage" value="'.$_GET['acreage'].'" > ';
 			}
+            if(isset($_GET['pool']) && $_GET['pool']!= '') {
+                echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="pool" >Pool</a><input type="hidden" name="pool" value="'.$_GET['pool'].'" > ';
+            }
+            if(isset($_GET['waterfront']) && $_GET['waterfront']!= '') {
+                echo '<a class="criterion btn btn-default btn-sm hidden-sm-down" data-call="waterfront" >Waterfront</a><input type="hidden" name="waterfront" value="'.$_GET['waterfront'].'" > ';
+            }
 
 			?>
                 <div id="sortbox" class="ml-auto">
                     <div class="input-group input-group-sm">
+                        <input type="hidden" name="qs" value="search" >
                         <select class="form-control form-control-sm" name="sortBy" >
                             <option value="date_modified" <?php if($_GET['sortBy']=='date_modified'){ echo 'selected'; } ?> >Updated</option>
                             <option value="price" <?php if($_GET['sortBy']=='price'){ echo 'selected'; } ?>>Cheapest</option>
@@ -275,7 +269,6 @@
                         </select>
                         <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-default" >Sort</button></span>
                     </div>
-<!--                    <a class="rembutton btn btn-danger btn-sm pull-right" href="/property-search/" >reset</a>-->
                 </div>
                 <input type="hidden" name="orderBy" value="ASC">
                 <input type="hidden" name="q" value="search" >

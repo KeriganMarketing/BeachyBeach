@@ -161,7 +161,7 @@ class Leads
         $request = [
             'posts_per_page' => - 1,
             'offset'         => 0,
-            'post_type'      => 'lead',
+            'post_type'      => $this->uglify($this->postType),
             'post_status'    => 'publish',
         ];
 
@@ -170,7 +170,11 @@ class Leads
 
         $resultArray = [];
         foreach ( $results as $item ){
-            array_push( $resultArray, $item );
+            $meta = get_post_meta($item->ID);
+            $resultArray[] = [
+                'object' => $item,
+                'meta'   => $meta
+            ];
         }
 
         return $resultArray;

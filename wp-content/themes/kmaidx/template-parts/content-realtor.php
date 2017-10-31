@@ -57,19 +57,20 @@ use Includes\Modules\Social\SocialSettingsPage;
                 <div class="row">
                     <div class="col">
                         <h2>My Listings</h2>
-			            <?php get_template_part( 'template-parts/mls', 'sortbar' ); ?>
+			            <?php //get_template_part( 'template-parts/mls', 'sortbar' ); ?>
                     </div>
                 </div>
                 <div class="row">
 
                     <?php foreach ($agentData['listings'] as $result) { ?>
-                        <div class="listing-tile agent col-sm-6 col-lg-3 text-center">
+                        <div class="listing-tile agent col-sm-6 col-lg-3 text-center mb-5">
                             <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
                         </div>
                     <?php } ?>
 
                 </div>
             </div>
+            <hr>
             <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
 
         </div>

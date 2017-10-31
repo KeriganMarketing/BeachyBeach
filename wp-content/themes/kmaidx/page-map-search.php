@@ -92,6 +92,7 @@ get_header(); ?>
             zoom: 11,
             center: myLatLng,
             disableDefaultUI: true,
+            zoomControl: true,
             styles: [
                 {
                     "featureType": "all",
@@ -342,8 +343,10 @@ get_header(); ?>
         markers.push(marker);
 
         marker.addListener('click', function(){
-            var requestedDoc = '<?php echo get_template_directory_uri() ?>/template-parts/partials/mls-map-listing.php?mls='+mlsnum,
+            var requestedDoc = '<?php echo get_template_directory_uri() ?>/template-parts/mls-map-listing.php',
               xhttp = new XMLHttpRequest();
+
+            console.log(xhttp);
 
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -356,15 +359,15 @@ get_header(); ?>
                         borderRadius: 0,
                         arrowSize: 10,
                         borderWidth: 0,
-                        pixelOffset: new google.maps.Size(15, 60),
+                        pixelOffset: new google.maps.Size(10, 0),
                         backgroundClassName: 'transparent',
                         content: contentString
                     })
-                    infowindow.setContent('<div class="map-listing text-center">' + response + '</div>');
+                    infowindow.setContent('<div class="listing-tile map-search">' + response + '</div>');
                     infowindow.open(map, marker);
                 }
             };
-            xhttp.open("GET", requestedDoc, true);
+            xhttp.open("GET", requestedDoc + '?mls=' + mlsnum, true);
             xhttp.send();
 
         });

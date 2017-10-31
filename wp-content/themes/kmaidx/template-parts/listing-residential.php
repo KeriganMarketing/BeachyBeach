@@ -9,7 +9,8 @@
 <table class="table table-striped listing-data">
 	<tbody>
 	<tr><td class="title">MLS#</td><td class="data"><?php echo $listingInfo->mls_account; ?></td></tr>
-	<tr><td class="title">Property Type</td><td class="data"><?php echo $listingInfo->class; ?></td></tr>
+    <tr><td class="title">Status</td><td class="data"><?php echo $listingInfo->status; ?></td></tr>
+	<tr><td class="title">Property Type</td><td class="data"><?php echo $listingInfo->property_type; ?></td></tr>
 	<tr><td class="title">Bedrooms</td><td class="data"><?php echo $listingInfo->bedrooms; ?></td></tr>
 	<tr><td class="title">Bathrooms</td><td class="data"><?php echo $listingInfo->full_baths; ?> full, <?php echo $listingInfo->half_baths; ?> half</td></tr>
 	<tr><td class="title">H/C Sqft</td><td class="data"><?php echo number_format( intval($listingInfo->sq_ft), 0, '.', ',' ); ?></td></tr>

@@ -81,7 +81,7 @@ get_header(); ?>
                                         </div>
                                     <?php } ?>
                                 </div>
-                                <?php if ($isOurs) { ?>
+                                <?php if ($isOurs && isset($agentData['name']) ) { ?>
                                     <div class="col-md-5">
                                         <div class="listing-agent-box">
                                             <?php include(locate_template('template-parts/listing-agent.php')); ?>

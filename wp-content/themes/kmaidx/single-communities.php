@@ -4,9 +4,9 @@ use Includes\Modules\MLS\QuickSearch;
 use Includes\Modules\MLS\BeachyBucket;
 
 $currentPage  = (isset($_GET['pg']) ? $_GET['pg'] : 1);
-$searchCriteria = (isset($_GET['qs']) ? $_GET : [
-    'omniField'    => get_post_meta( $post->ID, 'community_info_database_name', true ),
-    'pg'           => $currentPage
+$searchCriteria = (isset($_GET['pg']) ? $_GET : [
+    'omniField' => get_post_meta( $post->ID, 'community_info_database_name', true ),
+    'pg'   => $currentPage
 ]);
 
 $qs           = new QuickSearch($searchCriteria);
@@ -51,7 +51,7 @@ get_header(); ?>
 			<?php
                 if(count($listings)> 0) {
                     foreach ( $listings as $result ) { ?>
-                        <div class="listing-tile community col-sm-6 col-lg-3 text-center">
+                        <div class="listing-tile col-sm-6 col-lg-3 text-center mb-5">
                             <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
                         </div>
                     <?php }
