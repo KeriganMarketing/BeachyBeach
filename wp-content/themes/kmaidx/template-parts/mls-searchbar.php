@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="input-container">
-                        <select class="form-control form-control-lg select2-property-type" name="propertyType" >
+                        <select class="form-control select2-property-type" name="propertyType" >
                             <option value="" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == '' ? 'selected' : ''); ?> >Property type</option>
                             <option value="Single Family Home" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Single Family Home' ? 'selected' : ''); ?> >Single Family Home</option>
                             <option value="Condo / Townhome" <?php echo (isset($_GET['propertyType']) && $_GET['propertyType'] == 'Condo / Townhome' ? 'selected' : ''); ?> >Condo / Townhome</option>
