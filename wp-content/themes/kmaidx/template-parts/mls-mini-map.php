@@ -295,7 +295,7 @@
     }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyCRXeRhZCIYcKhtc-rfHCejAJsEW9rYtt4&callback=initMap" ></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyDxp-f8wIi_TJuU5ZRg4Z3KS-T3nkLXYKM&callback=initMap" ></script>
 <script>
 <?php
     foreach ($listings as $result) {

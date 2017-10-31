@@ -1,12 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
 @font-face {
-    font-family: 'BebasNeue';
-    src: local('BebasNeue'),
-    url('/wp-content/themes/kmaidx/css/fonts/BebasNeue-webfont.eot'),
-    url('/wp-content/themes/kmaidx/css/fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
-    url('/wp-content/themes/kmaidx/css/fonts/BebasNeue-webfont.woff') format('woff'),
-    url('/wp-content/themes/kmaidx/css/fonts/BebasNeue-webfont.ttf') format('truetype'),
-    url('/wp-content/themes/kmaidx/css/fonts/BebasNeue-webfont.svg#BebasNeue') format('svg');
+    font-family: 'Bebas';
+    src: local('Bebas'), local('Bebas'),
+    url('https://beachybeach.com/wp-content/themes/kmaidx/css/fonts/BEBAS-webfont.woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -16,5 +12,5 @@
 }
 
 h1, h2, h3, h1 span, h2 span, h3 span {
-    font-family: 'BebasNeue', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
 }

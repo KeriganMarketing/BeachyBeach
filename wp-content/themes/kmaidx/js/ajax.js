@@ -5,37 +5,6 @@ function toggler(menuVar){
     $('#'+menuVar).toggle();
 }
 
-function loadIdxAjax(){
-    $.ajax({
-        type : 'post',
-        dataType : 'json',
-        url : wpAjax.ajaxurl,
-        data : {
-            action: 'loadMlsIdx'
-        },
-        success: function(data) {
-            console.log(data);
-
-            $(".area-select").select2({
-                placeholder: 'City, area, subdivision, or zip',
-                dataType: 'json',
-                width: '100%',
-                tags: true,
-                data: data.areaArray
-            });
-
-            $('.prop-type-input').select2({
-                placeholder: 'Property type',
-                dataType: 'json',
-                width: '100%',
-                data: data.typeArray
-            });
-
-        }
-
-    });
-}
-
 //go get pins for community map
 function loadCommMap(){
     $.ajax({

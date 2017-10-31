@@ -661,7 +661,7 @@
 		},
 		addEvent = helpers.addEvent = function(node,eventType,method){
 			if (node.addEventListener){
-				node.addEventListener(eventType,method);
+				node.addEventListener(eventType,method, {passive: true});
 			} else if (node.attachEvent){
 				node.attachEvent("on"+eventType, method);
 			} else {
