@@ -412,6 +412,7 @@ div#beach-bucket #bucket-right p.logged-in{
 }
 div#beach-bucket #bucket-right p.logged-in a{
     text-decoration: none;
+    font-size: .9em;
 }
 
 div#beach-bucket span.user-name {
@@ -1093,14 +1094,22 @@ ol.comment-list li:nth-child(even) {
 
 /** Properties **/
 
+.listing-tile {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 3rem;
+}
+
 .listing-tile-container {
     background: #FFF;
     border: 1px solid #999;
-    margin-bottom: 30px;
+    border-bottom: 3px solid #24BEE4;
 }
 
-.listing-tile {
-    text-align: center;
+.listing-tile-container:hover {
+    border-bottom: 3px solid #42BC7B;
 }
 
 .listing-tile .tile-section.price {
@@ -1171,14 +1180,10 @@ ol.comment-list li:nth-child(even) {
     position: absolute;
     z-index: 3;
     top: 0;
-    bottom: 30px;
+    bottom: 0;
     left: 15px;
     right: 15px;
     transition: all ease-out .5s;
-}
-
-.listing-tile a.listing-link:hover {
-    background:rgba(0,0,0,.1);
 }
 
 /* MAP */

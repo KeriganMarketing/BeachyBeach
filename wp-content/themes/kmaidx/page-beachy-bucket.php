@@ -3,14 +3,16 @@ use Includes\Modules\MLS\BeachyBucket;
 use Includes\Modules\MLS\FullListing;
 
 get_header();
-global $paged;
-global $wpdb;
 
-$paged   = (get_query_var('paged')) ? abs((int)get_query_var('paged')) : 1;
 $bb      = new BeachyBucket();
 $user_id = (isset($_GET['users_bucket']) ? $_GET['users_bucket'] : get_current_user_id());
 
 $mlsNumbers = $bb->listingsSavedByUser($user_id);
+
+if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
+    $bb->handleFavorite($_POST['user_id'], $_POST['mls_account']);
+    header("Refresh:0");
+}
 ?>
 
     <div id="content">
@@ -36,16 +38,40 @@ $mlsNumbers = $bb->listingsSavedByUser($user_id);
     </div><!-- #primary -->
 
     <div class="container wide">
-
+        <p>&nbsp;</p>
         <div class="row justify-content-center">
-            <?php foreach ($mlsNumbers as $result) {
-                $fullListing = new FullListing($result);
+            <?php foreach ($mlsNumbers as $mlsNumber) {
+                $fullListing = new FullListing($mlsNumber);
                 $result      = $fullListing->create();
                 if($result){  ?>
-                <div class="listing-tile property-search col-sm-6 col-lg-3 text-center">
-		            <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
+                <div class="col-sm-6 col-lg-3 text-center">
+                    <div class="listing-tile bucket">
+                        <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
+                        <form class="form form-inline" method="post" style="display: inline-block; position: absolute; bottom: 0; z-index: 5; width: 100%;">
+                            <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
+                            <input type="hidden" name="mls_account" value="<?php echo $mlsNumber; ?>" />
+                            <button type="submit" class="btn btn-primary mb-2" >Remove from bucket</button>
+                        </form>
+                    </div>
                 </div>
-            <?php }} ?>
+            <?php }else{ ?>
+            <div class="col-sm-6 col-lg-3 text-center">
+                <div class="listing-tile bucket">
+                    <div class="listing-tile-container">
+                        <p style="padding: 20px 20px 15px; color:#999999; font-size:1.5em; line-height: 1.5em;" class="listing-not-available">
+                            Listing #<?php echo $mlsNumber; ?> has been sold or removed.
+                        </p>
+                    </div>
+                    <form class="form form-inline" method="post" style="display: inline-block; position: absolute; bottom: 0; z-index: 5; width: 100%;">
+                        <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
+                        <input type="hidden" name="mls_account" value="<?php echo $mlsNumber; ?>" />
+                        <button type="submit" class="btn btn-primary mb-2" >Remove from bucket</button>
+                    </form>
+                </div>
+                <p>&nbsp;</p>
+            </div>
+            <?php }
+            } ?>
         </div>
     </div>
 </div>

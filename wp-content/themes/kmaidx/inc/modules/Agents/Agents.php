@@ -335,10 +335,24 @@ class Agents {
 
     public function updateAgent($agentData)
     {
-        //echo '<pre>',print_r($agentData),'</pre>';
         $agentMothershipData = $this->getFromMothership($agentData['mls_name']);
         $agentMothershipData['name'] = $agentData['mls_name'];
         $this->updateAgentsByMotherShip( $agentMothershipData, $agentData['post_id']);
+    }
+
+    public function getAgentById($shortId)
+    {
+        $client = new Client(['base_uri' => 'https://mothership.kerigan.com/api/v1/']);
+
+        // make the API call
+        $apiCall = $client->request(
+            'GET',
+            'agents?'
+            .'shortId='. $shortId
+        );
+
+        return json_decode($apiCall->getBody());
+
     }
 
 }

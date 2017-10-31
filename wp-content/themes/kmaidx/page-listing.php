@@ -1,17 +1,6 @@
 <?php
-/**
- * The template for displaying all pages
- *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package KMA_DEMO
- */
 
+use Includes\Modules\Agents\Agents;
 use Includes\Modules\MLS\FullListing;
 use Includes\Modules\MLS\BeachyBucket;
 
@@ -20,26 +9,30 @@ if (isset($_GET['mls'])) {
     $fullListing = new FullListing($mlsNumber);
     $listingInfo = $fullListing->create();
 
+    //echo '<pre>',print_r($listingInfo),'</pre>';
+
     if($listingInfo) {
 
-        $buttonText = $fullListing->isInBucket(get_current_user_id(),
-            $listingInfo->mls_account) ? 'REMOVE FROM BUCKET' : 'SAVE TO BUCKET';
+        $buttonText = ($fullListing->isInBucket(get_current_user_id(), $listingInfo->mls_account) ? 'REMOVE FROM BUCKET' : 'SAVE TO BUCKET');
         if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
             $bb = new BeachyBucket();
             $bb->handleFavorite($_POST['user_id'], $_POST['mls_account']);
+            header("Refresh:0");
         }
 
         $isOurs = $fullListing->isOurs($listingInfo);
+        if($isOurs){
+            $agents = new Agents;
+            $mlsData = $agents->getAgentById($listingInfo->listing_member_shortid);
+            $agentData = $agents->assembleAgentData($agentData->data[0]->full_name);
+        }
 
         $title = $listingInfo->street_number . ' ' . $listingInfo->street_name;
         if ($listingInfo->unit_number != '') {
             $title = $title . ' ' . $listingInfo->unit_number;
         }
 
-        $metaTitle       = $title . ' | $' . number_format($listingInfo->price) . ' | ' . get_bloginfo('name');
-        $metaDescription = $listingInfo->description;
-        $ogPhoto         = ($listingInfo->preferred_image != '' ? $listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
-        $ogUrl           = get_the_permalink() . '?mls=' . $listingInfo->mls_account;
+        $fullListing->setListingSeo( $listingInfo );
 
     }
 
@@ -71,17 +64,17 @@ get_header(); ?>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <?php if (in_array($listingInfo->property_type, array('G', 'A'), FALSE)) { ?>
+                                    <?php if (in_array($listingInfo->class, array('G', 'A'), FALSE)) { ?>
                                         <div class="listing-residential">
                                             <?php include(locate_template('template-parts/listing-residential.php')); ?>
                                         </div>
                                     <?php } ?>
-                                    <?php if (in_array($listingInfo->property_type, array('C'), FALSE)) { ?>
+                                    <?php if (in_array($listingInfo->class, array('C'), FALSE)) { ?>
                                         <div class="listing-land">
                                             <?php include(locate_template('template-parts/listing-land.php')); ?>
                                         </div>
                                     <?php } ?>
-                                    <?php if (in_array($listingInfo->property_type, array('E','J','F'), FALSE)) { ?>
+                                    <?php if (in_array($listingInfo->class, array('E','J','F'), FALSE)) { ?>
                                         <div class="listing-commercial">
                                             <?php include(locate_template('template-parts/listing-commercial.php')); ?>
                                         </div>

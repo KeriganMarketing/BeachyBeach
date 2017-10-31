@@ -1,25 +1,14 @@
 <?php
-use Includes\Modules\Agents\Agents;
-
-$wpTeam = new Agents();
-//$agent = $mls->getAgentByMLSId($listingInfo->listing_member_shortid);
-$wpAgent = $wpTeam->assembleAgentData($agent->full_name);
-
+$phone = (isset($agentData['cell_phone']) ? $agentData['cell_phone'] : (isset($agentData['office_phone']) ? $agentData['office_phone'] : ''));
 ?>
 <div class="card">
     <img class="card-img-top" src="<?php echo $agentData['thumbnail']; ?>" alt="<?php echo $agentData['name']; ?>">
     <div class="card-block">
-        <h4 class="card-title"><?php echo $agent->full_name; ?></h4>
+        <h4 class="card-title"><?php echo $agentData['full_name']; ?></h4>
         <ul class="contact-info">
-            <?php if ($agentData['email_address'] != '') { ?>
-                <li class="email"><i class="fa fa-envelope" aria-hidden="true"></i> <a
-                        href="mailto:<?php echo $agentData['email_address']; ?>"><?php echo $agentData['email_address']; ?></a>
-                </li><?php } ?>
-            <?php if ($agentData['cell_phone'] != '') { ?>
-                <li class="phone"><i class="fa fa-phone" aria-hidden="true"></i> <a
-                        href="tel:<?php echo $agentData['cell_phone']; ?>"><?php echo $agentData['cell_phone']; ?></a>
-                </li><?php } ?>
+            <?php if($agentData['email_address'] != ''){?><li class="email"><img src="<?php echo getSvg('email'); ?>" alt="Email <?php echo $agentData['name'];?>" > <a href="mailto:<?php echo $agentData['email_address']; ?>" ><?php echo $agentData['email_address']; ?></a></li><?php } ?>
+            <?php if($phone != ''){?><li class="phone"><img src="<?php echo getSvg('phone'); ?>" alt="Call <?php echo $agentData['name'];?>" > <a href="tel:<?php echo $phone; ?>" ><?php echo $phone; ?></a></li><?php }else{ '<li></li>'; } ?>
         </ul>
-        <a href="<?php echo $wpAgent['link']; ?>" class="btn btn-primary">view profile</a>
+        <a href="<?php echo $agentData['link']; ?>" class="btn btn-primary">view profile</a>
     </div>
 </div>

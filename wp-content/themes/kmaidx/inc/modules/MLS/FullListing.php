@@ -72,4 +72,38 @@ class FullListing
 
         return true;
     }
+
+    public function setListingSeo( $listingInfo )
+    {
+
+        global $metaTitle;
+        $title = $listingInfo->street_number . ' ' . $listingInfo->street_name;
+        $title = ($listingInfo->unit_number != '' ? $title . ' ' . $listingInfo->unit_number : $title);
+        $metaTitle = $title . ' | $' . number_format($listingInfo->price) . ' | ' . $listingInfo->city . ' | ' . get_bloginfo('name');
+        add_filter('wpseo_title', function ($metaTitle) {
+            return $metaTitle;
+        }, 100, 1);
+
+        global $metaDescription;
+        $metaDescription = strip_tags($listingInfo->description);
+        add_filter('wpseo_metadesc', function ($metaDescription) {
+            return $metaDescription;
+        }, 100, 1);
+
+        global $ogPhoto;
+        $ogPhoto = ($listingInfo->preferred_image != '' ? $listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+        add_filter('wpseo_opengraph_image', function ($ogPhoto) {
+            return $ogPhoto;
+        }, 100, 1);
+
+        global $ogUrl;
+        $ogUrl = get_the_permalink() . '?mls=' . $listingInfo->mls_account;
+        add_filter('wpseo_canonical',  function ($ogUrl) {
+            return $ogUrl;
+        }, 100, 1);
+        add_filter('wpseo_opengraph_url', function ($ogUrl) {
+            return $ogUrl;
+        }, 100, 1);
+
+    }
 }

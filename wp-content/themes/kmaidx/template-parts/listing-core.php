@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Bryan
- * Date: 5/22/2017
- * Time: 1:51 PM
- */
-?>
 <div class="row">
     <div class="col-md-6 flex-order-md-second">
         <div id="req-info-btn" class="text-center text-md-right">
@@ -13,14 +5,14 @@
                 <input type="hidden" name="reason" value="Property inquiry" />
                 <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
                 <input type="hidden" name="mls_number" value="<?php echo $listingInfo->mls_account; ?>" />
-                <input type="hidden" name="selected_agent" value="<?php echo ($isOurs ? $agent->full_name : ''); ?>" />
+                <input type="hidden" name="selected_agent" value="<?php echo ($isOurs ? $agentData['full_name'] : ''); ?>" />
                 <button type="submit" class="btn btn-primary mb-2" >Request Info</button>
             </form>
 			<?php if(is_user_logged_in()){?>
                 <form class="form form-inline" method="post" style="display:inline-block;" >
                     <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
                     <input type="hidden" name="mls_account" value="<?php echo $listingInfo->mls_account; ?>" />
-                    <button type="submit" class="btn btn-primary mb-2" ><img src="<?php echo $mls->getSvg( 'star' ); ?>" alt="save to favorites" style="width: 16px; vertical-align: sub; margin: 0 3px 0 0;"> <?php echo $buttonText; ?></button>
+                    <button type="submit" class="btn btn-primary mb-2" ><img src="<?php echo getSvg( 'star' ); ?>" alt="save to favorites" style="width: 16px; vertical-align: sub; margin: 0 3px 0 0;"> <?php echo $buttonText; ?></button>
                 </form>
 			<?php } ?>
             <button type="button" class="btn btn-primary hidden-md-up mb-2" data-toggle="modal" data-target="#lightbox" >View more photos</button>
