@@ -47,7 +47,7 @@ if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
                 <div class="col-sm-6 col-lg-3 text-center">
                     <div class="listing-tile bucket">
                         <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
-                        <form class="form form-inline" method="post" style="display: inline-block; position: absolute; bottom: 0; z-index: 5; width: 100%;">
+                        <form class="form form-inline" method="post" style="display: inline-block;width: 100%;z-index: 5;padding: 1rem 0 2rem;">
                             <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
                             <input type="hidden" name="mls_account" value="<?php echo $mlsNumber; ?>" />
                             <button type="submit" class="btn btn-primary mb-2" >Remove from bucket</button>
@@ -62,7 +62,7 @@ if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
                             Listing #<?php echo $mlsNumber; ?> has been sold or removed.
                         </p>
                     </div>
-                    <form class="form form-inline" method="post" style="display: inline-block; position: absolute; bottom: 0; z-index: 5; width: 100%;">
+                    <form class="form form-inline" method="post" style="display: inline-block;width: 100%;z-index: 5;padding: 1rem 0 2rem;">
                         <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
                         <input type="hidden" name="mls_account" value="<?php echo $mlsNumber; ?>" />
                         <button type="submit" class="btn btn-primary mb-2" >Remove from bucket</button>

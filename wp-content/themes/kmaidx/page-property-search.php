@@ -55,7 +55,7 @@ get_header(); ?>
         <div class="row">
 
             <?php foreach ($listings as $result) { ?>
-            <div class="listing-tile property-search col-sm-6 col-lg-3 text-center">
+            <div class="listing-tile property-search col-sm-6 col-lg-3 text-center mb-5">
                 <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
             </div>
             <?php } ?>

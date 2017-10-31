@@ -24,7 +24,8 @@ if (isset($_GET['mls'])) {
         if($isOurs){
             $agents = new Agents;
             $mlsData = $agents->getAgentById($listingInfo->listing_member_shortid);
-            $agentData = $agents->assembleAgentData($agentData->data[0]->full_name);
+            //echo '<pre>',print_r($mlsData),'</pre>';
+            $agentData = $agents->assembleAgentData($mlsData->data[0]->first_name. ' ' .$mlsData->data[0]->last_name);
         }
 
         $title = $listingInfo->street_number . ' ' . $listingInfo->street_name;
