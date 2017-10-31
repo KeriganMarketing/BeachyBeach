@@ -54,7 +54,7 @@ class HomeValuation extends Leads
 
         }
 
-        parent::set($this->adminEmail,'bbaird85@gmail.com'); //temp
+        //parent::set($this->adminEmail,'bbaird85@gmail.com'); //temp
         parent::addToDashboard($dataSubmitted);
         if(parent::validateSubmission($dataSubmitted)){
             echo '<div class="alert alert-success" role="alert">

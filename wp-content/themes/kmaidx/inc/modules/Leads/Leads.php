@@ -27,7 +27,7 @@ class Leads
         $this->siteName   = 'Beachy Beach Real Estate';
 
         //separate multiple email addresses with a ';'
-        $this->adminEmail = 'bbaird85@gmail.com';
+        $this->adminEmail = 'info@beachybeach.com';
         $this->ccEmail    = ''; //Admin email only
         $this->bccEmail   = 'bbaird85@gmail.com';
 
