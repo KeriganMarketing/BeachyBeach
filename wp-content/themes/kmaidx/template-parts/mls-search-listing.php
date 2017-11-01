@@ -1,5 +1,5 @@
 
-        <div class="listing-tile-container">
+        <div class="listing-tile-container <?php echo $result->class; ?>">
             <a class="listing-link" href="/listing?mls=<?php echo $result->mls_account; ?>"></a>
             <div class="embed-responsive embed-responsive-16by9">
                 <div class="embed-responsive-item listing-tile-photo">
