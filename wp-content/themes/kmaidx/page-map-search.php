@@ -409,9 +409,13 @@ get_footer();
             propertyType: '<?php echo (isset($_GET['propertyType']) ? $_GET['propertyType'] : null); ?>',
             minPrice: '<?php echo (isset($_GET['minPrice']) ? $_GET['minPrice'] : null); ?>',
             maxPrice: '<?php echo (isset($_GET['maxPrice']) ? $_GET['maxPrice'] : null); ?>',
+            sq_ft: '<?php echo (isset($_GET['sq_ft']) ? $_GET['sq_ft'] : null); ?>',
+            acreage: '<?php echo (isset($_GET['acreage']) ? $_GET['acreage'] : null); ?>',
             bathrooms: '<?php echo (isset($_GET['bathrooms']) ? $_GET['bathrooms'] : null); ?>',
             bedrooms: '<?php echo (isset($_GET['bedrooms']) ? $_GET['bedrooms'] : null); ?>',
             status: 'Active',
+            waterfront: '<?php echo (isset($_GET['waterfront']) ? $_GET['waterfront'] : null); ?>',
+            waterfront: '<?php echo (isset($_GET['pool']) ? $_GET['pool'] : null); ?>',
         },
         success: function (data) {
             refreshMap(data);
