@@ -82,25 +82,23 @@ get_header(); ?>
         }]];
 
     //load property template on click
-    function openProperty(mlsnum, lat, lng){
-        var pinLocation = new google.maps.LatLng(lat, lng);
-        var requestedDoc = '<?php echo get_template_directory_uri() ?>/template-parts/mls-map-listing.php',
-            xhttp = new XMLHttpRequest();
+    function bindPropertyWindow(marker, mlsnum, pinLocation){
+        marker.addListener('click', function() {
+            var requestedDoc = '<?php echo get_template_directory_uri() ?>/template-parts/mls-map-listing.php',
+              xhttp = new XMLHttpRequest();
 
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var response = this.responseText.replace(/(\r\n|\n|\r)/gm,"");
-                infowindow.close(); // Close previously opened infowindow
-                infowindow.setContent('<div class="listing-tile map-search">' + response + '</div>');
-                infowindow.setPosition(pinLocation);
-                infowindow.open(map);
-
-                console.log(pinLocation + ' ' + mlsnum)
-            }
-        };
-        xhttp.open("GET", requestedDoc + '?mls=' + mlsnum, true);
-        xhttp.send();
-
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = this.responseText.replace(/(\r\n|\n|\r)/gm, "");
+                    infowindow.close(); // Close previously opened infowindow
+                    infowindow.setContent('<div class="listing-tile map-search">' + response + '</div>');
+                    infowindow.setPosition(pinLocation);
+                    infowindow.open(map);
+                }
+            };
+            xhttp.open("GET", requestedDoc + '?mls=' + mlsnum, true);
+            xhttp.send();
+        });
     }
 
     function refreshMap(data) {
@@ -117,8 +115,8 @@ get_header(); ?>
                 status = data[i].status;
             if(lat > 29 && lat < 32 && lng > -90 && lng < -83) {
 
-                var pin
-                    location;
+                var pinLocation =  new google.maps.LatLng(parseFloat(lat),parseFloat(lng)),
+                pin;
 
                 switch(type) {
                     case 'G':
@@ -138,18 +136,13 @@ get_header(); ?>
                         pin = 'http://mt.googleapis.com/vt/icon/name=icons/spotlight/spotlight-poi.png&scale=1';
                 }
 
-                pinLocation =  new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
-
                 marker = new google.maps.Marker({
                     position: pinLocation,
                     map: map,
                     icon: pin
                 });
 
-                marker.addListener('click', function(){
-                    openProperty(mlsnum, lat, lng)
-                });
-
+                bindPropertyWindow(marker, mlsnum, pinLocation);
                 markers.push(marker);
 
             }

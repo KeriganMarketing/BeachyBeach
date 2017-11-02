@@ -761,7 +761,7 @@ div#smart-search-box p.range-text {
 }
 
 div#smart-search-box p.range-text span.slider-num {
-    font-family:'Lato';
+    font-family:'Lato', sans-serif;
     font-weight:700;
     font-size:20px;
 }
