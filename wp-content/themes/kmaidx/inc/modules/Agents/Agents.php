@@ -10,6 +10,7 @@ class Agents {
 	public $queryvar;
 	public $agentArray;
 	public $officeId;
+	protected $agentData;
 
 	public function __construct() {
 	}
@@ -224,32 +225,27 @@ class Agents {
 
     public function setAgentSeo( $agentData ){
 
-	    global $metaTitle;
-        $metaTitle = $agentData['name'] . ' | ' . $agentData['title'] . ' | ' . get_bloginfo('name');
-        add_filter('wpseo_title', function ($metaTitle) {
-            return $metaTitle;
-        }, 100, 1);
+	    $this->agentData = $agentData;
 
-        global $metaDescription;
-        $metaDescription = strip_tags($agentData['bio']);
-        add_filter('wpseo_metadesc', function ($metaDescription) {
-            return $metaDescription;
-        }, 100, 1);
+        add_filter('wpseo_title', function () {
+            return $this->agentData['name'] . ' | ' . $this->agentData['title'] . ' | ' . get_bloginfo('name');
+        });
 
-        global $ogPhoto;
-        $ogPhoto = $agentData['thumbnail'];
-        add_filter('wpseo_opengraph_image', function ($ogPhoto) {
-            return $ogPhoto;
-        }, 100, 1);
+        add_filter('wpseo_metadesc', function () {
+            return strip_tags($this->agentData['bio']);
+        });
 
-        global $ogUrl;
-        $ogUrl = get_the_permalink();
-        add_filter('wpseo_canonical',  function ($ogUrl) {
-            return $ogUrl;
-        }, 100, 1);
-        add_filter('wpseo_opengraph_url', function ($ogUrl) {
-            return $ogUrl;
-        }, 100, 1);
+        add_filter('wpseo_opengraph_image', function () {
+            return $this->agentData['thumbnail'];
+        });
+
+        add_filter('wpseo_canonical',  function () {
+            return get_the_permalink();
+        });
+
+        add_filter('wpseo_opengraph_url', function () {
+            return get_the_permalink();
+        });
 
     }
 

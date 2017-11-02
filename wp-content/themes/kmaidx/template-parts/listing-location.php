@@ -6,9 +6,9 @@
  * Time: 2:08 PM
  */
 ?>
-<div class="col" >
-	<h3>Location Information</h3>
-	<table class="table table-striped listing-data">
+<div class="col mb-2" >
+    <div class="card" style="border-bottom:1px solid #ddd;">
+	<table class="table table-striped listing-data mb-0">
 		<tbody>
 		<?php if( isset($listingInfo->lot_description) ){ ?>
             <tr><td class="title">Area</td><td class="data">$<?php echo $listingInfo->lot_description; ?></td></tr>
@@ -42,6 +42,7 @@
 		<?php } ?>
 		</tbody>
 	</table>
+</div>
 </div>
 <div class="col-md-7">
 	<script type="text/javascript">

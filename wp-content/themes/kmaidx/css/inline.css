@@ -7,6 +7,14 @@
     font-style: normal;
 }
 
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3, h1 span, h2 span, h3 span {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
 /* Bootstrap Override */
 .select2-results__option--highlighted[aria-selected],
 .custom-control-input:checked~.custom-control-indicator,
