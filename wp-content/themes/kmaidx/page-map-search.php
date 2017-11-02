@@ -406,13 +406,14 @@ get_footer();
         data: {
             qs: true,
             city: '<?php echo (isset($_GET['omniField']) ? $_GET['omniField'] : null); ?>',
-            propertyType: '<?php echo (isset($_GET['propertyType']) ? $_GET['propertyType'] : null); ?>',
+            //propertyType: '<?php echo (isset($_GET['propertyType']) ? $_GET['propertyType'] : null); ?>',
             minPrice: '<?php echo (isset($_GET['minPrice']) ? $_GET['minPrice'] : null); ?>',
             maxPrice: '<?php echo (isset($_GET['maxPrice']) ? $_GET['maxPrice'] : null); ?>',
             sq_ft: '<?php echo (isset($_GET['sq_ft']) ? $_GET['sq_ft'] : null); ?>',
             acreage: '<?php echo (isset($_GET['acreage']) ? $_GET['acreage'] : null); ?>',
             bathrooms: '<?php echo (isset($_GET['bathrooms']) ? $_GET['bathrooms'] : null); ?>',
             bedrooms: '<?php echo (isset($_GET['bedrooms']) ? $_GET['bedrooms'] : null); ?>',
+            //status: '<?php echo (isset($_GET['status']) ? $_GET['status'] : null); ?>', convert to array
             status: 'Active',
             waterfront: '<?php echo (isset($_GET['waterfront']) ? $_GET['waterfront'] : null); ?>',
             waterfront: '<?php echo (isset($_GET['pool']) ? $_GET['pool'] : null); ?>',
