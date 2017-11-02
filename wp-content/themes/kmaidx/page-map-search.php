@@ -112,7 +112,7 @@ get_header(); ?>
                 lng = data[i].longitude,
                 type = data[i].class,
                 mlsnum = data[i].mls_account,
-                status = data[i].status;
+                status = data[i].status.toLowerCase();
             if(lat > 29 && lat < 32 && lng > -90 && lng < -83) {
 
                 var pinLocation =  new google.maps.LatLng(parseFloat(lat),parseFloat(lng)),
