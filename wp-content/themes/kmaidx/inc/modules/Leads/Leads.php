@@ -332,6 +332,6 @@ class Leads
         $headers       .= 'MIME-Version: 1.0' . $eol;
         $headers       .= 'Content-type: text/html; charset=utf-8' . $eol;
 
-        mail($emailData['to'], $emailData['subject'], $emailTemplate, $headers);
+        wp_mail($emailData['to'], $emailData['subject'], $emailTemplate, $headers);
     }
 }
