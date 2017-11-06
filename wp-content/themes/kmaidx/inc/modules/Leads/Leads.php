@@ -307,7 +307,7 @@ class Leads
     protected function createEmailTemplate ($emailData)
     {
         $eol           = "\r\n";
-        $emailTemplate = file_get_contents(wp_normalize_path(get_template_directory() . '/inc/Modules/Leads/emailtemplate.php'));
+        $emailTemplate = file_get_contents(wp_normalize_path(get_template_directory() . '/inc/modules/Leads/emailtemplate.php'));
         $emailTemplate = str_replace('{headline}', $eol . $emailData['headline'] . $eol, $emailTemplate);
         $emailTemplate = str_replace('{introcopy}', $eol . $emailData['introcopy'] . $eol, $emailTemplate);
         $emailTemplate = str_replace('{data}', $eol . $emailData['leadData'] . $eol, $emailTemplate);
