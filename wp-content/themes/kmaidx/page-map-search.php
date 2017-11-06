@@ -4,6 +4,7 @@
  */
 
 use GuzzleHttp\Client;
+use Includes\Modules\MLS\QuickSearch;
 
 $client  = new Client(['base_uri' => 'http://mothership.kerigan.com/api/v1/allMapListings']);
 $raw     = $client->request(
@@ -398,6 +399,9 @@ get_footer();
 ?>
 <script async defer>
 
+    <?php
+    $propertyType = (isset($_GET['propertyType']) && $_GET['propertyType'] != '') ? implode('|', QuickSearch::getPropertyTypes($_GET['propertyType'])) : '';
+    ?>
     //get mothership data
     $.ajax({
         type: 'get',
@@ -406,7 +410,7 @@ get_footer();
         data: {
             qs: true,
             city: '<?php echo (isset($_GET['omniField']) ? $_GET['omniField'] : null); ?>',
-            //propertyType: '<?php echo (isset($_GET['propertyType']) ? $_GET['propertyType'] : null); ?>',
+            propertyType: '<?php echo $propertyType ?>',
             minPrice: '<?php echo (isset($_GET['minPrice']) ? $_GET['minPrice'] : null); ?>',
             maxPrice: '<?php echo (isset($_GET['maxPrice']) ? $_GET['maxPrice'] : null); ?>',
             sq_ft: '<?php echo (isset($_GET['sq_ft']) ? $_GET['sq_ft'] : null); ?>',

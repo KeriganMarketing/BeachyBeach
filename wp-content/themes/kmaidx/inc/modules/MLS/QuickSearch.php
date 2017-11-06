@@ -77,7 +77,7 @@ class QuickSearch
         return $results;
     }
 
-    private function getPropertyTypes($class = null)
+    public static function getPropertyTypes($class = null)
     {
         $typeArray = [
             'Single Family Home'   => ['Detached Single Family'],

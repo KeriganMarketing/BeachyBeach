@@ -37,18 +37,18 @@ class HomeValuation extends Leads
 
             $agent = new Agents();
             $agentInfo = $agent->assembleAgentData($dataSubmitted['selected_agent']);
-            parent::set($this->adminEmail,($agentInfo['email'] != '' ? $agentInfo['email'] : 'info@beachybeach.com'));
+            parent::set('adminEmail',($agentInfo['email'] != '' ? $agentInfo['email'] : 'info@beachybeach.com'));
             $dataSubmitted['lead_for'] = '';
 
         }elseif($dataSubmitted['lead_for'] == 'pcb'){
 
-            parent::set($this->adminEmail,'info@beachybeach.com');
+            parent::set('adminEmail','info@beachybeach.com');
             $dataSubmitted['selected_agent'] = '';
             $dataSubmitted['lead_for'] = 'Beachy Beach Real Estate';
 
         }elseif($dataSubmitted['lead_for'] == '30a'){
 
-            parent::set($this->adminEmail,'30a@beachybeach.com');
+            parent::set('adminEmail','30a@beachybeach.com');
             $dataSubmitted['selected_agent'] = '';
             $dataSubmitted['lead_for'] = 'Beachy Beach 30A';
 
