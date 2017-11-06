@@ -325,9 +325,9 @@ class Leads
     public function sendEmail ( $emailData = [] ) {
         $eol           = "\r\n";
         $emailTemplate = $this->createEmailTemplate($emailData);
-        $headers       = 'From: ' . 'Website <noreply@' . $this->domain . $eol;
-        $headers       .= (isset($this->adminCc) ? 'Cc: ' . $this->adminCc . $eol : '');
-        $headers       .= (isset($this->adminBcc) ? 'Bcc: ' . $this->adminBcc . $eol : '');
+        $headers       = 'From: ' . $emailData['from'] . $eol;
+        $headers       .= (isset($emailData['cc']) ? 'Cc: ' . $emailData['cc'] . $eol : '');
+        $headers       .= (isset($emailData['bcc']) ? 'Bcc: ' . $emailData['bcc'] . $eol : '');
         $headers       .= 'MIME-Version: 1.0' . $eol;
         $headers       .= 'Content-type: text/html; charset=utf-8' . $eol;
 
