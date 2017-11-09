@@ -120,12 +120,13 @@ class AdminLeads
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
                 <tr>
-                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                    <th scope="col" id="accounts-title" class="manage-column column-name column-primary sortable desc"><a
                                 href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
                                     class="sorting-indicator"></span></a></th>
-                    <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
-                    <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
-                    <th scope="col" id="email" class="manage-column column-address"><span>Physical Address</span></th>
+                    <th scope="col" id="accounts-phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="accounts-email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="accounts-address" class="manage-column column-address"><span>Physical Address</span></th>
+                    <th scope="col" id="accounts-date" class="manage-column column-date"><span>Last Logged In</span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -159,9 +160,10 @@ class AdminLeads
                         <td><strong><a href="tel:<?php echo $user['phone1'][0]; ?>"><?php echo $user['phone1'][0]; ?></a></strong></td>
                         <td><strong><a href="mailto:<?php echo $user['email']; ?>"><?php echo $user['email']; ?></a></strong></td>
                         <td><strong><?php echo $address; ?></strong></td>
+                        <td><?php echo date('j/n/y h:i a', strtotime($user['registered'])); ?></td>
                     </tr>
                     <tr>
-                        <td colspan="4">
+                        <td colspan="5">
                             <a target="_blank" href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>"
                                role="button" class="button button-primary" style="float: right">View
                                 All <?php echo count($user['buckets']); ?> Properties</a>
@@ -203,13 +205,14 @@ class AdminLeads
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
                 <tr>
-                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                    <th scope="col" id="info-title" class="manage-column column-name column-primary sortable desc"><a
                                 href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
                                     class="sorting-indicator"></span></a></th>
-                    <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
-                    <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
-                    <th scope="col" id="email" class="manage-column column-email"><span>MLS Number</span></th>
-                    <th scope="col" style="width:40%" id="cagent" class="manage-column column-agent"><span>Message</span></th>
+                    <th scope="col" id="info-phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="info-email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="info-mlsnumber" class="manage-column column-email"><span>MLS Number</span></th>
+                    <th scope="col" style="width:40%" id="info-agent" class="manage-column column-agent"><span>Message</span></th>
+                    <th scope="col" id="info-date" class="manage-column column-date"><span>Date Submitted</span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -221,6 +224,7 @@ class AdminLeads
                         <td><?php echo $lead['meta']['lead_info_email_address'][0]; ?></td>
                         <td><?php echo (isset($lead['meta']['lead_info_mls_number'][0]) ? $lead['meta']['lead_info_mls_number'][0] : ''); ?></td>
                         <td><?php echo (isset($lead['meta']['lead_info_message'][0]) ? $lead['meta']['lead_info_message'][0] : ''); ?></td>
+                        <td><?php echo (isset($lead['object']->post_date) ? date('j/n/y h:i a', strtotime($lead['object']->post_date)) : ''); ?></td>
                     </tr>
                 <?php }
                 ?>
@@ -233,14 +237,15 @@ class AdminLeads
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
                 <tr>
-                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                    <th scope="col" id="homeval-title" class="manage-column column-name column-primary sortable desc"><a
                                 href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
                                     class="sorting-indicator"></span></a></th>
-                    <th scope="col" id="vphone" class="manage-column column-phone"><span>Phone Number</span></th>
-                    <th scope="col" id="vemail" class="manage-column column-email"><span>Email Address</span></th>
-                    <th scope="col" id="ptype" class="manage-column column-email"><span>Property Type</span></th>
-                    <th scope="col" id="paddress" class="manage-column column-email"><span>Property Address</span></th>
-                    <th style="width:40%" scope="col" id="vcagent" class="manage-column column-details"><span>Property Details</span></th>
+                    <th scope="col" id="homeval-phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="homeval-email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="homeval-type" class="manage-column column-email"><span>Property Type</span></th>
+                    <th scope="col" id="homeval-address" class="manage-column column-email"><span>Property Address</span></th>
+                    <th style="width:40%" scope="col" id="homeval-agent" class="manage-column column-details"><span>Property Details</span></th>
+                    <th scope="col" id="homeval-date" class="manage-column column-date"><span>Date Submitted</span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -253,6 +258,7 @@ class AdminLeads
                         <td><?php echo (isset($lead['meta']['lead_info_listing_property_type'][0]) ? $lead['meta']['lead_info_listing_property_type'][0] : ''); ?></td>
                         <td><?php echo (isset($lead['meta']['lead_info_property_address'][0]) ? $lead['meta']['lead_info_property_address'][0] : ''); ?></td>
                         <td><?php echo (isset($lead['meta']['lead_info_property_details'][0]) ? $lead['meta']['lead_info_property_details'][0] : ''); ?></td>
+                        <td><?php echo (isset($lead['object']->post_date) ? date('j/n/y h:i a', strtotime($lead['object']->post_date)) : ''); ?></td>
                     </tr>
                 <?php }
                 ?>
@@ -296,19 +302,21 @@ class AdminLeads
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
                 <tr>
-                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                    <th scope="col" id="account-title" class="manage-column column-name column-primary sortable desc"><a
                                 href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
                                     class="sorting-indicator"></span></a></th>
-                    <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
-                    <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
-                    <th scope="col" id="address" class="manage-column column-address"><span>Physical Address</span></th>
-                    <th scope="col" id="agent" class="manage-column column-agent"><span>Assigned Agent</span></th>
-                    <th scope="col" id="properties" class="manage-column column-properties"></th>
+                    <th scope="col" id="account-phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="account-email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="account-address" class="manage-column column-address"><span>Physical Address</span></th>
+                    <th scope="col" id="account-agent" class="manage-column column-agent" style="width:240px;"><span>Assigned Agent</span></th>
+                    <th scope="col" id="account-properties" class="manage-column column-properties" style="width:110px;">Beachy Bucket</th>
+                    <th scope="col" id="account-date" class="manage-column column-date"><span>Last Logged In</span></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 foreach ($userData as $user) {
+                    //echo '<pre>',print_r($user),'</pre>';
                     if($user['id']!=0){
                     $user['zip'][0]            = isset($user['zip'][0]) ? $user['zip'][0] : '';
                     $user['city'][0]           = isset($user['city'][0]) ? $user['city'][0] : '';
@@ -372,9 +380,10 @@ class AdminLeads
                         <td><strong><?php echo $address; ?></strong>
                         </td>
                         <td><strong><?php echo $user['selected_agent'][0]; ?></strong> <?php echo $changeButton; ?></td>
-                        <td align="center"><a href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>"
-                                              role="button" class="button button-primary" style="float: right"
+                        <td><a href="/beachy-bucket/?users_bucket=<?php echo $user['id']; ?>"
+                                              role="button" class="button button-primary"
                                               target="_blank"><?php echo count($user['buckets']); ?> Properties</a></td>
+                        <td><?php echo date('j/n/y h:i a', strtotime($user['registered'])); ?></td>
                     </tr>
                 <?php }} ?>
                 </tbody>
@@ -386,14 +395,15 @@ class AdminLeads
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
                 <tr>
-                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                    <th scope="col" id="info-title" class="manage-column column-name column-primary sortable desc"><a
                                 href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
                                     class="sorting-indicator"></span></a></th>
-                    <th scope="col" id="phone" class="manage-column column-phone"><span>Phone Number</span></th>
-                    <th scope="col" id="email" class="manage-column column-email"><span>Email Address</span></th>
-                    <th scope="col" id="email" class="manage-column column-email"><span>MLS Number</span></th>
-                    <th scope="col" id="cagent" class="manage-column column-agent"><span>Contacted Agent/Company</span></th>
-                    <th scope="col" id="agent" class="manage-column column-agent"><span>Assigned Agent</span></th>
+                    <th scope="col" id="info-phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="info-email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="info-mlsnumber" class="manage-column column-email"><span>MLS Number</span></th>
+                    <th scope="col" id="info-company" class="manage-column column-agent"><span>Contacted Agent/Company</span></th>
+                    <th scope="col" id="info-agent" class="manage-column column-agent"><span>Assigned Agent</span></th>
+                    <th scope="col" id="info-date" class="manage-column column-date"><span>Date Submitted</span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -445,6 +455,7 @@ class AdminLeads
                             <td><?php echo (isset($lead['meta']['lead_info_mls_number'][0]) ? $lead['meta']['lead_info_mls_number'][0] : ''); ?></td>
                             <td><?php echo $leadfor; ?></td>
                             <td><strong><?php echo $assignedAgent; ?></strong> <?php echo $changeButton; ?></td>
+                            <td><?php echo (isset($lead['object']->post_date) ? date('j/n/y h:i a', strtotime($lead['object']->post_date)) : ''); ?></td>
                         </tr>
                     <?php }
                 ?>
@@ -457,15 +468,16 @@ class AdminLeads
             <table class="wp-list-table widefat fixed striped pages">
                 <thead>
                 <tr>
-                    <th scope="col" id="title" class="manage-column column-name column-primary sortable desc"><a
+                    <th scope="col" id="homeval-title" class="manage-column column-name column-primary sortable desc"><a
                                 href="?page=bb-admin&amp;orderby=name&amp;order=asc"><span>Name</span><span
                                     class="sorting-indicator"></span></a></th>
-                    <th scope="col" id="vphone" class="manage-column column-phone"><span>Phone Number</span></th>
-                    <th scope="col" id="vemail" class="manage-column column-email"><span>Email Address</span></th>
-                    <th scope="col" id="ptype" class="manage-column column-email"><span>Property Type</span></th>
-                    <th scope="col" id="paddress" class="manage-column column-email"><span>Property Address</span></th>
-                    <th scope="col" id="vcagent" class="manage-column column-agent"><span>Contacted Agent/Company</span></th>
-                    <th scope="col" id="vagent" class="manage-column column-agent"><span>Assigned Agent</span></th>
+                    <th scope="col" id="homeval-phone" class="manage-column column-phone"><span>Phone Number</span></th>
+                    <th scope="col" id="homeval-email" class="manage-column column-email"><span>Email Address</span></th>
+                    <th scope="col" id="homeval-type" class="manage-column column-email"><span>Property Type</span></th>
+                    <th scope="col" id="homeval-address" class="manage-column column-email"><span>Property Address</span></th>
+                    <th scope="col" id="homeval-company" class="manage-column column-agent"><span>Contacted Agent/Company</span></th>
+                    <th scope="col" id="homeval-agent" class="manage-column column-agent"><span>Assigned Agent</span></th>
+                    <th scope="col" id="homeval-date" class="manage-column column-date"><span>Date Submitted</span></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -520,6 +532,7 @@ class AdminLeads
                         <td><?php echo (isset($lead['meta']['lead_info_property_address'][0]) ? $lead['meta']['lead_info_property_address'][0] : ''); ?></td>
                         <td><?php echo $leadfor; ?></td>
                         <td><strong><?php echo $assignedAgent; ?></strong> <?php echo $changeButton; ?></td>
+                        <td><?php echo (isset($lead['object']->post_date) ? date('j/n/y h:i a', strtotime($lead['object']->post_date)) : ''); ?></td>
                     </tr>
                 <?php }
                 ?>
