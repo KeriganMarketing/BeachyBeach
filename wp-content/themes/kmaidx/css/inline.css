@@ -907,7 +907,7 @@ div#smart-search-box .input-group-lg>.input-group-btn>.btn {
     line-height: 1.3em;
     text-shadow: 2px 2px 0 rgba(26,110,138,.8);
     padding: 0;
-    margin: 0 0 -23px;
+    margin: 0 0 -16px;
 }
 
 @media screen and (min-width: 768px){
@@ -1123,6 +1123,7 @@ ol.comment-list li:nth-child(even) {
     border: 1px solid #999;
     border-bottom: 3px solid #24BEE4;
     height: 100%;
+    min-height: 418px;
 }
 
 .listing-tile-container:hover {
@@ -1507,8 +1508,12 @@ div#mortgage-calculator h2 {
     color: rgb( 18, 106, 143 );
     text-align: center;
     line-height:22px;
-    border-bottom: solid 1px rgba( 18, 106, 143, .5 );
-    margin:20px 0;
+    background: url('/wp-content/themes/kmaidx/img/blue-dot.png') center repeat-x;
+    margin:20px 0 40px;
+}
+div#mortgage-calculator h2 span {
+    background-color: #FFF;
+    padding:0 .5rem;
 }
 
 div#mortgage-calculator input {
@@ -1898,7 +1903,7 @@ form h3 {
 
 .listing-tile.map-search .listing-tile-container {
     border: none;
-
+    min-height: auto;
 }
 
 .card-spacer {

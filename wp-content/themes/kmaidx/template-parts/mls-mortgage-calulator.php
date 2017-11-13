@@ -14,7 +14,7 @@
             <button onclick="toggler('mortgage-caculator-box'); mortCal();" class="btn btn-lg btn-primary mb-3">Open Mortgage Calculator</button>
         </div>
         <div class="hidden-sm-down text-center">
-            <h2>Mortgage Calculator</h2>
+            <h2><span>Mortgage Calculator</span></h2>
         </div>
         <div id="mortgage-caculator-box" style="display:none" >
 		<form name="mortcalc" id="mortform" >
