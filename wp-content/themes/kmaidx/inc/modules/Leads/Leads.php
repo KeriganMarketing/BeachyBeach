@@ -29,7 +29,7 @@ class Leads
         //separate multiple email addresses with a ';'
         $this->adminEmail = 'info@beachybeach.com';
         $this->ccEmail    = ''; //Admin email only
-        $this->bccEmail   = 'bbaird85@gmail.com';
+        $this->bccEmail   = 'support@kerigan.com';
 
         //use this to merge in additional fields
         $this->assembleLeadData([
