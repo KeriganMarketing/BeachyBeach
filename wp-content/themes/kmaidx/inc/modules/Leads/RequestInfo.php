@@ -31,7 +31,7 @@ class RequestInfo extends Leads
 
             $agent = new Agents();
             $agentInfo = $agent->assembleAgentData($dataSubmitted['selected_agent']);
-            parent::set('adminEmail',($agentInfo['email'] != '' ? $agentInfo['email'] : 'info@beachybeach.com'));
+            parent::set('adminEmail', (isset($agentInfo['email_address']) && $agentInfo['email_address'] != '' ? $agentInfo['email_address'] : $this->adminEmail));
             $dataSubmitted['lead_for'] = '';
 
         }elseif($dataSubmitted['lead_for'] == 'pcb'){
