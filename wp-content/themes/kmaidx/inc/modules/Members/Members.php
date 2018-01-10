@@ -283,7 +283,7 @@ class Members {
 
 			$selectedAgent = ( isset( $currentUser['selected_agent'][0] ) ? $currentUser['selected_agent'][0] : null );
 			foreach ( $agentArray as $agent ) {
-				$agentOptions .= '<option value="' . $agent . '" ' . ( $selectedAgent == $agent ? 'selected' : '' ) . '  '.($overrideFields && $sessionAgent != $agent ? 'disabled' : '') .' >' . $agent . '</option>';
+				$agentOptions .= '<option value="' . $agent . '" ' . ( $selectedAgent == $agent || $sessionAgent == $agent ? 'selected' : '' ) . '  '.($overrideFields && $sessionAgent != $agent ? 'disabled' : '') .' >' . $agent . '</option>';
 			}
 
 			//echo '<pre>',print_r($agentArray),'</pre>';
