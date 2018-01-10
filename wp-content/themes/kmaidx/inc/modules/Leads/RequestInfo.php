@@ -3,6 +3,7 @@
 namespace Includes\Modules\Leads;
 
 use Includes\Modules\Agents\Agents;
+use Includes\Modules\MLS\FullListing;
 
 class RequestInfo extends Leads
 {
@@ -60,7 +61,63 @@ class RequestInfo extends Leads
             </div>';
             return;
         }
-        parent::sendNotifications($dataSubmitted);
+        $this->sendNotifications($dataSubmitted);
+    }
+
+    protected function sendNotifications ($leadInfo)
+    {
+        $emailAddress = (isset($leadInfo['email_address']) ? $leadInfo['email_address'] : null);
+        $fullName     = (isset($leadInfo['full_name']) ? $leadInfo['full_name'] : null);
+
+        $tableData = '';
+        foreach ($this->additionalFields as $key => $var) {
+            if($leadInfo[$key]!='') {
+                $tableData .= '<tr><td class="label"><strong>' . $var . '</strong></td><td>' . htmlentities(stripslashes($leadInfo[$key])) . '</td>';
+            }
+        }
+
+        if($leadInfo['mls_number']!=''){
+
+            $fullListing = new FullListing($leadInfo['mls_number']);
+            $listingInfo = $fullListing->create();
+
+            $tableData .= '<tr><td width="50%"><img src="' . $listingInfo->preferred_image . '" width="100%" ></td>
+            <td><table>
+                <tr><td>
+                <p>' . $listingInfo->street_number.' '.$listingInfo->street_name . '<br>
+                ' . $listingInfo->city . ', FL</p>
+                <p><strong>$' . number_format($listingInfo->price) . '</strong></p></td></tr>
+                <tr><td><a style="display: block; line-height: 20px;" href="https://beachybeach.com/listing/?mls=' . $leadInfo['mls_number'] . '" >View property</a></td></tr>
+            </table>
+            </td></tr><tr><td>&nbsp;</td></tr>';
+        }
+
+        parent::sendEmail(
+            [
+                'to'        => $this->adminEmail,
+                'from'      => $this->siteName . ' <noreply@' . $this->domain . '>',
+                'subject'   => $this->postType . ' from website',
+                'cc'        => $this->ccEmail,
+                'bcc'       => $this->bccEmail,
+                'replyto'   => $fullName . '<' . $emailAddress . '>',
+                'headline'  => 'You have a new ' . strtolower($this->postType),
+                'introcopy' => 'A ' . strtolower($this->postType) . ' was received from the website. Details are below:',
+                'leadData'  => $tableData
+            ]
+        );
+
+        parent::sendEmail(
+            [
+                'to'        => $fullName . '<' . $emailAddress . '>',
+                'from'      => $this->siteName . ' <noreply@' . $this->domain . '>',
+                'subject'   => 'Your website submission has been received',
+                'bcc'       => $this->bccEmail,
+                'headline'  => 'Thank you',
+                'introcopy' => 'We\'ll review the information you\'ve provided and get back with you as soon as we can.',
+                'leadData'  => $tableData
+            ]
+        );
+
     }
 
 }
