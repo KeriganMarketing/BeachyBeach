@@ -1,6 +1,8 @@
 <?php
 use Includes\Modules\Agents\Agents;
 
+
+
 $wpTeam     = new Agents();
 $agentData  = $wpTeam->assembleAgentData( $post->post_title );
 $wpTeam->setAgentSeo($agentData);
@@ -16,6 +18,11 @@ foreach ($agentTerms as $term) {
             'category-slug' => (isset($term->slug) ? $term->slug : null),
         )
     );
+}
+
+$referrer = (isset($_SERVER['HTTP_REFERER']) ? (strpos('https://beachybeach.com', $_SERVER['HTTP_REFERER']) == 0 ? true : false ) : false);
+if (!$referrer){
+    $_SESSION['agent_override'] = $post->post_title;
 }
 
 get_header(); ?>
