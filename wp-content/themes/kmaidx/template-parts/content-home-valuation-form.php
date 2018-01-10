@@ -75,24 +75,24 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="custom-controls-inline col-12">
 
             <label class="custom-control custom-radio mt-2 mb-2">
-                <input id="radioStacked1" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="pcb" <?= ($overrideFields ? 'readonly="readonly"' : ''); ?>>
+                <input id="radioStacked1" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="pcb" <?= ($overrideFields ? 'readonly' : ''); ?>>
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Beachy Beach Real Estate</span>
             </label>
             <label class="custom-control custom-radio">
-                <input id="radioStacked2" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="30a" <?= ($overrideFields ? 'readonly="readonly"' : ''); ?>>
+                <input id="radioStacked2" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="30a" <?= ($overrideFields ? 'readonly' : ''); ?>>
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Beachy Beach 30A Real Estate</span>
             </label>
             <label class="custom-control custom-radio">
-                <input id="select-an-agent" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="specific" <?php echo ($selectedAgent!='' ? 'checked' : ''); ?>  <?= ($overrideFields ? 'readonly="readonly"' : ''); ?>>
+                <input id="select-an-agent" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="specific" <?php echo ($selectedAgent!='' ? 'checked' : ''); ?>  <?= ($overrideFields ? 'readonly' : ''); ?>>
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Select an agent</span>
             </label>
 
             <div class="form-group <?php echo ( $selectedAgent=='' && $formSubmitted ? 'has-error' : ''); ?>" id="agent-select-dd" style="display: none; margin:0;">
                 <label for="selected_agent" class="sr-only">Your Agent</label>
-                <select class="form-control" name="selected_agent" required <?= ($overrideFields ? 'readonly="readonly"' : ''); ?>>
+                <select class="form-control" name="selected_agent" required <?= ($overrideFields ? 'readonly' : ''); ?>>
 			        <?php echo $agentOptions; ?>
                 </select>
             </div>
