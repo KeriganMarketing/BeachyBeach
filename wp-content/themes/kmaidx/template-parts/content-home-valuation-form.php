@@ -32,7 +32,7 @@ $selectedAgent = (isset($_GET['selected_agent']) && isset($_GET['reason']) && $_
 $agents     = new Agents();
 $agentArray = $agents->getAgentNames();
 foreach($agentArray as $agent){
-    $agentOptions .= '<option value="'.$agent.'" '.($selectedAgent == $agent ? 'selected' : '').' >'.$agent.'</option>';
+    $agentOptions .= '<option value="'.$agent.'" '.($selectedAgent == $agent ? 'selected' : '').' '.($overrideFields && $selectedAgent != $agent ? 'disabled' : '') .'>'.$agent.'</option>';
 }
 
 $formID                 = (isset($_POST['formID']) ? $_POST['formID'] : '');
@@ -75,24 +75,24 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
         <div class="custom-controls-inline col-12">
 
             <label class="custom-control custom-radio mt-2 mb-2">
-                <input id="radioStacked1" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="pcb" <?= ($overrideFields ? 'readonly' : ''); ?>>
+                <input id="radioStacked1" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="pcb" <?= ($overrideFields ? 'disabled' : ''); ?>>
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Beachy Beach Real Estate</span>
             </label>
             <label class="custom-control custom-radio">
-                <input id="radioStacked2" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="30a" <?= ($overrideFields ? 'readonly' : ''); ?>>
+                <input id="radioStacked2" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="30a" <?= ($overrideFields ? 'disabled' : ''); ?>>
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Beachy Beach 30A Real Estate</span>
             </label>
             <label class="custom-control custom-radio">
-                <input id="select-an-agent" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="specific" <?php echo ($selectedAgent!='' ? 'checked' : ''); ?>  <?= ($overrideFields ? 'readonly' : ''); ?>>
+                <input id="select-an-agent" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="specific" <?php echo ($selectedAgent!='' ? 'checked' : ''); ?> >
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">Select an agent</span>
             </label>
 
             <div class="form-group <?php echo ( $selectedAgent=='' && $formSubmitted ? 'has-error' : ''); ?>" id="agent-select-dd" style="display: none; margin:0;">
                 <label for="selected_agent" class="sr-only">Your Agent</label>
-                <select class="form-control" name="selected_agent" required <?= ($overrideFields ? 'readonly' : ''); ?>>
+                <select class="form-control" name="selected_agent" required>
 			        <?php echo $agentOptions; ?>
                 </select>
             </div>
