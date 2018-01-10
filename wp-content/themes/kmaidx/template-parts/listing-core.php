@@ -5,7 +5,7 @@
                 <input type="hidden" name="reason" value="Property inquiry" />
                 <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
                 <input type="hidden" name="mls_number" value="<?php echo $listingInfo->mls_account; ?>" />
-                <input type="hidden" name="selected_agent" value="<?php echo ($isOurs ? $agentData['full_name'] : ''); ?>" />
+                <input type="hidden" name="selected_agent" value="<?php echo ($isOurs ? $agentData['name'] : ''); ?>" />
                 <button type="submit" class="btn btn-primary mb-2" >Request Info</button>
             </form>
 			<?php if(is_user_logged_in()){?>
