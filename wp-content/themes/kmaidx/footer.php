@@ -8,7 +8,7 @@ use Includes\Modules\Social\SocialSettingsPage;
             <div class="container xwide">
 
                 <div class="mortgage-mobile-button hidden-md-up text-center">
-                    <button onclick="toggler('location-grid')" class="btn btn-lg btn-primary">Office Locations</button>
+                    <button onclick="toggler('location-grid');" class="btn btn-lg btn-primary">Office Locations</button>
                 </div>
                 <div class="hidden-sm-down text-center">
                     <div class="switch-title"><span>Choose Your Beachy Beach</span></div>
@@ -56,9 +56,8 @@ use Includes\Modules\Social\SocialSettingsPage;
                     </div>
                     <div class="col-md-3 my-auto justify-content-center justify-content-sm-end text-center text-sm-right">
                         <p class="siteby"><svg version="1.1" id="kma" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12.5 8.7" style="enable-background:new 0 0 12.5 8.7;" xml:space="preserve">
-                                <defs><style>.kma{fill:#b4be35;}</style></defs>
-                                <path class="kma" d="M6.4,0.1c0,0,0.1,0.3,0.2,0.9c1,3,3,5.6,5.7,7.2l-0.1,0.5c0,0-0.4-0.2-1-0.4C7.7,7,3.7,7,0.2,8.5L0.1,8.1
-                            c2.8-1.5,4.8-4.2,5.7-7.2C6,0.4,6.1,0.1,6.1,0.1H6.4L6.4,0.1z"/>
+                                <path fill="#b4be35;" class="kma" d="M6.4,0.1c0,0,0.1,0.3,0.2,0.9c1,3,3,5.6,5.7,7.2l-0.1,0.5c0,0-0.4-0.2-1-0.4C7.7,7,3.7,7,0.2,8.5L0.1,8.1
+                            c2.8-1.5,4.8-4.2,5.7-7.2C6,0.4,6.1,0.1,6.1,0.1H6.4L6.4,0.1z"></path>
                         </svg> <a href="https://keriganmarketing.com">Site by KMA</a>.</p>
                     </div>
                 </div>
