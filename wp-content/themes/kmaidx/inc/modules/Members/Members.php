@@ -274,13 +274,16 @@ class Members {
 
 			$rows = array();
 
+            $sessionAgent = (isset($_SESSION['agent_override']) ? $_SESSION['agent_override'] : null);
+            $overrideFields = (isset($sessionAgent) && $sessionAgent != '' ? true : false);
+
 			$agents       = new Agents();
 			$agentArray   = $agents->getAgentNames();
 			$agentOptions = '<option value="" selected >My Agent</option>';
 
 			$selectedAgent = ( isset( $currentUser['selected_agent'][0] ) ? $currentUser['selected_agent'][0] : null );
 			foreach ( $agentArray as $agent ) {
-				$agentOptions .= '<option value="' . $agent . '" ' . ( $selectedAgent == $agent ? 'selected' : '' ) . ' >' . $agent . '</option>';
+				$agentOptions .= '<option value="' . $agent . '" ' . ( $selectedAgent == $agent ? 'selected' : '' ) . '  '.($overrideFields && $selectedAgent != $agent ? 'disabled' : '') .' >' . $agent . '</option>';
 			}
 
 			//echo '<pre>',print_r($agentArray),'</pre>';
