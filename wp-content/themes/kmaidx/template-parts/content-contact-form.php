@@ -106,24 +106,24 @@ if( $formSubmitted ){ //FORM WAS SUBMITTED
             <div class="custom-controls-stacked">
                 <label for="lead_for" >Select an area office or specific agent.</label>
                 <label class="custom-control custom-radio">
-                    <input id="radioStacked1" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="pcb" <?= ($overrideFields ? 'disabled' : ''); ?>>
+                    <input id="radioStacked1" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="pcb" <?= ($overrideFields ? 'readonly' : ''); ?>>
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Beachy Beach Real Estate</span>
                 </label>
                 <label class="custom-control custom-radio">
-                    <input id="radioStacked2" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="30a" <?= ($overrideFields ? 'disabled' : ''); ?>>
+                    <input id="radioStacked2" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="30a" <?= ($overrideFields ? 'readonly' : ''); ?>>
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Beachy Beach 30A Real Estate</span>
                 </label>
                 <label class="custom-control custom-radio">
-                    <input id="select-an-agent" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="specific" <?php echo ($selectedAgent!='' ? 'checked' : ''); ?>  <?= ($overrideFields ? 'disabled' : ''); ?>>
+                    <input id="select-an-agent" name="lead_for" type="radio" class="custom-control-input" onclick="toggleSelect();" value="specific" <?php echo ($selectedAgent!='' ? 'checked' : ''); ?>  <?= ($overrideFields ? 'readonly' : ''); ?>>
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Select an agent</span>
                 </label>
             </div>
 			<div class="form-group <?php echo ( $selectedAgent=='' && $formSubmitted ? 'has-error' : ''); ?>" id="agent-select-dd" style="display: none">
 				<label for="selected_agent" class="sr-only">Your Agent</label>
-				<select class="form-control" name="selected_agent" required <?= ($overrideFields ? 'disabled' : ''); ?>>
+				<select class="form-control" name="selected_agent" required <?= ($overrideFields ? 'readonly' : ''); ?>>
 					<?php echo $agentOptions; ?>
 				</select>
 			</div>
