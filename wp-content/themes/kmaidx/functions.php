@@ -452,7 +452,7 @@ function loadOfficePins()
     wp_die();
 }
 
-include(wp_normalize_path(get_template_directory() . '/inc/members.php'));
+//include(wp_normalize_path(get_template_directory() . '/inc/members.php'));
 
 add_filter('get_the_archive_title', function ($title) {
 

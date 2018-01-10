@@ -17,12 +17,12 @@ class Members {
 	public function __construct() {
 
 		//Set vars
-		$this->loginPage          = 30;
-		$this->registerPage       = 84;
-		$this->passwordResetPage  = 32;
-		$this->forgotUsernamePage = 90;
-		$this->changePasswordPage = 92;
-		$this->editAccountPage    = 34;
+		$this->loginPage          = 8246;
+		$this->registerPage       = 8254;
+		$this->passwordResetPage  = 8301;
+		$this->forgotUsernamePage = 8308;
+		$this->changePasswordPage = 8315;
+		$this->editAccountPage    = 8298;
 
 		$this->setLoginForm();
 		$this->changeLoginFormRows();
@@ -197,7 +197,7 @@ class Members {
 		}, 10, 2 );
 
 		add_filter( 'wpmem_reg_link_str', function ( $str, $link ) {
-			return '<p>New? <a href="' . $link . '">Set up your Account.</a></p>';
+			return '<p>New? <a href="' . $link . '">Set up your Beachy Bucket.</a></p>';
 		}, 10, 2 );
 
 	}
