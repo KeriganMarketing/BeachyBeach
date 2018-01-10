@@ -259,29 +259,18 @@
         });
 
         marker.addListener('click', function(){
-            var requestedDoc = '/wp-content/themes/kmaidx/template-parts/mls-map-listing.php',
+            var requestedDoc = '<?php echo get_template_directory_uri() ?>/template-parts/mls-map-listing.php',
               xhttp = new XMLHttpRequest();
 
             console.log (requestedDoc);
 
-            xhttp.onreadystatechange = function() {
+            xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-
-                    var response = this.responseText.replace(/(\r\n|\n|\r)/gm,"");
-
+                    var response = this.responseText.replace(/(\r\n|\n|\r)/gm, "");
                     infowindow.close(); // Close previously opened infowindow
-                    infowindow.setOptions({
-                        padding: 0,
-                        maxWidth: 330,
-                        borderRadius: 0,
-                        arrowSize: 10,
-                        borderWidth: 0,
-                        pixelOffset: new google.maps.Size(15, 60),
-                        backgroundClassName: 'transparent',
-                        content: contentString
-                    })
-                    infowindow.setContent('<div class="map-listing text-center">' + response + '</div>');
-                    infowindow.open(map, marker);
+                    infowindow.setContent('<div class="listing-tile map-search">' + response + '</div>');
+                    infowindow.setPosition(pinLocation);
+                    infowindow.open(map);
                 }
             };
             xhttp.open("GET", requestedDoc + '?mls=' + mlsnum, true);
@@ -295,7 +284,7 @@
     }
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyDxp-f8wIi_TJuU5ZRg4Z3KS-T3nkLXYKM&callback=initMap" ></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyDxp-f8wIi_TJuU5ZRg4Z3KS-T3nkLXYKM&callback=initMap" ></script>
 <script>
 <?php
     foreach ($listings as $result) {

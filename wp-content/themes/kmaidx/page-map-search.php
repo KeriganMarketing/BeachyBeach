@@ -457,7 +457,7 @@ get_footer();
         });
         markers.push(marker);
         marker.addListener('click', function(){
-            openProperty(mlsnum, pinLocation)
+            openProperty(mlsnum, pinLocation);
         });
         //bounds.extend(pinLocation);
         //map.fitBounds(bounds);

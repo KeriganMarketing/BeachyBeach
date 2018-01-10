@@ -158,7 +158,7 @@ div.container.wide {
     /* sticker scroll */
     div#top.smaller header {
         height: 75px;
-        min-height: auto;
+        min-height: inherit;
     }
     #top.smaller div#beach-bucket {
         margin: 0;
@@ -1924,6 +1924,10 @@ form h3 {
     transition: all ease-out .5s;
 }
 
+.gm-iv-address {
+    box-sizing: content-box;
+}
+
 #map-search .gm-style-iw,
 #map-search .gm-style-iw>div,
 #map-search .gm-style-iw>div>div {
@@ -1962,6 +1966,7 @@ form h3 {
     width: 352px !important;
     height: 379px !important;
 }
+
 #map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(3),
 #map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(1),
 #map-search > div > div > div:nth-child(1) > div:nth-child(4) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(1) {

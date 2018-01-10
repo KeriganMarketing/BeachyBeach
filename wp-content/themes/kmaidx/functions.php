@@ -59,10 +59,8 @@ function getSvg($file = '')
 }
 
 if ( ! function_exists('kmaidx_setup')) :
-
     function kmaidx_setup()
     {
-
         add_action('init', 'startSession', 1);
         add_action('wp_logout', 'endSession');
         add_action('wp_login', 'endSession');

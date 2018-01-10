@@ -12,7 +12,8 @@
 
             var map,
                 bounds,
-                mapElement;
+                mapElement,
+                currentInfoWindow = null;
 
             //init map using script include callback
             function initMap() {
@@ -248,7 +249,8 @@
             }
 
             //add the pins
-            function addMarker(lat,lng,type,name, link = '') {
+            function addMarker(lat,lng,type,name, link) {
+                var link = link!='' ? link : '';
                 var pinLocation = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
                 var panorama = new google.maps.StreetViewPanorama(document.getElementById('community-map'));
                 panorama.setVisible(false);
@@ -260,6 +262,16 @@
                             '<div class="community-map-info ' + type + '">' +
                                 '<h3 class="comm-title">' + name + '</h3>' +
                                 '<div class="comm-text"><a class="btn btn-block btn-primary" href="' + link + '" >View Properties in ' + name + '</div>' +
+                            '</div>';
+
+                        break;
+
+                    case 'beach':
+
+                        var contentString =
+                            '<div class="community-map-info ' + type + '">' +
+                            '<h3 class="comm-title">' + name + '</h3>' +
+                            '<div class="comm-text"><a class="btn btn-block btn-primary" onclick="openBeachViewer(' + parseFloat(lat) + ',' + parseFloat(lng) + ')" >View the Beach</div>' +
                             '</div>';
 
                         break;
@@ -297,28 +309,35 @@
                     icon: '<?php echo get_template_directory_uri() ?>/img/'+type+'-pin.png'
                 });
 
-                marker.addListener('click', function(){
-                    if(type == 'beach'){
-
-                        panorama = map.getStreetView();
-                        panorama.setPosition(pinLocation);
-                        panorama.setPov(({
-                            heading: 265,
-                            pitch: 0
-                        }));
-
-                        panorama.setVisible(true);
-
-                    }else {
-                        infowindow.open(map, marker);
+                marker.addListener('mouseover', function(){
+                    if (currentInfoWindow != null) {
+                        currentInfoWindow.close();
                     }
+                    infowindow.open(map, marker);
+                    currentInfoWindow = infowindow;
                 });
+
+
 
                 bounds.extend(pinLocation);
                 //map.fitBounds(bounds);
 
             }
 
+            function openBeachViewer(lat, lng){
+
+                var pinLocation = new google.maps.LatLng(parseFloat(lat),parseFloat(lng));
+
+                panorama = map.getStreetView();
+                panorama.setPosition(pinLocation);
+                panorama.setPov(({
+                    heading: 265,
+                    pitch: 0
+                }));
+
+                panorama.setVisible(true);
+            }
+
         </script>
         <div id="community-map" ></div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxp-f8wIi_TJuU5ZRg4Z3KS-T3nkLXYKM&callback=initMap" ></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxp-f8wIi_TJuU5ZRg4Z3KS-T3nkLXYKM&callback=initMap" ></script>
