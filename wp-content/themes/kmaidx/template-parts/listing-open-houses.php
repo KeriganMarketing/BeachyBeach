@@ -8,7 +8,7 @@
             <div class="card-block">
                 <p class="card-text"><strong>Date:</strong> <?php echo date('M j, Y', strtotime($openHouse->event_start)); ?><br>
                 <strong>Time:</strong> <?php echo date('h:s a', strtotime($openHouse->event_start)); ?> - <?php echo date('h:s a', strtotime($openHouse->event_end)); ?></p>
-                <a href="https://www.google.com/maps/place/<?php echo $addressString; ?>" class="card-link">Get Directions</a>
+                <a target="_blank" href="https://www.google.com/maps/place/<?php echo $addressString; ?>" class="btn btn-default btn-sm card-link">Get Directions</a>
             </div>
         </div>
     <?php } ?>
