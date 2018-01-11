@@ -1,4 +1,3 @@
-
         <div class="listing-tile-container <?php echo $result->class; ?>">
             <a class="listing-link" href="/listing?mls=<?php echo $result->mls_account; ?>"></a>
             <div class="embed-responsive embed-responsive-16by9">
@@ -12,6 +11,9 @@
                     <?php } ?>
                     <?php if ($result->status == 'Contingent') { ?>
                         <span class="status-flag contingent">SALE CONTINGENT</span>
+                    <?php } ?>
+                    <?php if ($result->has_open_houses == 1) { ?>
+                        <span class="status-flag contingent">OPEN HOUSE</span>
                     <?php } ?>
                     <img src="<?php echo ($result->preferred_image != '' ? $result->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.png' ); ?>"
                          class="img-fluid lazy"
