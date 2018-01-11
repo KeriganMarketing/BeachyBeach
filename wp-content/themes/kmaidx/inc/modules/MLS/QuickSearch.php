@@ -36,6 +36,7 @@ class QuickSearch
         $page         = $this->searchCriteria['pg'] ?? 1;
         $sortBy       = $this->searchCriteria['sortBy'] ?? 'date_modified';
         $orderBy      = $this->searchCriteria['orderBy'] ?? 'DESC';
+        $openHouses   = $this->searchCriteria['openHouses'] ?? '';
         $status       = '';
 
         /*
@@ -70,6 +71,7 @@ class QuickSearch
             .'&page='.         $page
             .'&sortBy='.       $sortBy
             .'&orderBy='.      $orderBy
+            .'&openHouses='.    $openHouses
         );
 
         $results = json_decode($apiCall->getBody());

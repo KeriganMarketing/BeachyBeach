@@ -18,8 +18,8 @@ use Includes\Modules\MLS\BeachyBucket;
 $currentPage  = (isset($_GET['pg']) ? $_GET['pg'] : 1);
 $searchCriteria = (isset($_GET['qs']) ? $_GET : [
     'omniField'    => '',
-    'status'       => 'Active',
-    'propertyType' => 'Commercial',
+    'status'       => '',
+    'openHouses'   => 1,
     'minPrice'     => 0,
     'maxPrice'     => 9000000000,
     'pg'           => $currentPage
@@ -32,6 +32,8 @@ $lastPage     = $results->last_page;
 $totalResults = $results->total;
 
 $currentUrl   = preg_replace("/&pg=\d+/", "", $_SERVER['REQUEST_URI']) . (isset($_GET['qs']) ? '' : '?browse=true');
+
+//echo '<pre>',print_r($listings),'</pre>';
 
 get_header(); ?>
 <div id="content">

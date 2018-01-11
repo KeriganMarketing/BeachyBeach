@@ -49,7 +49,7 @@ get_header(); ?>
     <div class="container wide" >
         <div class="row">
             <div class="col">
-				<?php get_template_part( 'template-parts/mls', 'searchbar' ); ?>
+                <?php include(locate_template('template-parts/mls-searchbar.php')); ?>
             </div>
         </div>
         <div class="row">

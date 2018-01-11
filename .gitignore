@@ -8,3 +8,5 @@ tags
 .user.ini
 php.ini
 */cache/
+wp-content/uploads/
+wp-content/plugins/
