@@ -74,7 +74,7 @@ class Members {
 				'remember_check'    => false,
 				'n'                 => "\n",
 				't'                 => "\t",
-				'redirect_to'       => "/my-account/",
+				'redirect_to'       => "/beachy-bucket/",
 				'login_form_action' => true,
 				'heading'           => 'Login',
 				'button_text'       => 'Log In',
@@ -172,7 +172,7 @@ class Members {
 	private function changePageLinks() {
 
 		add_filter( 'wpmem_forgot_link', function ( $str ) {
-			return '/my-account/reset-password/';
+			return '/beachy-bucket/reset-password/';
 		} );
 
 		add_filter( 'wpmem_forgot_link_str', function ( $str, $link ) {
@@ -181,11 +181,11 @@ class Members {
 
 
 		add_filter( 'wpmem_username_link', function ( $str ) {
-			return '/my-account/forgot-username/';
+			return '/beachy-bucket/forgot-username/';
 		} );
 
 		add_filter( 'wpmem_reg_link', function ( $str ) {
-			return '/my-account/register/';
+			return '/beachy-bucket/register/';
 		} );
 
 	}
