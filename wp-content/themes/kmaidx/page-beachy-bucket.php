@@ -21,11 +21,29 @@ if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
 
-            <?php while (have_posts()) : the_post();
+            <?php
+            if(!is_user_logged_in()) {
+                while (have_posts()) : the_post();
 
-                get_template_part('template-parts/content', 'page');
+                    get_template_part('template-parts/content', 'page');
 
-            endwhile; ?>
+                endwhile;
+            }else{ ?>
+            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+                <header class="entry-header">
+                    <div class="container wide">
+                        <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+                    </div>
+                </header><!-- .entry-header -->
+
+                <div class="entry-content">
+                    <div class="container wide">
+                        <p>&nbsp;</p>
+                    </div>
+                </div><!-- .entry-content -->
+
+            </article><!-- #post-## -->
             <div class="container wide">
                 <div class="account-actions text-right">
                     <a class="btn btn-sm btn-primary mr-1" href="/beachy-bucket/edit-account/">Edit my account information</a>
@@ -33,10 +51,10 @@ if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
                 </div>
                 <hr>
             </div>
-
+            <?php } ?>
         </main><!-- #main -->
     </div><!-- #primary -->
-
+    <?php if(is_user_logged_in()) { ?>
     <div class="container wide">
         <p>&nbsp;</p>
         <div class="row justify-content-center">
@@ -74,6 +92,7 @@ if (isset($_POST['user_id']) && isset($_POST['mls_account'])) {
             } ?>
         </div>
     </div>
+    <?php } ?>
 </div>
 
 <?php get_footer();
