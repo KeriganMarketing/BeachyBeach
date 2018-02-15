@@ -92,7 +92,7 @@ class ListingUpdated
             $tableData .= '<tr><td width="50%"><img src="' . $listingInfo->preferred_image . '" width="100%" ></td>
             <td><table>
                 <tr><td>
-                <p>' . $listingInfo->street_number.' '.$listingInfo->street_name . '<br>
+                <p>' . $listingInfo->street_number.' '.$listingInfo->street_name .' '.$listingInfo->street_suffix .  '<br>
                 ' . $listingInfo->city . ', FL</p>
                 <p><strong>$' . number_format($listingInfo->price) . '</strong></p></td></tr>
                 <tr><td><a style="display: block; line-height: 20px;" href="https://beachybeach.com/listing/?mls=' . $mlsId . '" >View property</a></td></tr>

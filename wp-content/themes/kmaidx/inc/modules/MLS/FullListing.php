@@ -80,7 +80,7 @@ class FullListing
         $this->listingInfo = $listingInfo;
 
         add_filter('wpseo_title', function () {
-            $title = $this->listingInfo->street_number . ' ' . $this->listingInfo->street_name;
+            $title = $this->listingInfo->street_number . ' ' . $this->listingInfo->street_name .' '. $listingInfo->street_suffix;
             $title = ($this->listingInfo->unit_number != '' ? $title . ' ' . $this->listingInfo->unit_number : $title);
             $metaTitle = $title . ' | $' . number_format($this->listingInfo->price) . ' | ' . $this->listingInfo->city . ' | ' . get_bloginfo('name');
             return $metaTitle;
