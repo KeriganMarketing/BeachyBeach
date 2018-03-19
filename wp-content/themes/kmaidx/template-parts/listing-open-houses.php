@@ -1,4 +1,5 @@
 <?php
+if(count($openHouses)>0){
 ?>
 <h2>Upcoming Open Houses</h2>
 <div class="card-columns">
@@ -13,3 +14,4 @@
         </div>
     <?php } ?>
 </div>
+<?php } ?>
