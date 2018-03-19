@@ -27,7 +27,7 @@ if (isset($_GET['mls'])) {
             $agentData = $agents->assembleAgentData($mlsData->data[0]->first_name . ' ' . $mlsData->data[0]->last_name);
         }
 
-        $title = $listingInfo->street_number . ' ' . $listingInfo->street_name;
+        $title = $listingInfo->street_number . ' ' . $listingInfo->street_name .' '. $listingInfo->street_suffix;
         if ($listingInfo->unit_number != '') {
             $title = $title . ' ' . $listingInfo->unit_number;
         }

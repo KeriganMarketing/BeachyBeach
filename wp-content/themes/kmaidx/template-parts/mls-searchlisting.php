@@ -45,7 +45,7 @@ foreach ($results as $result) { ?>
             <div class="tile-info">
 
                 <div class="tile-section">
-                    <span class="addr1"><?php echo $result->street_number . ' ' . $result->street_name; ?></span><?php
+                    <span class="addr1"><?php echo $result->street_number . ' ' . $result->street_name .' '. $result->street_suffix; ?></span><?php
                     if ($result->unit_number != '') { ?><span class="unit">, <?php echo $result->unit_number; ?></span><?php } ?>
                     <br><span class="city"><?php echo $result->city; ?></span>,
                     <span class="state"><?php echo $result->state; ?></span>
