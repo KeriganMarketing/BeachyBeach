@@ -61,13 +61,13 @@ use Includes\Modules\Social\SocialSettingsPage;
                     </div>
                 </div>
                 <div class="row">
-
+                <?php if(is_array($agentData['listings']) && count($agentData['listings'])>0){ ?>
                     <?php foreach ($agentData['listings'] as $result) { ?>
                         <div class="listing-tile agent col-sm-6 col-lg-3 text-center mb-5">
                             <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
                         </div>
                     <?php } ?>
-
+                <?php } ?>
                 </div>
             </div>
             <hr>
