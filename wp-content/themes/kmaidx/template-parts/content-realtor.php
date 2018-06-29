@@ -53,22 +53,50 @@ use Includes\Modules\Social\SocialSettingsPage;
 
                 </div>
             </div>
+            <?php if(is_array($agentData['listings']) && count($agentData['listings'])>0){ 
+                $activeListings = [];
+                $soldListings = [];
+
+                array_map(function($listing) use (&$activeListings, &$soldListings){
+                    if($listing->status == 'Active' || $listing->status == 'Contingent' || $listing->status == 'Pending'){ 
+                        array_push($activeListings, $listing); 
+                    }else{
+                        array_push($soldListings, $listing); 
+                    }  
+                }, $agentData['listings']);
+            } ?>
             <div id="mylistings">
+                <?php if(count($activeListings) > 0){ ?>
                 <div class="row">
                     <div class="col">
-                        <h2>My Listings</h2>
+                        <h2>My Active Listings</h2>
 			            <?php //get_template_part( 'template-parts/mls', 'sortbar' ); ?>
                     </div>
                 </div>
                 <div class="row">
-                <?php if(is_array($agentData['listings']) && count($agentData['listings'])>0){ ?>
-                    <?php foreach ($agentData['listings'] as $result) { ?>
+                    <?php foreach ($activeListings as $result) { ?>
                         <div class="listing-tile agent col-sm-6 col-lg-3 text-center mb-5">
                             <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
                         </div>
                     <?php } ?>
-                <?php } ?>
                 </div>
+                <?php } ?>
+
+                <?php if(count($soldListings) > 0){ ?>
+                <div class="row">
+                    <div class="col">
+                        <h2>Listings I've sold</h2>
+			            <?php //get_template_part( 'template-parts/mls', 'sortbar' ); ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <?php foreach ($soldListings as $result) { ?>
+                        <div class="listing-tile agent col-sm-6 col-lg-3 text-center mb-5">
+                            <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
+                        </div>
+                    <?php } ?>
+                </div>
+                <?php } ?>
             </div>
             <hr>
             <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
