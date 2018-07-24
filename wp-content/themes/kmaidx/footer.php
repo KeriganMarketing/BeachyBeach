@@ -2,7 +2,7 @@
 use Includes\Modules\Social\SocialSettingsPage;
 
 ?>
-
+<script async src="https://i.simpli.fi/dpx.js?cid=151523&action=100&segment=RetargetingBeachyBeach&m=1&sifi_tuid=72047"></script>
     <div id="sticky-footer" class="unstuck">
         <div id="bot">
             <div class="container xwide">
