@@ -20,15 +20,20 @@ get_header(); ?>
 	    <?php get_template_part( 'template-parts/mls', 'quick-search' ); ?>
     </div>
     <div class="container">
-    <div id="map-header" >
-        <p>Explore Our Communities</p>
-        <span class="hidden-md-down">
-        <span id="office-toggle" class="map-toggles">Beachy Beach Office</span>
-        <span id="neighborhood-toggle" class="map-toggles">Search by neighborhood</span>
-        <span id="beach-toggle" class="map-toggles">View the beaches</span>
-        </span>
-    </div>
-    <?php get_template_part( 'template-parts/mls', 'community-map' ); ?>
+        <div id="map-header" >
+            <p class="text-center text-md-left" >Explore Our Communities</p>
+            <span class="hidden-md-down">
+            <span id="office-toggle" class="map-toggles">Beachy Beach Office</span>
+            <span id="neighborhood-toggle" class="map-toggles">Search by neighborhood</span>
+            <span id="beach-toggle" class="map-toggles">View the beaches</span>
+            </span>
+        </div>
+        <div class="hidden-sm-down">
+            <?php get_template_part( 'template-parts/mls', 'community-map' ); ?>
+        </div>
+        <div class="hidden-md-up" style="margin-bottom:1rem;">
+            <a href="https://beachybeach.com/hot-communities/" class="btn btn-primary">View Map</a>
+        </div>
     </div>
 </div>
 <?php
