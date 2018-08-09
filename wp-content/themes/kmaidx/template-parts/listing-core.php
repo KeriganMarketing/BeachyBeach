@@ -16,6 +16,25 @@
                 </form>
 			<?php } ?>
             <button type="button" class="btn btn-primary hidden-md-up mb-2" data-toggle="modal" data-target="#lightbox" >View more photos</button>
+
+            <div class="social-sharing" style="padding: .5rem 0;">
+                <div class="fb-share-button" 
+                    data-href="<?php echo "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" 
+                    data-layout="button" 
+                    data-size="large" 
+                    data-mobile-iframe="false"
+                    ><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                </div>
+                <div 
+                    class="fb-like" 
+                    data-href="<?php echo "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" 
+                    data-layout="button" 
+                    data-action="like" 
+                    data-size="large" 
+                    data-show-faces="false" 
+                    data-share="false"
+                ></div>
+            </div>
         </div>
     </div>
     <div class="col-md-6 flex-order-md-first text-center text-md-left">
