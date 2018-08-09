@@ -78,6 +78,7 @@ class FullListing
     {
 
         $this->listingInfo = $listingInfo;
+        $image = getimagesize($this->listingInfo->preferred_image);
 
         add_filter('wpseo_title', function () {
             $title = $this->listingInfo->street_number . ' ' . $this->listingInfo->street_name .' '. $this->listingInfo->street_suffix;
@@ -92,6 +93,14 @@ class FullListing
 
         add_filter('wpseo_opengraph_image', function () {
             return ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+        });
+
+        add_filter( 'wpseo_og_og_image_width', function (){
+            return $image['0'];
+        });
+
+        add_filter( 'wpseo_og_og_image_height', function (){
+            return $image['1'];
         });
 
         add_filter('wpseo_canonical',  function () {
