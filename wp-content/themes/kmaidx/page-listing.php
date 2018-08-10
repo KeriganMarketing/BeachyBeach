@@ -53,7 +53,7 @@ get_header(); ?>
                     <?php } else { ?><h1>404</h1><?php } ?>
                 </div>
             </header><!-- .entry-header -->
-
+            
             <div class="entry-content">
                 <div class="container wide">
                     <?php if ($listingInfo) { ?>

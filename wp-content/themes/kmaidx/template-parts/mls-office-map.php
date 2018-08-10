@@ -27,212 +27,212 @@
                     center: myLatLng,
                     disableDefaultUI: true,
                     // This is where you would paste any style found on Snazzy Maps.
-                    styles: [
-                        {
-                            "featureType": "all",
-                            "elementType": "labels",
-                            "stylers": [
-                                {
-                                    "visibility": "off"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "administrative",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "visibility": "off"
-                                },
-                                {
-                                    "color": "#efebe2"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "landscape",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#efebe2"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#efebe2"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi.attraction",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#efebe2"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi.business",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#efebe2"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi.government",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#dfdcd5"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi.medical",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#dfdcd5"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi.park",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#bad294"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi.place_of_worship",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#efebe2"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi.school",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#efebe2"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "poi.sports_complex",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#efebe2"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "road",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "visibility": "on"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "road.highway",
-                            "elementType": "geometry.fill",
-                            "stylers": [
-                                {
-                                    "color": "#ffffff"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "road.highway",
-                            "elementType": "geometry.stroke",
-                            "stylers": [
-                                {
-                                    "visibility": "on"
-                                },
-                                {
-                                    "color": "#dedede"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "road.highway.controlled_access",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "visibility": "on"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "road.arterial",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "visibility": "on"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "road.arterial",
-                            "elementType": "geometry.fill",
-                            "stylers": [
-                                {
-                                    "color": "#ffffff"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "road.local",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "visibility": "on"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "road.local",
-                            "elementType": "labels.icon",
-                            "stylers": [
-                                {
-                                    "visibility": "off"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "transit",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "visibility": "off"
-                                }
-                            ]
-                        },
-                        {
-                            "featureType": "water",
-                            "elementType": "all",
-                            "stylers": [
-                                {
-                                    "color": "#a5d7e0"
-                                }
-                            ]
-                        }
-                    ]
+                    // styles: [
+                    //     {
+                    //         "featureType": "all",
+                    //         "elementType": "labels",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "off"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "administrative",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "off"
+                    //             },
+                    //             {
+                    //                 "color": "#efebe2"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "landscape",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#efebe2"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#efebe2"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi.attraction",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#efebe2"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi.business",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#efebe2"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi.government",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#dfdcd5"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi.medical",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#dfdcd5"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi.park",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#bad294"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi.place_of_worship",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#efebe2"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi.school",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#efebe2"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "poi.sports_complex",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#efebe2"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "road",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "on"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "road.highway",
+                    //         "elementType": "geometry.fill",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#ffffff"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "road.highway",
+                    //         "elementType": "geometry.stroke",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "on"
+                    //             },
+                    //             {
+                    //                 "color": "#dedede"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "road.highway.controlled_access",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "on"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "road.arterial",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "on"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "road.arterial",
+                    //         "elementType": "geometry.fill",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#ffffff"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "road.local",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "on"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "road.local",
+                    //         "elementType": "labels.icon",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "off"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "transit",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "visibility": "off"
+                    //             }
+                    //         ]
+                    //     },
+                    //     {
+                    //         "featureType": "water",
+                    //         "elementType": "all",
+                    //         "stylers": [
+                    //             {
+                    //                 "color": "#a5d7e0"
+                    //             }
+                    //         ]
+                    //     }
+                    // ]
                 };
 
                 // Get the HTML DOM element that will contain your map
@@ -303,4 +303,5 @@
 
         </script>
         <div id="office-map"></div>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxp-f8wIi_TJuU5ZRg4Z3KS-T3nkLXYKM&callback=initMap" ></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_API_KEY; ?>&callback=initMap" ></script>
+        <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap" ></script> -->
