@@ -80,6 +80,12 @@ class FullListing
         $this->listingInfo = $listingInfo;
         $image = getimagesize($this->listingInfo->preferred_image);
 
+        //echo '<pre>',print_r($this->listingInfo),'</pre>';
+
+        $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+        $imageParts = getimagesize ( $image );
+        //echo '<pre>',print_r($imageParts),'</pre>';
+
         add_filter('wpseo_title', function () {
             $title = $this->listingInfo->street_number . ' ' . $this->listingInfo->street_name .' '. $this->listingInfo->street_suffix;
             $title = ($this->listingInfo->unit_number != '' ? $title . ' ' . $this->listingInfo->unit_number : $title);
@@ -92,15 +98,35 @@ class FullListing
         });
 
         add_filter('wpseo_opengraph_image', function () {
-            return ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+            return null;
+        });
+
+        add_action( 'wpseo_add_opengraph_images', function() {
+
+            //echo '<meta property="og:latitude" content="' .  $this->listingInfo->latitude . '" />', "\n";
+            //echo '<meta property="og:longitude" content="' .  $this->listingInfo->longitude . '" />', "\n";
+            //echo '<meta property="og:street_address" content="' .  $this->listingInfo->full_address . ', ' . $this->listingInfo->state . '" />', "\n";
+
+            foreach($this->listingInfo->photos as $image){
+                echo '<meta property="og:image" content="' .  $image->url . '" />', "\n";
+                echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
+            }
+
+            $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+            $imageParts = getimagesize ( $image );
+
+            echo '<meta property="og:image" content="' .  $this->listingInfo->preferred_image . '" />', "\n";
+            echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
+            echo '<meta property="og:image:width" content="' .  $imageParts['0'] . '" />', "\n";
+            echo '<meta property="og:image:height" content="' .  $imageParts['1'] . '" />', "\n";
         });
 
         add_filter( 'wpseo_og_og_image_width', function (){
-            return $image['0'];
+            return null;          
         });
 
         add_filter( 'wpseo_og_og_image_height', function (){
-            return $image['1'];
+            return null;
         });
 
         add_filter('wpseo_canonical',  function () {
