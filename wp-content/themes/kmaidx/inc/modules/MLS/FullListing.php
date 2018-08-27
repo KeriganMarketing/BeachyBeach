@@ -80,7 +80,7 @@ class FullListing
         $this->listingInfo = $listingInfo;
         $image = getimagesize($this->listingInfo->preferred_image);
 
-        //echo '<pre>',print_r($this->listingInfo),'</pre>';
+        echo '<pre>',print_r($this->listingInfo),'</pre>';
 
         $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
         $imageParts = getimagesize ( $image );
@@ -95,6 +95,11 @@ class FullListing
 
         add_filter('wpseo_metadesc', function () {
             return strip_tags($this->listingInfo->description);
+
+            echo '<meta property="og:latitude" content="' .  $this->listingInfo->latitude . '" />', "\n";
+            echo '<meta property="og:longitude" content="' .  $this->listingInfo->longitude . '" />', "\n";
+            echo '<meta property="og:street_address" content="' .  $this->listingInfo->full_address . ', ' . $this->listingInfo->state . '" />', "\n";
+
         });
 
         add_filter('wpseo_opengraph_image', function () {
@@ -104,19 +109,24 @@ class FullListing
         add_action( 'wpseo_add_opengraph_images', function() {
             foreach($this->listingInfo->photos as $image){
                 echo '<meta property="og:image" content="' .  $image->url . '" />', "\n";
+                echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
             }
+
+            $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+            $imageParts = getimagesize ( $image );
+
+            echo '<meta property="og:image" content="' .  $this->listingInfo->preferred_image . '" />', "\n";
+            echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
+            echo '<meta property="og:image:width" content="' .  $imageParts['0'] . '" />', "\n";
+            echo '<meta property="og:image:height" content="' .  $imageParts['1'] . '" />', "\n";
         });
 
         add_filter( 'wpseo_og_og_image_width', function (){
-            $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
-            $imageParts = getimagesize ( $image );
-            return $imageParts['0'];            
+            return null;          
         });
 
         add_filter( 'wpseo_og_og_image_height', function (){
-            $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
-            $imageParts = getimagesize ( $image );
-            return $imageParts['1'];
+            return null;
         });
 
         add_filter('wpseo_canonical',  function () {
