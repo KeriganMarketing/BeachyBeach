@@ -103,10 +103,10 @@ class FullListing
 
         add_action( 'wpseo_add_opengraph_images', function() {
 
-            echo '<meta property="og:latitude" content="' .  $this->listingInfo->latitude . '" />', "\n";
-            echo '<meta property="og:longitude" content="' .  $this->listingInfo->longitude . '" />', "\n";
-            echo '<meta property="og:street_address" content="' .  $this->listingInfo->full_address . ', ' . $this->listingInfo->state . '" />', "\n";
-            
+            //echo '<meta property="og:latitude" content="' .  $this->listingInfo->latitude . '" />', "\n";
+            //echo '<meta property="og:longitude" content="' .  $this->listingInfo->longitude . '" />', "\n";
+            //echo '<meta property="og:street_address" content="' .  $this->listingInfo->full_address . ', ' . $this->listingInfo->state . '" />', "\n";
+
             foreach($this->listingInfo->photos as $image){
                 echo '<meta property="og:image" content="' .  $image->url . '" />', "\n";
                 echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
