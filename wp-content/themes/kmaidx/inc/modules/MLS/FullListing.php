@@ -80,6 +80,12 @@ class FullListing
         $this->listingInfo = $listingInfo;
         $image = getimagesize($this->listingInfo->preferred_image);
 
+        //echo '<pre>',print_r($this->listingInfo),'</pre>';
+
+        $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+        $imageParts = getimagesize ( $image );
+        //echo '<pre>',print_r($imageParts),'</pre>';
+
         add_filter('wpseo_title', function () {
             $title = $this->listingInfo->street_number . ' ' . $this->listingInfo->street_name .' '. $this->listingInfo->street_suffix;
             $title = ($this->listingInfo->unit_number != '' ? $title . ' ' . $this->listingInfo->unit_number : $title);
@@ -95,12 +101,22 @@ class FullListing
             return ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
         });
 
+        add_action( 'wpseo_add_opengraph_images', function() {
+            foreach($this->listingInfo->photos as $image){
+                echo '<meta property="og:image" content="' .  $image->url . '" />', "\n";
+            }
+        });
+
         add_filter( 'wpseo_og_og_image_width', function (){
-            return $image['0'];
+            $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+            $imageParts = getimagesize ( $image );
+            return $imageParts['0'];            
         });
 
         add_filter( 'wpseo_og_og_image_height', function (){
-            return $image['1'];
+            $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+            $imageParts = getimagesize ( $image );
+            return $imageParts['1'];
         });
 
         add_filter('wpseo_canonical',  function () {
