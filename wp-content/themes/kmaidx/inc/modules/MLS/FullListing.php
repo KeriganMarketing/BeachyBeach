@@ -103,7 +103,7 @@ class FullListing
         });
 
         add_filter('wpseo_opengraph_image', function () {
-            return ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
+            return null;
         });
 
         add_action( 'wpseo_add_opengraph_images', function() {
