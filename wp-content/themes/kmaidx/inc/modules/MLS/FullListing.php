@@ -80,7 +80,7 @@ class FullListing
         $this->listingInfo = $listingInfo;
         $image = getimagesize($this->listingInfo->preferred_image);
 
-        echo '<pre>',print_r($this->listingInfo),'</pre>';
+        //echo '<pre>',print_r($this->listingInfo),'</pre>';
 
         $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
         $imageParts = getimagesize ( $image );
