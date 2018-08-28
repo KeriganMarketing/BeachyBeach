@@ -16,7 +16,7 @@ $modalImages     = '<div class="carousel-inner" role="listbox">';
 <div class="listing-photo">
     <div class="embed-responsive embed-responsive-16by9">
         <div class="main-prop-photo" style="overflow:hidden;">
-            <img src="<?php echo $preferredImage; ?>"
+            <img src="<?php echo str_replace('http://','//', $preferredImage); ?>"
                  data-src="<?php echo $preferredImage; ?>" class="embed-responsive-item"
                  alt="MLS Property <?php echo $listingInfo->mls_account; ?>" style="width:100%"/>
         </div>
@@ -26,6 +26,7 @@ $modalImages     = '<div class="carousel-inner" role="listbox">';
     <?php
 
     foreach ($listingInfo->photos as $photo) {
+        $photoUrl = str_replace('http://','//', $photo->url);
         if ($i > 0) {
             $active = '';
             if ($i + 2 <= count($listingInfo->photos)) {
@@ -38,7 +39,7 @@ $modalImages     = '<div class="carousel-inner" role="listbox">';
             $modalIndicators .= '<li data-target="#myCarousel" data-slide-to="' . ($i-1) . '" class="' . $active . '"></li>';
             $modalImages .= '
                     <div class="carousel-item ' . $active . '" >
-                      <img src="' . $photo->url . '" alt="' . $photo->photo_description . '" style="width:100%; height:auto !important; display: block;">
+                      <img src="' . $photoUrl . '" alt="' . $photo->photo_description . '" style="width:100%; height:auto !important; display: block;">
                       <div class="carousel-caption">';
 
             if ($photo->photo_description != '') {
@@ -54,7 +55,7 @@ $modalImages     = '<div class="carousel-inner" role="listbox">';
                 <div class="embed-responsive embed-responsive-16by9">
                     <div class="sub-photo-container">
                         <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox" data-slide-to="<?php echo $nextImage - 1; ?>">
-                            <img src="<?php echo $photo->url; ?>" data-src="<?php echo $photo->url; ?>"
+                            <img src="<?php echo $photoUrl; ?>" data-src="<?php echo $photoUrl; ?>"
                                  class="embed-responsive-item" style="width:100%"
                                  alt="MLS Property <?php echo $listingInfo->mls_account; ?>"
                                  data-slide-to="<?php echo $nextImage - 1; ?>"/>
