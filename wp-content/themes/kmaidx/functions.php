@@ -487,3 +487,19 @@ add_action('notifications_hook', function()
     $listingUpdated = new ListingUpdated();
     $listingUpdated->notify();
 });
+
+// Creates a shortcode for a custom search page
+// Author: Opey 9-26-18
+function custom_searchpage_shortcode( $atts ) {
+    extract( shortcode_atts( array(
+        'csomniField' => 'Panama City Beach',
+        'cspropertyType' => 'Single Family Home',
+    ), $atts, 'multilink' ) );
+  
+    return sprintf( 'Be sure to subscribe to future Elegant Themes updates <a href="%1$s">by %2$s</a>.',
+        esc_omniField( $csomniField ),
+        esc_propertyType( $cspropertyType )
+    );
+}
+add_shortcode( 'custom_searchpage', 'custom_searchpage_shortcode' );
+
