@@ -13,13 +13,15 @@ use Includes\Modules\Helpers\CleanWP;
 use Includes\Modules\Layouts\Layouts;
 use Includes\Modules\Members\Members;
 use Includes\Modules\MLS\Communities;
-use Includes\Modules\Leads\AdminLeads;
+use Includes\Modules\MLS\QuickSearch;
 use Includes\Modules\MLS\BeachyBucket;
+use Includes\Modules\Leads\AdminLeads;
 use Includes\Modules\MLS\AdminSettings;
 use Includes\Modules\Leads\RequestInfo;
 use Includes\Modules\Leads\HomeValuation;
 use Includes\Modules\Social\SocialSettingsPage;
 use Includes\Modules\Notifications\ListingUpdated;
+
 
 require('vendor/autoload.php');
 
@@ -491,15 +493,73 @@ add_action('notifications_hook', function()
 // Creates a shortcode for a custom search page
 // Author: Opey 9-26-18
 function custom_searchpage_shortcode( $atts ) {
-    extract( shortcode_atts( array(
-        'csomniField' => 'Panama City Beach',
-        'cspropertyType' => 'Single Family Home',
-    ), $atts, 'multilink' ) );
+    $a = shortcode_atts( [
+        'omni'      => 'Panama City Beach',
+        'type'      => 'Single Family Home',
+        'status'    => 'Active',
+        'min_price' => 0,
+        'max_price' => 9000000000
+    ], $atts );
+
+    $currentPage  = (isset($_GET['pg']) ? $_GET['pg'] : 1);
+    $searchCriteria = (isset($_GET['qs']) ? $_GET : [
+        'omniField'    => $a['omni'],
+        'status'       => $a['status'],
+        'propertyType' => $a['type'],
+        'minPrice'     => $a['min_price'],
+        'maxPrice'     => $a['max_price'],
+        'pg'           => $currentPage
+    ]);
+
+    $qs           = new QuickSearch($searchCriteria);
+    $results      = $qs->create();
+    $listings     = $results->data;
+    $lastPage     = $results->last_page;
+    $totalResults = $results->total;
+
+    $currentUrl   = preg_replace("/&pg=\d+/", "", $_SERVER['REQUEST_URI']) . (isset($_GET['qs']) ? '' : '?browse=true');
+
+    $output = '';
+
+    ob_start(); ?>
+    <div class="row">
+    <?php foreach ($listings as $result) { ?>
+        <div class="listing-tile property-search col-sm-6 col-lg-3 text-center mb-5">
+            <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
+        </div>
+    <?php } ?>
+    </div>
+    <nav aria-label="Search results navigation" class="text-center mx-auto">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" <?php echo(1 != $currentPage ? 'href="'.$currentUrl.'&pg=1"' : 'disabled'); ?> aria-label="First">
+                    <span>First</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" <?php echo(1 != $currentPage ? 'href="'.$currentUrl.'&pg='.($currentPage - 1).'"' : 'disabled'); ?> aria-label="Previous">
+                    <span>Previous</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <span class="page-link disabled" ><?php echo $currentPage; ?></span>
+            </li>
+            <li class="page-item">
+                <a class="page-link" <?php echo($lastPage != $currentPage ? 'href="'.$currentUrl.'&pg='.($currentPage + 1).'"' : 'disabled'); ?> aria-label="Next">
+                    <span>Next</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" <?php echo($lastPage != $currentPage ? 'href="'.$currentUrl.'&pg='.$lastPage.'"' : 'disabled'); ?> aria-label="Next">
+                    <span>Last</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
+    <?php
   
-    return sprintf( 'Be sure to subscribe to future Elegant Themes updates <a href="%1$s">by %2$s</a>.',
-        esc_omniField( $csomniField ),
-        esc_propertyType( $cspropertyType )
-    );
+    return ob_get_clean();
 }
 add_shortcode( 'custom_searchpage', 'custom_searchpage_shortcode' );
 
