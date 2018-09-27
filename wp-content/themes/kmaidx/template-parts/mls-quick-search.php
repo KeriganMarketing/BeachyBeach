@@ -26,7 +26,6 @@
                         <option value="Commercial">Commercial</option>
                         <option value="Lots / Land">Lots / Land</option>
                         <option value="Multi-Family Home">Multi-Family Home</option>
-                        <option value="Rental">Rental</option>
                         <option value="Manufactured">Manufactured</option>
                         <option value="Farms / Agricultural">Farms / Agricultural</option>
                         <option value="Other">Other</option>
