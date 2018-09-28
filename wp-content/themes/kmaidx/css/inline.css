@@ -2049,12 +2049,21 @@ form h3 {
 
 .single-post h2 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5em;
+    font-size: 3.5em;
     color: #24bee4;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
 }
 .single-post h2 a {
     font-family: 'Bebas Neue', sans-serif;
     color: #24bee4;
+}
+
+#reply-title {
+    padding-top: 1rem;
+    border-top: 1px solid #ccc;
+    margin-top: 1rem;
 }
 
 .single-post a {
