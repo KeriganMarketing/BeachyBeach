@@ -2046,3 +2046,17 @@ form h3 {
     }
 
 }
+
+.single-post h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5em;
+    color: #24bee4;
+}
+.single-post h2 a {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #24bee4;
+}
+
+.single-post a {
+    color: #24bee4;
+}
