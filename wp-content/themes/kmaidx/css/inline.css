@@ -2069,3 +2069,10 @@ form h3 {
 .single-post a {
     color: #24bee4;
 }
+
+.single-post img {
+    height: auto !important;
+    width: auto !important;
+    max-width: 100%;
+}
+
