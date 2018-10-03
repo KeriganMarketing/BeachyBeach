@@ -37,8 +37,10 @@ $bb = new BeachyBucket();
 }(document, 'script', 'facebook-jssdk'));</script>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'kmaidx' ); ?></a>
-
     <div id="top">
+        <div class="maintenance-notification" >
+            <p>October 3, 2018: Our property search is currently undergoing maintenance. We’ll be finished soon.</p>
+        </div>
         <header id="masthead" class="site-header">
             <div class="container wide nopad">
                 <div class="row no-gutters justify-content-center">

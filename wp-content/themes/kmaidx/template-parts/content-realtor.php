@@ -39,17 +39,24 @@ use Includes\Modules\Social\SocialSettingsPage;
                 </div>
                 <div class="col-sm-6 col-lg-8">
                     <div class="text-md-right">
-                    <form class="form form-inline" action="/contact/" method="get" style="display:inline-block;" >
-                        <input type="hidden" name="reason" value="Just reaching out" />
-                        <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
-                        <input type="hidden" name="selected_agent" value="<?php echo $agentData['name']; ?>" />
-                        <button type="submit" class="btn btn-primary" >Contact Me</button>
-                    </form>
-                    <a href="#mylistings" class="btn btn-primary">See My Listings</a>
+                        <form class="form form-inline" action="/contact/" method="get" style="display:inline-block;" >
+                            <input type="hidden" name="reason" value="Just reaching out" />
+                            <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
+                            <input type="hidden" name="selected_agent" value="<?php echo $agentData['name']; ?>" />
+                            <button type="submit" class="btn btn-primary" >Contact Me</button>
+                        </form>
+                        <a href="#mylistings" class="btn btn-primary">See My Listings</a>
+                        <?php if($agentData['app_id']!=''){ ?>
+                            <a href="#download-app" class="btn btn-primary">Download My App</a>
+                        <?php } ?>
                     </div>
                     <hr>
 
                     <?php the_content(); ?>
+
+                    <?php if($agentData['app_id']!=''){
+                        echo do_shortcode('[bb_app app_id="'.$agentData['app_id'].'"]');
+                    } ?>
 
                 </div>
             </div>

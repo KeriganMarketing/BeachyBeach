@@ -60,6 +60,7 @@ class Agents {
 			[
 				'Display Name' => 'text',
 				'MLS IDs'      => 'text',
+				'App ID'       => 'text',
 				'AKA'          => 'text',
 				'Title'        => 'text',
 				'Photo'        => 'image',
@@ -143,7 +144,8 @@ class Agents {
                 'cell_phone'   => (isset($item->contact_info_cell_phone) ? $item->contact_info_cell_phone : null),
                 'slug'         => (isset($item->post_name) ? $item->post_name : null),
                 'thumbnail'    => (isset($item->contact_info_photo) ? $item->contact_info_photo : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg'),
-                'short_ids'    => (isset($item->contact_info_mls_ids) ? $item->contact_info_mls_ids : null),
+				'short_ids'    => (isset($item->contact_info_mls_ids) ? $item->contact_info_mls_ids : null),
+				'app_id'    => (isset($item->contact_info_app_id) ? $item->contact_info_app_id : null),
                 'link'         => get_permalink($item->ID),
                 'bio'          => (isset($item->post_content) ? $item->post_content : null),
                 'social'       => [

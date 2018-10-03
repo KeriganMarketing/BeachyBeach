@@ -22,7 +22,6 @@ use Includes\Modules\Leads\HomeValuation;
 use Includes\Modules\Social\SocialSettingsPage;
 use Includes\Modules\Notifications\ListingUpdated;
 
-
 require('vendor/autoload.php');
 
 new CleanWP();
@@ -563,3 +562,37 @@ function custom_searchpage_shortcode( $atts ) {
 }
 add_shortcode( 'custom_searchpage', 'custom_searchpage_shortcode' );
 
+function agent_app_shortcode( $atts ){
+
+    $a = shortcode_atts( [
+        'agent_id' => 'bbkaren',
+    ], $atts );
+
+    $output = '
+    <a class="mt-4 pt-4" name="download-app" id="download-app">&nbsp;</a>
+    <hr>
+    <h3 class="pt-4">
+        <a class="bebas" href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">Download My Free Real Estate Search App</a>
+    </h3>
+    <div class="row mb-4">
+        <div class="col-sm-auto p-2 text-center">
+            <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
+                <img class="img-fluid" src="https://beachybeach.com/wp-content/uploads/2017/05/AppCap3-169x300.png" alt="Beachy Beach Search Mobile App" srcset="https://beachybeach.com/wp-content/uploads/2017/05/AppCap3-169x300.png 169w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap3-768x1366.png 768w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap3-576x1024.png 576w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap3.png 1125w" sizes="(max-width: 169px) 100vw, 169px" > 
+            </a>
+        </div>
+        <div class="col-sm-auto p-2 text-center">
+            <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
+                <img class="img-fluid" src="https://beachybeach.com/wp-content/uploads/2017/05/AppCap2-169x300.png" alt="Beachy Beach Search Mobile App" srcset="https://beachybeach.com/wp-content/uploads/2017/05/AppCap2-169x300.png 169w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap2-768x1366.png 768w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap2-576x1024.png 576w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap2.png 1125w" sizes="(max-width: 169px) 100vw, 169px" > 
+            </a>
+        </div>
+        <div class="col-sm-auto p-2 text-center">
+            <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
+                <img class="img-fluid" src="https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-169x300.png" alt="Beachy Beach Search Mobile App" srcset="https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-169x300.png 169w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-768x1366.png 768w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-576x1024.png 576w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1.png 1125w" sizes="(max-width: 169px) 100vw, 169px" >
+            </a>
+        </div>
+    </div>';
+
+    return $output;
+}
+
+add_shortcode( 'bb_app', 'agent_app_shortcode' );

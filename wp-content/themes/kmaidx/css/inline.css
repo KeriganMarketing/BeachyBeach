@@ -11,8 +11,26 @@
     font-family: 'Lato', sans-serif;
 }
 
-h1, h2, h3, h1 span, h2 span, h3 span {
+h1, h2, h3, h1 span, h2 span, h3 span, bebas {
     font-family: 'Bebas Neue', sans-serif;
+}
+
+.maintenance-notification {
+    display: none;
+    /* display: block; */
+    background-color: #42bc7b;
+    padding: .5rem .5rem .75rem;
+    color: #FFF;
+    text-align: center;
+    z-index: 5;
+}
+
+.maintenance-notification p {
+    margin: 0;
+}
+
+.smaller .maintenance-notification {
+    display: none;
 }
 
 /* Bootstrap Override */
@@ -2076,3 +2094,15 @@ form h3 {
     max-width: 100%;
 }
 
+#content .bebas {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #24bee4;
+}
+
+#download-app:before {
+    content: " ";
+    margin-top: -200px;
+    display: block;
+    position: absolute;
+    height: 200px;
+}
