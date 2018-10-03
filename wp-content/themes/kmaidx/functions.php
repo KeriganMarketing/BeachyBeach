@@ -582,7 +582,8 @@ function agent_app_shortcode( $atts ){
         <li>Save Searches and be notified when new properties that match your search come on the market</li>
         <li>It\'s FREE FOREVER!</li>
     </ul>
-    <p>Better than Zillow, Trulia or Realtor.com because the listings come directly from the local MLS in Real Time! And you can Share it with your Friends!</p>
+    <p>Better than Zillow, Trulia or Realtor.com because the listings come directly from the local MLS in Real Time!</p>
+    <p>And you can Share it with your Friends!</p>
     <div class="row mb-4">
         <div class="col-sm-auto p-2 text-center">
             <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
