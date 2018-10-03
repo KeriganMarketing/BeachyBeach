@@ -583,7 +583,6 @@ function agent_app_shortcode( $atts ){
         <li>It\'s FREE FOREVER!</li>
     </ul>
     <p>Better than Zillow, Trulia or Realtor.com because the listings come directly from the local MLS in Real Time!</p>
-    <p>And you can Share it with your Friends!</p>
     <div class="row mb-4">
         <div class="col-sm-auto p-2 text-center">
             <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
@@ -600,7 +599,8 @@ function agent_app_shortcode( $atts ){
                 <img class="img-fluid" src="https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-169x300.png" alt="Beachy Beach Search Mobile App" srcset="https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-169x300.png 169w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-768x1366.png 768w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-576x1024.png 576w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1.png 1125w" sizes="(max-width: 169px) 100vw, 169px" >
             </a>
         </div>
-    </div>';
+    </div>
+    <p>Share it with your Friends!</p>';
 
     return $output;
 }
