@@ -574,6 +574,15 @@ function agent_app_shortcode( $atts ){
     <h3 class="pt-4">
         <a class="bebas" href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">Download My Free Real Estate Search App</a>
     </h3>
+    <ul>
+        <li>Easily search for properties by area, price, bedrooms, square footage and more.</li>
+        <li>GPS enabled to show you which properties are for sale or rent near you.</li>
+        <li>Easy to use Map Search</li>
+        <li>See close by Open Houses at a glance!</li>
+        <li>Save Searches and be notified when new properties that match your search come on the market</li>
+        <li>It\'s FREE FOREVER!</li>
+    </ul>
+    <p>Better than Zillow, Trulia or Realtor.com because the listings come directly from the local MLS in Real Time! And you can Share it with your Friends!</p>
     <div class="row mb-4">
         <div class="col-sm-auto p-2 text-center">
             <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
