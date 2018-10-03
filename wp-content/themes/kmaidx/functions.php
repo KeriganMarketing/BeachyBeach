@@ -600,7 +600,7 @@ function agent_app_shortcode( $atts ){
             </a>
         </div>
     </div>
-    <p>Share it with your Friends!</p>';
+    <p><strong>Share it with your Friends!</strong></p>';
 
     return $output;
 }
