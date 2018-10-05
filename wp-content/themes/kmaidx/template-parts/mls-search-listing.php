@@ -3,7 +3,7 @@
             <div class="embed-responsive embed-responsive-16by9">
                 <div class="embed-responsive-item listing-tile-photo">
                     <?php if ($result->status == 'Sold') { ?>
-                        <span class="status-flag sold">Sold</span>
+                        <span class="status-flag sold">Sold <?php echo ($result->sold_price != '' ? 'for $' . number_format($result->sold_price) : ''); ?></span>
                     <?php } ?>
                     <?php if ($result->status == 'Pending') { ?>
                         <span class="status-flag under-contract">SALE PENDING</span>
