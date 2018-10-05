@@ -54,10 +54,6 @@ use Includes\Modules\Social\SocialSettingsPage;
 
                     <?php the_content(); ?>
 
-                    <?php if($agentData['app_id']!=''){
-                        echo do_shortcode('[bb_app agent_id="'.$agentData['app_id'].'"]');
-                    } ?>
-
                 </div>
             </div>
             <?php if(is_array($agentData['listings']) && count($agentData['listings'])>0){ 
@@ -105,10 +101,20 @@ use Includes\Modules\Social\SocialSettingsPage;
                 </div>
                 <?php } ?>
             </div>
+
+            
+
             <hr>
             <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
 
         </div>
+
+        <?php if($agentData['app_id']!=''){ ?>
+            <div class="agent-app-section">
+                <?php echo do_shortcode('[bb_app agent_id="'.$agentData['app_id'].'"]'); ?>
+            </div>
+        <?php } ?>
+
 	</div><!-- .entry-content -->
 
 </article><!-- #post-## -->
