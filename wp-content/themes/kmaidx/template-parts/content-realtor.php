@@ -43,11 +43,11 @@ use Includes\Modules\Social\SocialSettingsPage;
                             <input type="hidden" name="reason" value="Just reaching out" />
                             <input type="hidden" name="user_id" value="<?php echo get_current_user_id(); ?>" />
                             <input type="hidden" name="selected_agent" value="<?php echo $agentData['name']; ?>" />
-                            <button type="submit" class="btn btn-primary" >Contact Me</button>
+                            <button type="submit" class="btn btn-primary my-1" >Contact Me</button>
                         </form>
-                        <a href="#mylistings" class="btn btn-primary">See My Listings</a>
+                        <a href="#mylistings" class="btn btn-primary my-1">See My Listings</a>
                         <?php if($agentData['app_id']!=''){ ?>
-                            <a href="#download-app" class="btn btn-primary">Download My App</a>
+                            <a href="#download-app" class="btn btn-primary my-1">Download My App</a>
                         <?php } ?>
                     </div>
                     <hr>
@@ -110,7 +110,7 @@ use Includes\Modules\Social\SocialSettingsPage;
         </div>
 
         <?php if($agentData['app_id']!=''){ ?>
-            <div class="agent-app-section py-1 py-md-4">
+            <div class="agent-app-section py-1 py-md-4 mt-4">
                 <?php echo do_shortcode('[bb_app agent_id="'.$agentData['app_id'].'"]'); ?>
             </div>
         <?php } ?>
