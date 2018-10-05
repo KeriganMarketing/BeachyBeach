@@ -110,7 +110,7 @@ use Includes\Modules\Social\SocialSettingsPage;
         </div>
 
         <?php if($agentData['app_id']!=''){ ?>
-            <div class="agent-app-section">
+            <div class="agent-app-section py-1 py-md-4">
                 <?php echo do_shortcode('[bb_app agent_id="'.$agentData['app_id'].'"]'); ?>
             </div>
         <?php } ?>

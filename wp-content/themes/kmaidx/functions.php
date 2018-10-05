@@ -570,8 +570,8 @@ function agent_app_shortcode( $atts ){
 
     $output = '
     <a name="download-app" id="download-app">&nbsp;</a>
-    <div class="container wide" >
-        <div class="row align-items-center justify-content-between">
+    <div class="container wide pb-md-4" >
+        <div class="row align-items-center justify-content-between no-gutters">
             <div class="col-12 col-lg-6 pr-4">
                 <h3>
                     <a class="bebas" href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">Download My Free Real Estate Search App</a>
@@ -588,18 +588,18 @@ function agent_app_shortcode( $atts ){
                 <a class="btn btn-primary" href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new" >Download Now</a>
             </div>
             <div class="col-md-auto"> 
-                <div class="row mb-4">
-                    <div class="col-sm-auto p-2 text-center">
+                <div class="row py-2 py-md-0">
+                    <div class="col-4 col-sm-auto p-2 text-center justify-content-center">
                         <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
                             <img class="img-fluid" src="https://beachybeach.com/wp-content/uploads/2017/05/AppCap3-169x300.png" alt="Beachy Beach Search Mobile App" srcset="https://beachybeach.com/wp-content/uploads/2017/05/AppCap3-169x300.png 169w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap3-768x1366.png 768w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap3-576x1024.png 576w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap3.png 1125w" sizes="(max-width: 169px) 100vw, 169px" > 
                         </a>
                     </div>
-                    <div class="col-sm-auto p-2 text-center">
+                    <div class="col-4 col-sm-auto p-2 text-center justify-content-center">
                         <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
                             <img class="img-fluid" src="https://beachybeach.com/wp-content/uploads/2017/05/AppCap2-169x300.png" alt="Beachy Beach Search Mobile App" srcset="https://beachybeach.com/wp-content/uploads/2017/05/AppCap2-169x300.png 169w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap2-768x1366.png 768w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap2-576x1024.png 576w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap2.png 1125w" sizes="(max-width: 169px) 100vw, 169px" > 
                         </a>
                     </div>
-                    <div class="col-sm-auto p-2 text-center">
+                    <div class="col-4 col-sm-auto p-2 text-center justify-content-center">
                         <a href="http://app.beachybeach.com/'.$a['agent_id'].'" target="_new">
                             <img class="img-fluid" src="https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-169x300.png" alt="Beachy Beach Search Mobile App" srcset="https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-169x300.png 169w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-768x1366.png 768w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1-576x1024.png 576w, https://beachybeach.com/wp-content/uploads/2017/05/AppCap1.png 1125w" sizes="(max-width: 169px) 100vw, 169px" >
                         </a>
