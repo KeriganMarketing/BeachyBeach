@@ -565,7 +565,7 @@ add_shortcode( 'custom_searchpage', 'custom_searchpage_shortcode' );
 function agent_app_shortcode( $atts ){
 
     $a = shortcode_atts( [
-        'agent_id' => 'bbkaren',
+        'agent_id' => '',
     ], $atts ); 
 
     $output = '

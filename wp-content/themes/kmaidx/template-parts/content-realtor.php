@@ -55,7 +55,7 @@ use Includes\Modules\Social\SocialSettingsPage;
                     <?php the_content(); ?>
 
                     <?php if($agentData['app_id']!=''){
-                        echo do_shortcode('[bb_app app_id="'.$agentData['app_id'].'"]');
+                        echo do_shortcode('[bb_app agent_id="'.$agentData['app_id'].'"]');
                     } ?>
 
                 </div>
