@@ -9,7 +9,7 @@ if (isset($_GET['mls'])) {
     $fullListing = new FullListing($mlsNumber);
     $listingInfo = $fullListing->create();
 
-    echo '<pre>',print_r($listingInfo),'</pre>';
+    // echo '<pre>',print_r($listingInfo),'</pre>';
 
     if ($listingInfo) {
 
