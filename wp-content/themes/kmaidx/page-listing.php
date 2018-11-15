@@ -9,6 +9,8 @@ if (isset($_GET['mls'])) {
     $fullListing = new FullListing($mlsNumber);
     $listingInfo = $fullListing->create();
 
+    echo '<pre>',print_r($listingInfo),'</pre>';
+
     if ($listingInfo) {
 
         $buttonText = ($fullListing->isInBucket(get_current_user_id(),
