@@ -493,7 +493,7 @@ add_action('notifications_hook', function()
 // Author: Opey 9-26-18
 function custom_searchpage_shortcode( $atts ) {
     $a = shortcode_atts( [
-        'omni'      => 'Panama City Beach',
+        'omni'      => 'Panama City',
         'type'      => 'Single Family Home',
         'status'    => 'Active',
         'min_price' => 0,
