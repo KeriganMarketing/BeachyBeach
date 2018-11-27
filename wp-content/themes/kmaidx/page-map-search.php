@@ -12,6 +12,7 @@ $raw     = $client->request(
 );
 $results = json_decode($raw->getBody());
 
+
 get_header(); ?>
 <div id="content">
     <div id="primary" class="content-area">
