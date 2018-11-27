@@ -6,13 +6,14 @@
 use GuzzleHttp\Client;
 use Includes\Modules\MLS\QuickSearch;
 
-$client  = new Client(['base_uri' => 'https://mothership.kerigan.com/api/v1/allMapListings']);
+$client  = new Client(['base_uri' => 'https://mothership.kerigan.com/api/v1/']);
 $raw     = $client->request(
     'GET',
-    '?status=Active'
+    'allMapListings?' .
+    'status=Active'
 );
-$response = (substr($raw->getBody(), -3) == '"}]' ? $raw->getBody() : $raw->getBody() . '"}]');
-$results = json_decode($response);
+$results = json_decode($raw->getBody());
+
 
 get_header(); ?>
 <div id="content">
