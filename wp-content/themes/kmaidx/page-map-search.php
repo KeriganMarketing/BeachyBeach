@@ -11,8 +11,8 @@ $raw     = $client->request(
     'GET',
     '?status=Active'
 );
-$results = json_decode($raw->getBody());
-
+$response = (substr($raw->getBody(), -3) == '"}]' ? $raw->getBody() : $raw->getBody() . '"}]');
+$results = json_decode($response);
 
 get_header(); ?>
 <div id="content">
