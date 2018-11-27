@@ -9,8 +9,7 @@ use Includes\Modules\MLS\QuickSearch;
 $client  = new Client(['base_uri' => 'https://mothership.kerigan.com/api/v1/']);
 $raw     = $client->request(
     'GET',
-    'allMapListings?' .
-    'status=Active'
+    'allMapListings'
 );
 $results = json_decode($raw->getBody());
 
