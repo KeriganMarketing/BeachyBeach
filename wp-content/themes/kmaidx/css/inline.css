@@ -11,8 +11,12 @@
     font-family: 'Lato', sans-serif;
 }
 
-h1, h2, h3, h1 span, h2 span, h3 span, bebas {
-    font-family: 'Bebas Neue', sans-serif;
+h1, h2, h3, h1 span, h2 span, h3 span, .bebas, h2 a, h3 a {
+    font-family: 'Bebas Neue', sans-serif !important;
+}
+
+h2 a, h3 a {
+    color: #42bc7b;
 }
 
 .maintenance-notification {
