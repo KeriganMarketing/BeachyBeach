@@ -86,7 +86,7 @@ class BeachyBucket
         $count    = $wpdb->get_results("SELECT COUNT(id) as items FROM wp_beachy_buckets WHERE user_id = {$user_id}");
         $listings = $count[0]->items;
 
-        return $listings;
+        return ($listings > 0 ? $listings : 0);
     }
 
     /**

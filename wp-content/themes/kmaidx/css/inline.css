@@ -176,14 +176,19 @@ div.container.wide {
     background: rgba(255,255,255,.9);
 }
 
+@media screen and (min-width:1259px){
+    ul#menu-1 {
+        padding:0 0 .8rem;
+    }
+    #top.smaller ul#menu-1 {
+        padding:1.25rem 0 0;
+    }
+}
+
 @media screen and (min-width:768px){
     #top header { /* sticky nav */
         position: fixed;
         height: 132px;
-    }
-
-    #top.smaller ul#menu-1 {
-        padding-top:.25rem;
     }
 
     /* sticker scroll */
@@ -232,7 +237,7 @@ div.container.wide {
 }
 ul li.menu-item a.nav-link {
     display:block;
-    padding:.25rem 1rem;
+    padding:.25rem 1rem !important;
     text-transform: uppercase;
     text-align: center;
     font-size: 16px;
@@ -340,13 +345,9 @@ span.btn-text {
 }
 .collapsing ul li.menu-item a.nav-link,
 .collapse.show ul li.menu-item a.nav-link {
-    padding:1rem;
+    padding:1rem !important;
     color:#FFF;
     font-size:1.1em;
-}
-
-ul#menu-1 {
-    padding-top: 2.5rem;
 }
 
 @media screen and (min-width: 768px){
@@ -387,7 +388,7 @@ ul#menu-1 {
         background-color: rgba(255, 255, 255, .9);
         display: block;
         text-align: left;
-        padding: .5rem .5rem;
+        padding: .5rem 1rem;
         width: 100%;
     }
 }
@@ -405,33 +406,32 @@ div#beach-bucket {
     width: 100%;
     position: relative;
     margin:0;
-    overflow: hidden;
     z-index: 50000;
     box-shadow: 0 0 10px rgba(50,50,50,.4);
+    display:inline-flex;
+    overflow:hidden;
 }
 div#beach-bucket #bucket-left {
-    float: left;
     padding: 5px;
     background: #FFFFFF;
-    width:21%;
+    display: flex;
 }
 div#beach-bucket #bucket-left img {
-    max-width: 40px;
-    float: left;
+    height:50px;
 }
 div#beach-bucket #bucket-left p {
-    margin: .2rem .1rem;
+    margin: auto;
     text-align: center;
     padding: 0;
     display: inline-block;
+    min-width:20px;
     font-weight: bold;
     font-size: 1.2rem;
     color: #42bc7b;
 }
 div#beach-bucket #bucket-right {
+    flex-grow:1;
     padding:10px 1rem;
-    float: right;
-    width:78%;
     background: url('/wp-content/themes/kmaidx/img/blue-texture.jpg') #24afdd;
 }
 div#beach-bucket #bucket-right p {
@@ -482,23 +482,6 @@ div#beach-bucket p.logout-link {
     float: right;
 }
 
-@media screen and (min-width:768px){
-    div#beach-bucket #bucket-left {
-        padding: 3px;
-    }
-    div#beach-bucket span.user-name {
-        display: block;
-    }
-    div#beach-bucket #bucket-right p.logged-in{
-        display: block;
-        margin: .5em 0 0 0;
-    }
-    div#beach-bucket p.logout-link {
-        float: none;
-    }
-}
-
-
 #user-login .link-text {
     margin-top: 20px;
 }
@@ -516,32 +499,39 @@ form legend {
 
 @media screen and (min-width:768px){
     div#beach-bucket {
-        width: 219px;
-        height: 112px;
-        border-radius: 8px;
-        margin: 40px 0 0 0;
-        order: 3;
+        width: auto;
+        height: 68px;
+        border-radius: 0 0 8px 8px;
+        margin-left: auto;
+        justify-content: flex-end;
+        order:3;
     }
     div#beach-bucket #bucket-left {
-        width:40%;
-        padding: 3px 3px 20px;
-        text-align: center;
+        padding: .5rem;
     }
     div#beach-bucket #bucket-left p {
-        display: block;
     }
     div#beach-bucket #bucket-left img {
-        max-width: 100%;
-        float: none;
+        height: 95%; width: auto;
     }
 
     div#beach-bucket #bucket-right {
-        width: 60%;
-        padding: 23px 1rem;
+        width: auto;
+        flex-grow: 1;
+        align-items: center;
     }
 
     div#beach-bucket #bucket-right p {
         font-size: 16px;
+    }
+
+    div#beach-bucket #bucket-right p.logout-link {
+        float:none;
+        line-height: 14px;
+    }
+
+    .smaller div#beach-bucket  {
+        display: none;
     }
 }
 
