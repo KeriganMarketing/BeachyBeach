@@ -44,7 +44,7 @@ $bb = new BeachyBucket();
         <header id="masthead" class="site-header">
             <div class="container wide nopad">
                 <div class="row no-gutters justify-content-center">
-                    <div id="beach-bucket" class="col-md-4 col-lg-3 col-xl-2">
+                    <div id="beach-bucket" class="col-md-4 col-lg-auto">
                         <div class="">
                             <div id="bucket-left" class="" >
                                 <p class="saved-num">
@@ -63,7 +63,7 @@ $bb = new BeachyBucket();
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-md-2 col-lg-2 text-center text-md-left mb-sm-2">
+                    <div class="col-sm-4 col-md-2 col-lg-auto text-center text-md-left mb-sm-2">
                         <a href="/" class="navbar-brand"><img src="<?php echo get_template_directory_uri().'/img/beachy-beach-logo.png'; ?>" alt="Beachy Beach Real Estate" ></a>
                     </div>
                     <div class="col-sm-4 col-md-5 text-center hidden-lg-up my-auto">
@@ -76,7 +76,7 @@ $bb = new BeachyBucket();
                             </span>
                         </button>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-7 hidden-md-down text-center my-auto mx-auto">
+                    <div class="col-12 col-md-6 col-lg-7 col-xl-auto hidden-md-down text-center my-auto mx-auto">
                         <div class="navbar-collapse navbar-toggleable-sm" id="navbar-header">
                             <?php wp_nav_menu(
                                 array(
