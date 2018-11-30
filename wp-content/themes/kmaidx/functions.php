@@ -115,6 +115,8 @@ if ( ! function_exists('kmaidx_setup')) :
             'menu-3' => esc_html__('Mobile', 'kmaidx'),
         ));
 
+        add_theme_support( 'post-formats', array( 'quote', 'video' ) );
+
         /*
          * Switch default core markup for search form, comment form, and comments
          * to output valid HTML5.
