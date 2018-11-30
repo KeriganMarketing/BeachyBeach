@@ -521,7 +521,7 @@ function custom_searchpage_shortcode( $atts ) {
     $output = '';
 
     ob_start(); ?>
-    <div class="row">
+    <div class="row py-4">
     <?php foreach ($listings as $result) { ?>
         <div class="listing-tile property-search col-sm-6 col-lg-3 text-center mb-5">
             <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
