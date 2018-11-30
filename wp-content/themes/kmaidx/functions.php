@@ -23,6 +23,7 @@ use Includes\Modules\Social\SocialSettingsPage;
 use Includes\Modules\Notifications\ListingUpdated;
 
 require('vendor/autoload.php');
+require('inc/editor-filters.php');
 
 new CleanWP();
 
@@ -521,7 +522,7 @@ function custom_searchpage_shortcode( $atts ) {
     $output = '';
 
     ob_start(); ?>
-    <div class="row py-4">
+    <div class="row pt-4">
     <?php foreach ($listings as $result) { ?>
         <div class="listing-tile property-search col-sm-6 col-lg-3 text-center mb-5">
             <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
@@ -555,7 +556,7 @@ function custom_searchpage_shortcode( $atts ) {
             </li>
         </ul>
     </nav>
-    <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
+    <p class="footnote disclaimer pb-4" style="font-size: .9em; text-align: center; color: #aaa;">Real estate property information provided by Bay County Association of REALTORS® and Emerald Coast Association of REALTORS®. IDX information is provided exclusively for consumers personal, non-commercial use, and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. This data is deemed reliable but is not guaranteed accurate by the MLS.</p>
     <?php
   
     return ob_get_clean();
