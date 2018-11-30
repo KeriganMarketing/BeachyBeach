@@ -56,7 +56,7 @@ $bb = new BeachyBucket();
                             </div>
                             <div id="bucket-right" >
                                 <?php if(is_user_logged_in()){ ?>
-                                    <p class="logged-in"><a href="/beachy-bucket/"><span class="user-name" ><?php echo ( $current_user->user_firstname != '' ? $current_user->user_firstname : $current_user->user_login ); ?>'s</span>Beachy Bucket</a></p><p class="logout-link"><a class="logout-link" href="<?php echo wp_logout_url('/'); ?>">logout</a> </p>
+                                    <p class="logged-in"><a href="/beachy-bucket/"><span class="user-name" ><?php echo ( $current_user->user_firstname != '' ? $current_user->user_firstname : $current_user->user_login ); ?>'s</span>Beachy&nbsp;Bucket</a></p><p class="logout-link"><a class="logout-link" href="<?php echo wp_logout_url('/'); ?>">logout</a> </p>
                                 <?php }else{ ?>
                                     <p class="not-logged-in"><a class="login-link" href="/user-login/">Log In</a> to keep favorites in your Beachy Bucket</p>
                                 <?php } ?>
