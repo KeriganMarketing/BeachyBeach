@@ -19,6 +19,10 @@ h2 a, h3 a {
     color: #42bc7b;
 }
 
+a:hover, a:visited {
+    color: #27c1e6;
+}
+
 .maintenance-notification {
     display: none;
     /* display: block; */
