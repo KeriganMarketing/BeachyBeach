@@ -78,13 +78,8 @@ class FullListing
     {
 
         $this->listingInfo = $listingInfo;
-        $image = getimagesize($this->listingInfo->preferred_image);
-
-        //echo '<pre>',print_r($this->listingInfo),'</pre>';
-
         $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
         $imageParts = getimagesize ( $image );
-        //echo '<pre>',print_r($imageParts),'</pre>';
 
         add_filter('wpseo_title', function () {
             $title = $this->listingInfo->street_number . ' ' . $this->listingInfo->street_name .' '. $this->listingInfo->street_suffix;
