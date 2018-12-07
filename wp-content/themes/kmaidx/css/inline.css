@@ -28,6 +28,10 @@ a:hover, a:visited {
     color: #27c1e6;
 }
 
+.btn-primary a:hover, .btn-primary a:visited {
+    color: #27c1e6;
+}
+
 .maintenance-notification {
     display: none;
     /* display: block; */

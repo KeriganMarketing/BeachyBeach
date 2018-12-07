@@ -11,7 +11,7 @@ if (isset($_GET['mls'])) {
 
     // echo '<pre>',print_r($listingInfo),'</pre>';
 
-    if ($listingInfo) {
+    //if ($listingInfo) {
 
         $buttonText = ($fullListing->isInBucket(get_current_user_id(),
             $listingInfo->mls_account) ? 'REMOVE FROM BUCKET' : 'SAVE TO BUCKET');
@@ -38,7 +38,7 @@ if (isset($_GET['mls'])) {
 
         $openHouses = $listingInfo->open_houses;
 
-    }
+    //}
 
 }
 
@@ -49,16 +49,16 @@ get_header(); ?>
         <article id="post-<?php echo $listingInfo->mls_account; ?>" class="listing">
             <header class="entry-header">
                 <div class="container wide">
-                    <?php if ($listingInfo) { ?>
+                    <?php //if ($listingInfo) { ?>
                         <h1 class="entry-title"><?php echo $title; ?> <span
                                     class="subhead small">MLS# <?php echo $listingInfo->mls_account; ?></span></h1>
-                    <?php } else { ?><h1>404</h1><?php } ?>
+                    <!-- <?php //} else { ?><h1>404</h1><?php //} ?> -->
                 </div>
             </header><!-- .entry-header -->
             
             <div class="entry-content">
                 <div class="container wide">
-                    <?php if ($listingInfo) { ?>
+                    <?php //if ($listingInfo) { ?>
                         <div class="row">
                             <div class="col-lg-5 listing-left">
                                 <div class="listing-slider">
@@ -117,9 +117,9 @@ get_header(); ?>
                             personal, non-commercial use, and may not be used for any purpose other than to identify
                             prospective properties consumers may be interested in purchasing. This data is deemed
                             reliable but is not guaranteed accurate by the MLS.</p>
-                    <?php } else { ?>
-                        <p class="center">The requested listing is no longer available.</p>
-                    <?php } ?>
+                    <?php //} else { ?>
+                        <!-- <p class="center">The requested listing is no longer available.</p> -->
+                    <?php //} ?>
                 </div>
             </div>
         </article>
