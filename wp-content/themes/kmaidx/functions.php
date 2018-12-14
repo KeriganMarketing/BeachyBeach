@@ -636,8 +636,8 @@ function yoast_add_og_video() {
         preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
         echo '<meta property="og:video" content="' .  $video[2] . '" />', "\n";
         echo '<meta property="og:video:secure_url" content="' .  str_replace('http://','https://' , $video[2]) . '" />', "\n";
-        echo '<meta property="og:height" content="1080" />', "\n";
-        echo '<meta property="og:width" content="1920" />', "\n";
+        echo '<meta property="og:video:height" content="1080" />', "\n";
+        echo '<meta property="og:video:width" content="1920" />', "\n";
     }
 }
 add_action( 'wpseo_opengraph', 'yoast_add_og_video', 10, 1 );
