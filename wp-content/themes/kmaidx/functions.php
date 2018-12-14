@@ -617,3 +617,27 @@ function agent_app_shortcode( $atts ){
 }
 
 add_shortcode( 'bb_app', 'agent_app_shortcode' );
+
+// Change og:type of episodes and videos to video
+function yoast_change_opengraph_type( $type ){
+    if ( get_post_format() == 'video' ) {
+        return 'video';
+    }else{
+        return get_post_type();
+    }
+    
+}
+add_filter( 'wpseo_opengraph_type', 'yoast_change_opengraph_type', 10, 1 );
+
+// Add og:video meta tag for episodes and videos
+function yoast_add_og_video() {
+    if ( get_post_format() == 'video' ) {
+        $post = get_post();
+        preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
+        echo '<meta property="og:video" content="' .  $video[2] . '" />', "\n";
+        echo '<meta property="og:video:secure_url" content="' .  str_replace('http://','https://' , $video[2]) . '" />', "\n";
+        echo '<meta property="og:height" content="1080" />', "\n";
+        echo '<meta property="og:width" content="1920" />', "\n";
+    }
+}
+add_action( 'wpseo_opengraph', 'yoast_add_og_video', 10, 1 );

@@ -116,13 +116,6 @@ class FullListing
             echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
             echo '<meta property="og:image:width" content="' .  $imageParts['0'] . '" />', "\n";
             echo '<meta property="og:image:height" content="' .  $imageParts['1'] . '" />', "\n";
-
-            echo get_post_format();
-            
-            if(get_post_format() == 'video'){
-                preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
-                echo '<pre>',print_r($video),'</pre>';
-            }
         });
 
         add_filter( 'wpseo_og_og_image_width', function (){
@@ -140,8 +133,5 @@ class FullListing
         add_filter('wpseo_opengraph_url', function ($ogUrl) {
             return get_the_permalink() . '?mls=' . $this->listingInfo->mls_account;
         }, 100, 1);
-
-        
-
     }
 }

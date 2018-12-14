@@ -9,6 +9,7 @@
 
 preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
 
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -19,8 +20,6 @@ preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
     </header><!-- .entry-header -->
 
 	<div class="entry-content">
-    <?php echo '<pre>',print_r($video),'</pre>'; ?>
-
         <div class="container">
             <div class="row">
                 <div class="single-post copy col-lg-8 py-4">
