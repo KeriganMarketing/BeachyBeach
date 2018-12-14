@@ -5,6 +5,7 @@ WP-Cache Config Sample File
 See wp-cache.php for author details.
 */
 
+$wp_cache_debug_username = 'f01e77bec2d855d5ea2d9658335194bb';
 $wp_cache_mobile_groups = '';
 $wp_cache_home_path = '/';
 $wp_cache_slash_check = 1;
@@ -14,7 +15,7 @@ if ( ! defined('WPCACHEHOME') )
 	define( 'WPCACHEHOME', WP_CONTENT_DIR . "/plugins/wp-super-cache/" );
 
 $cache_compression = 1;
-$cache_enabled = true;
+$cache_enabled = false;
 $super_cache_enabled = true;
 $cache_max_time = 1800;
 //$use_flock = true; // Set it true or false if you know what to use
@@ -66,7 +67,7 @@ $wp_cache_debug_to_file = 0;
 $wp_super_cache_debug = 0;
 $wp_cache_debug_level = 5;
 $wp_cache_debug_ip = '';
-$wp_cache_debug_log = '';
+$wp_cache_debug_log = 'c389896b88f3c7bc6a7f35fbae0c874c.php';
 $wp_cache_debug_email = '';
 $wp_cache_pages[ "search" ] = 0;
 $wp_cache_pages[ "feed" ] = 0;
@@ -80,7 +81,7 @@ $wp_cache_pages[ "single" ] = 0;
 $wp_cache_pages[ "author" ] = 0;
 $wp_cache_hide_donation = 0;
 $wp_cache_not_logged_in = 1;
-$wp_cache_clear_on_post_edit = 0;
+$wp_cache_clear_on_post_edit = 1;
 $wp_cache_hello_world = 0;
 $wp_cache_mobile_enabled = 1;
 $wp_cache_cron_check = 1;
