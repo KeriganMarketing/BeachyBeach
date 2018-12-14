@@ -12,7 +12,6 @@ preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
     <header class="entry-header">
         <div class="container">
 	        <?php the_title( '<p style="color:#FFF; font-size:2.2rem;" class="bebas">', '</p>' ); ?>
@@ -20,6 +19,8 @@ preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
     </header><!-- .entry-header -->
 
 	<div class="entry-content">
+    <?php echo '<pre>',print_r($video),'</pre>'; ?>
+
         <div class="container">
             <div class="row">
                 <div class="single-post copy col-lg-8 py-4">

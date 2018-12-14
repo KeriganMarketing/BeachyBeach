@@ -102,9 +102,11 @@ class FullListing
             //echo '<meta property="og:longitude" content="' .  $this->listingInfo->longitude . '" />', "\n";
             //echo '<meta property="og:street_address" content="' .  $this->listingInfo->full_address . ', ' . $this->listingInfo->state . '" />', "\n";
 
-            foreach($this->listingInfo->photos as $image){
-                echo '<meta property="og:image" content="' .  $image->url . '" />', "\n";
-                echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
+            if(is_array($this->listingInfo->photos)){
+                foreach($this->listingInfo->photos as $image){
+                    echo '<meta property="og:image" content="' .  $image->url . '" />', "\n";
+                    echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
+                }
             }
 
             $image = ($this->listingInfo->preferred_image != '' ? $this->listingInfo->preferred_image : get_template_directory_uri() . '/img/beachybeach-placeholder.jpg');
@@ -114,6 +116,13 @@ class FullListing
             echo '<meta property="og:image:secure_url" content="' .  str_replace('http://','https://' , $this->listingInfo->preferred_image) . '" />', "\n";
             echo '<meta property="og:image:width" content="' .  $imageParts['0'] . '" />', "\n";
             echo '<meta property="og:image:height" content="' .  $imageParts['1'] . '" />', "\n";
+
+            echo get_post_format();
+            
+            if(get_post_format() == 'video'){
+                preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
+                echo '<pre>',print_r($video),'</pre>';
+            }
         });
 
         add_filter( 'wpseo_og_og_image_width', function (){
@@ -131,6 +140,8 @@ class FullListing
         add_filter('wpseo_opengraph_url', function ($ogUrl) {
             return get_the_permalink() . '?mls=' . $this->listingInfo->mls_account;
         }, 100, 1);
+
+        
 
     }
 }

@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package MCCALL_SOD
+ * @package KMA_IDX
  */
 preg_match('/\[embed(.*)](.*)\[\/embed]/', $post->post_content, $video);
 ?>
