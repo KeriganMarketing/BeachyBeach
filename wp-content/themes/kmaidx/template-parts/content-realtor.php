@@ -85,7 +85,7 @@ use Includes\Modules\Social\SocialSettingsPage;
                 </div>
                 <?php } ?>
 
-                <?php if(count($soldListings) > 0){ ?>
+                <!-- <?php //if(count($soldListings) > 0){ ?>
                 <div class="row">
                     <div class="col">
                         <h2>Listings I've sold</h2>
@@ -93,13 +93,13 @@ use Includes\Modules\Social\SocialSettingsPage;
                     </div>
                 </div>
                 <div class="row">
-                    <?php foreach ($soldListings as $result) { ?>
+                    <?php //foreach ($soldListings as $result) { ?>
                         <div class="listing-tile agent col-sm-6 col-lg-3 text-center mb-5">
-                            <?php include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
+                            <?php //include( locate_template( 'template-parts/mls-search-listing.php' ) ); ?>
                         </div>
-                    <?php } ?>
+                    <?php //} ?>
                 </div>
-                <?php } ?>
+                <?php //} ?> -->
             </div>
 
             
