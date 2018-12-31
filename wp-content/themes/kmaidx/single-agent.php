@@ -26,7 +26,7 @@ if (!$referrer){
 }
 
 get_header(); ?>
-    <!-- <?php print_r($agentIds); ?> -->
+    <!-- <?php //print_r($agentIds); ?> -->
 <div id="content">
 
     <div id="primary" class="content-area">

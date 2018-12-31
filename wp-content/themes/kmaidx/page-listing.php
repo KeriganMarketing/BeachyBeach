@@ -11,7 +11,7 @@ if (isset($_GET['mls'])) {
 
     // echo '<pre>',print_r($listingInfo),'</pre>';
 
-    //if ($listingInfo) {
+    if ($listingInfo) {
 
         $buttonText = ($fullListing->isInBucket(get_current_user_id(),
             $listingInfo->mls_account) ? 'REMOVE FROM BUCKET' : 'SAVE TO BUCKET');
@@ -38,7 +38,7 @@ if (isset($_GET['mls'])) {
 
         $openHouses = $listingInfo->open_houses;
 
-    //}
+    }
 
 }
 
@@ -107,16 +107,9 @@ get_header(); ?>
                         </div>
                         <hr>
                         <div class="row location-info">
-
                             <?php include(locate_template('template-parts/listing-location.php')); ?>
-
                         </div>
-                        <p class="footnote disclaimer" style="font-size: .9em; text-align: center; color: #aaa;">Real
-                            estate property information provided by Bay County Association of REALTORS® and Emerald
-                            Coast Association of REALTORS®. IDX information is provided exclusively for consumers
-                            personal, non-commercial use, and may not be used for any purpose other than to identify
-                            prospective properties consumers may be interested in purchasing. This data is deemed
-                            reliable but is not guaranteed accurate by the MLS.</p>
+                        <?php get_template_part( 'template-parts/mls', 'disclaimer' ); ?>
                     <?php } else { ?>
                         <p class="center">The requested listing is no longer available.</p>
                     <?php } ?>
