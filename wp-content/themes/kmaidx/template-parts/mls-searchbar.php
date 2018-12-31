@@ -211,7 +211,7 @@
             </div>
         </div>
         <input type="hidden" name="sortBy" value="date_modified">
-        <input type="hidden" name="orderBy" value="ASC">
+        <input type="hidden" name="orderBy" value="DESC">
     </form>
 
 	<?php if (isset($_GET['qs'])) { ?>
