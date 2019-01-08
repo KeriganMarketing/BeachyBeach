@@ -60,7 +60,7 @@
             <input hidden="hidden" id="ihf-minprice-homes" name="minPrice" class="form-control ihf-search-form-input" type="hidden" value=""/>
             <input hidden="hidden" id="ihf-maxprice-homes" name="maxPrice" class="form-control ihf-search-form-input" type="hidden" value=""/>
             <input type="hidden" name="sortBy" value="date_modified">
-            <input type="hidden" name="orderBy" value="ASC">
+            <input type="hidden" name="orderBy" value="DESC">
 		</form>
 	</div>
 </div>

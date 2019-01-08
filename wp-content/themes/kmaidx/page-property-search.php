@@ -22,7 +22,8 @@ $searchCriteria = (isset($_GET['qs']) ? $_GET : [
     'propertyType' => 'Single Family Home',
     'minPrice'     => 0,
     'maxPrice'     => 9000000000,
-    'pg'           => $currentPage
+    'pg'           => $currentPage,
+    ''
 ]);
 
 $qs           = new QuickSearch($searchCriteria);
