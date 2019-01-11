@@ -24,6 +24,7 @@ $current_user = wp_get_current_user();
 $bb = new BeachyBucket();
 ?>
 
+<script src="//cdn.jsdelivr.net/blazy/latest/blazy.min.js"></script>
 </head>
 
 <body <?php body_class(); ?>>

@@ -14,9 +14,11 @@
                     <?php if ($result->has_open_houses == 1) { ?>
                         <span class="status-flag contingent">OPEN HOUSE</span>
                     <?php } ?>
-                    <img src="<?php echo ($result->preferred_image != '' ? str_replace('http://','//', $result->preferred_image) : get_template_directory_uri() . '/img/beachybeach-placeholder.png' ); ?>"
-                         class="img-fluid lazy"
-                         alt="MLS Property <?php echo $result->mls_account; ?> for sale in <?php echo $result->city; ?>"/>
+                    <img 
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                        data-src="<?php echo ($result->preferred_image != '' ? str_replace('http://','//', $result->preferred_image) : get_template_directory_uri() . '/img/beachybeach-placeholder.png' ); ?>"
+                        class="img-fluid b-lazy"
+                        alt="MLS Property <?php echo $result->mls_account; ?> for sale in <?php echo $result->city; ?>"/>
                 </div>
             </div>
             <div class="tile-info">

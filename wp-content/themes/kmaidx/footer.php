@@ -17,7 +17,16 @@ use Includes\Modules\Social\SocialSettingsPage;
                 <div id="location-grid" class="row justify-content-center align-items-center" style="display: none;">
 	                <?php get_template_part( 'template-parts/content', 'location' ); ?>
                 </div>
-                <div class="switch-title text-center mb-2 mt-3"><a target="_blank" href="http://www.youtube.com/user/TheBeachShow" ><img class="img-fluid" src="<?php echo get_template_directory_uri() ?>/img/beachshow-horizontal.png" alt="The Beach Show"></a></div>
+                <div class="switch-title text-center mb-2 mt-3">
+                    <a target="_blank" href="http://www.youtube.com/user/TheBeachShow" >
+                        <img 
+                            class="img-fluid b-lazy" 
+                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                            data-src="<?php echo get_template_directory_uri() ?>/img/beachshow-horizontal.png" 
+                            alt="The Beach Show"
+                        >
+                    </a>
+                </div>
                 <div id="botnav" class="row no-gutters justify-content-center ">
                     <nav class="navbar">
 			            <?php wp_nav_menu(
@@ -52,7 +61,22 @@ use Includes\Modules\Social\SocialSettingsPage;
                         </div>
                     </div>
                     <div class="col-md-6 my-auto mx-auto justify-content-center text-center">
-                        <p class="copyright">&copy;<?php echo date('Y'); ?> Beachy Beach Real Estate. All Rights Reserved. <a style="text-decoration: underline;" href="/privacy-policy/" >Privacy Policy</a> <span class="line"><img src="<?php echo get_template_directory_uri() ?>/img/realtors-association-logo-small.png" alt="Realtors Associattion" id="realtors-association"> <img src="<?php echo get_template_directory_uri() ?>/img/equal-housing-logo-small.png" alt="Equal Housing Opportunity" id="equal-housing"></span></p>
+                        <p class="copyright">&copy;<?php echo date('Y'); ?> Beachy Beach Real Estate. All Rights Reserved. <a style="text-decoration: underline;" href="/privacy-policy/" >Privacy Policy</a> <span class="line">
+                            <img 
+                                class="b-lazy"
+                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                data-src="<?php echo get_template_directory_uri() ?>/img/realtors-association-logo-small.png" 
+                                alt="Realtors Associattion" 
+                                id="realtors-association"
+                            > 
+                            <img 
+                                class="b-lazy"
+                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                data-src="<?php echo get_template_directory_uri() ?>/img/equal-housing-logo-small.png" 
+                                alt="Equal Housing Opportunity" 
+                                id="equal-housing"
+                            >
+                        </span></p>
                     </div>
                     <div class="col-md-3 my-auto justify-content-center justify-content-sm-end text-center text-sm-right">
                         <p class="siteby"><svg version="1.1" id="kma" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12.5 8.7" style="enable-background:new 0 0 12.5 8.7;" xml:space="preserve">
