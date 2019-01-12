@@ -48,7 +48,5 @@ function toggler(menuVar){
 // });
 
 (function() {
-	var bLazy = new Blazy({
-		selector: '.b-lazy'
-	});
+	var bLazy = new Blazy();
 })();
