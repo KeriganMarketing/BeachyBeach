@@ -49,7 +49,6 @@ function toggler(menuVar){
 
 (function() {
 	var bLazy = new Blazy({
-		offset: 0,
 		selector: '.b-lazy'
 	});
 })();
